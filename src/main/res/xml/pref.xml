@@ -1,0 +1,16 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="CEPAS Card Reader">
+        <SwitchPreference
+            android:title="@string/launch_from_background"
+            android:persistent="false"
+            android:key="pref_launch_from_background"/>
+
+        <SwitchPreference
+            android:title="@string/convert_timezones"
+            android:summary="@string/convert_timezones_summary"
+            android:key="pref_convert_timezones"
+            android:defaultValue="false"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
