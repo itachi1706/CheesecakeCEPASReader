@@ -9,7 +9,11 @@ To use this library, run in your main project the following command
 
 ## How to use
 
-* Add the following lines to your build.gradle dependency
+* Add the following lines to your project-level (/) build.gradle dependency
+```gradle
+classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.6'
+```
+* Add the following lines to your app-level (/app) build.gradle dependency
 ```gradle
 implementation project(':cepaslib')
 ```
