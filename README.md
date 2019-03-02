@@ -47,6 +47,11 @@ if (getSupportFragmentManager().findFragmentById(android.R.id.content)==null) {
             .commit();
 }
 ```
+* Note: If your theme is a dark theme, add the following to your Main Activity (if you have initialized SharedPreferece, you do not need to reinitialize it)
+```java
+SharedPreference sp = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
+sp.edit().putBoolean("cepas_dark_theme", true).apply();
+```
 * In your settings screen activity where you wish to add the settings to, add the following line 
 ```java
 new SettingsHandler(getActivity()).initSettings(this);

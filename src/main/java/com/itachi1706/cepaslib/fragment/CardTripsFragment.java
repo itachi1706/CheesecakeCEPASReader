@@ -25,11 +25,14 @@ import android.app.Activity;
 import android.app.ListFragment;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -130,7 +133,13 @@ public class CardTripsFragment extends ListFragment {
         public UseLogListAdapter(Context context, Trip[] items, TransitData transitData) {
             super(context, 0, items);
             mTransitData = transitData;
+
+            //EDIT: Check for dark theme in SP
+            SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
+            if (sp.contains("cepas_dark_theme")) isCEPASDarkTheme = sp.getBoolean("cepas_dark_theme", false);
         }
+
+        private static boolean isCEPASDarkTheme = false;
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
@@ -156,6 +165,7 @@ public class CardTripsFragment extends ListFragment {
                 TextView headerText = listHeader.findViewById(android.R.id.text1);
 
                 headerText.setText(headerDate);
+                headerText.setTextColor((isCEPASDarkTheme) ? Color.WHITE : Color.BLACK); // EDIT: Check if dark theme or not
 
                 ((TextView) listHeader.findViewById(android.R.id.text1)).setText(Utils.longDateFormat(date));
             } else {
@@ -195,7 +205,9 @@ public class CardTripsFragment extends ListFragment {
             }
             if (iconResId != -1) {
                 try {
-                    icon = AppCompatResources.getDrawable(getContext(), iconResId);
+                    // EDIT: Check Dark Theme "(iconResId == R.drawable.ic_transaction_sgtvm_32dp && isCEPASDarkTheme)? R.drawable.ic_transaction_sgtvm_32dp_white :"
+                    icon = AppCompatResources.getDrawable(getContext(), (iconResId == R.drawable.ic_transaction_sgtvm_32dp && isCEPASDarkTheme)
+                            ? R.drawable.ic_transaction_sgtvm_32dp_white : iconResId);
                 } catch (Exception ex) {
                     icon = null;
                 }
