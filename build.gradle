@@ -46,10 +46,10 @@ dependencies {
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
-    implementation 'com.google.android.gms:play-services-maps:16.0.0'
+    implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.protobuf:protobuf-lite:3.0.1'
-    implementation 'androidx.multidex:multidex:2.0.0'
-    implementation 'org.apache.commons:commons-lang3:3.5'
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation 'org.apache.commons:commons-lang3:3.6'
 }
 
 protobuf {
