@@ -24,7 +24,6 @@ package com.codebutler.farebot.app.feature.home
 
 import android.content.Context
 import android.content.Intent
-import android.net.Uri
 import android.nfc.NfcAdapter
 import android.nfc.TagLostException
 import android.provider.Settings
@@ -40,7 +39,7 @@ import com.codebutler.farebot.app.feature.card.CardScreen
 import com.codebutler.farebot.app.feature.help.HelpScreen
 import com.codebutler.farebot.app.feature.history.HistoryScreen
 import com.codebutler.farebot.app.feature.main.MainActivity.MainActivityComponent
-import com.codebutler.farebot.app.feature.prefs.FareBotPreferenceActivity
+import com.itachi1706.cepaslib.SettingsHandler
 import com.uber.autodispose.kotlin.autoDisposable
 import dagger.Component
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -49,10 +48,6 @@ import javax.inject.Inject
 
 class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
         HomeScreenView.Listener {
-
-    companion object {
-        private val URL_ABOUT = Uri.parse("https://codebutler.github.com/farebot")
-    }
 
     @Inject lateinit var activityOperations: ActivityOperations
     @Inject lateinit var cardStream: CardStream
@@ -72,10 +67,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
                     when (menuItem.itemId) {
                         R.id.history -> navigator.goTo(HistoryScreen())
                         R.id.help -> navigator.goTo(HelpScreen())
-                        R.id.prefs -> activity.startActivity(FareBotPreferenceActivity.newIntent(activity))
-                        R.id.about -> {
-                            activity.startActivity(Intent(Intent.ACTION_VIEW, URL_ABOUT))
-                        }
+                        R.id.prefs -> activity.startActivity(SettingsHandler.launchSettings(activity))
                     }
                 }
 

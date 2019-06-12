@@ -82,13 +82,5 @@
                 android:name="android.nfc.action.TECH_DISCOVERED"
                 android:resource="@xml/filter_nfc" />
         </activity>
-
-        <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="AIzaSyBUUm1_1cyaCLkIvcE60gF4xO3pyb6SyP4"/>
-
-        <meta-data
-            android:name="com.google.android.gms.version"
-            android:value="@integer/google_play_services_version" />
     </application>
 </manifest>
