@@ -6,7 +6,7 @@ import android.content.pm.PackageManager;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
 
-import com.itachi1706.cepaslib.activity.BackgroundTagActivity;
+import com.codebutler.farebot.app.feature.bg.BackgroundTagActivity;
 
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
 import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
@@ -16,7 +16,7 @@ import static android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
  * for com.itachi1706.cepaslib in CheesecakeUtilities
  */
 public class SettingsHandler {
-    
+
     private Activity activity;
 
     public SettingsHandler(Activity activity) {
@@ -24,7 +24,7 @@ public class SettingsHandler {
     }
 
     public void initSettings(final PreferenceFragment fragment) {
-        fragment.addPreferencesFromResource(R.xml.pref);
+        fragment.addPreferencesFromResource(com.codebutler.farebot.R.xml.prefs);
         SwitchPreference mPreferenceLaunchFromBackground = (SwitchPreference) fragment.findPreference("pref_launch_from_background");
         mPreferenceLaunchFromBackground.setChecked(isLaunchFromBgEnabled());
         mPreferenceLaunchFromBackground.setOnPreferenceChangeListener((preference, newValue) -> {

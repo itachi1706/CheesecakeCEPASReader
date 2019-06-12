@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<!--
+  styles.xml
 
-    <!-- Add the following to your styles.xml file
-        <item name="TransportIcons">@array/TransportIcons</item>
-        <item name="ListHeaderTextColor">@android:color/background_dark</item>
-        <item name="LockImage">@drawable/locked</item>
-        <item name="DrawableClosedIndicator">@drawable/expander_close_holo_light</item>
-        <item name="DrawableOpenIndicator">@drawable/expander_open_holo_light</item>
-        -->
-    <integer-array name="TransportIcons" >
-        <item>@drawable/bus</item>
-        <item>@drawable/train</item>
-        <item>@drawable/tram</item>
-        <item>@drawable/metro</item>
-        <item>@drawable/ferry</item>
-        <item>@drawable/ic_transaction_sgtvm_32dp</item>
-        <item>@drawable/vending_machine</item>
-        <item>@drawable/cashier_yen</item>
-        <item>@drawable/unknown</item>
-        <item>@drawable/banned</item>
-        <item>@drawable/trolleybus</item>
-    </integer-array>
+  This file is part of FareBot.
+  Learn more at: https://codebutler.github.io/farebot/
+
+  Copyright (C) 2017 Eric Butler <eric@codebutler.com>
+
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<resources>
+    <style name="FareBot.Style.Button.Link" parent="@android:style/Widget.Holo.Button.Borderless.Small">
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">#2196F3</item>
+    </style>
 </resources>
