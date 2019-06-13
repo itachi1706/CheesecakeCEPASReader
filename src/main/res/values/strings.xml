@@ -61,4 +61,5 @@
     <string name="unknown_card_desc">This card is not supported by FareBot</string>
     <string name="wireless_settings">Wireless Settings</string>
     <string name="delete">Delete</string>
+    <string name="scan_cepas">Scan CEPAS Card</string>
 </resources>
