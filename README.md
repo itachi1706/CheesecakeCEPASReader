@@ -38,5 +38,14 @@ new SettingsHandler(getActivity()).initSettings(this);
 ```
 * Make the Preferences button in the library to point to your own settings screen if you wish for it, add the following to add the class to your SharedPreferences
 ```java
-PreferenceManager.getDefaultSharedPreferences(this).edit().putString("utility_preference_class", "<class to your Settings Screen Activity").apply();
+CEPASLibBuilder.setPreferenceClass(YourPreference.class);
+```
+* To show the "About" menu option, add the following  
+__Java__
+```java
+CEPASLibBuilder.INSTANCE.shouldShowAboutMenuItem(true);
+```
+__Kotlin__
+```kotlin
+CEPASLibBuilder.shouldShowAboutMenuItem(true)
 ```

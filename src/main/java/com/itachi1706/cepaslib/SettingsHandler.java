@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 import android.util.Log;
 
@@ -30,13 +28,9 @@ public class SettingsHandler {
     }
 
     public static Intent launchSettings(Context context) {
-        SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(context);
-        try {
-            Class c = Class.forName(sp.getString("utility_preference_class", "empty"));
-            return new Intent(context, c);
-        } catch (ClassNotFoundException e) {
-            Log.e("SettingsHandler", "No Preference Class found. Please define one in SharedPreference with the key \"utility_preference_class\"");
-        }
+        if (CEPASLibBuilder.INSTANCE.getPrefClass() != null)
+            return new Intent(context, CEPASLibBuilder.INSTANCE.getPrefClass());
+        Log.e("SettingsHandler", "No Preference Class defined. Using default preference. Initialize your own preference through CEPASLibBuilder");
         return FareBotPreferenceActivity.Companion.newIntent(context);
     }
 

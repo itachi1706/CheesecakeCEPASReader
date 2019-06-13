@@ -39,6 +39,7 @@ import com.codebutler.farebot.app.feature.card.CardScreen
 import com.codebutler.farebot.app.feature.help.HelpScreen
 import com.codebutler.farebot.app.feature.history.HistoryScreen
 import com.codebutler.farebot.app.feature.main.MainActivity.MainActivityComponent
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.SettingsHandler
 import com.uber.autodispose.kotlin.autoDisposable
 import dagger.Component
@@ -68,6 +69,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
                         R.id.history -> navigator.goTo(HistoryScreen())
                         R.id.help -> navigator.goTo(HelpScreen())
                         R.id.prefs -> activity.startActivity(SettingsHandler.launchSettings(activity))
+                        else -> CEPASLibBuilder.processMenuItemsFurther(menuItem, activity)
                     }
                 }
 
@@ -117,6 +119,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
 
     override fun onUpdateMenu(menu: Menu) {
         activity.menuInflater.inflate(R.menu.screen_main, menu)
+        if (!CEPASLibBuilder.showAbout) menu.removeItem(R.id.about)
     }
 
     override fun onNfcErrorButtonClicked() {
