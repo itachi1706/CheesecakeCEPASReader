@@ -1,51 +1,75 @@
+
 CheesecakeCEPASReader
-========
 
 This is my personal module for reading CEPAS cards based off FareBot
 
 To use this library, run in your main project the following command
 
-`git submodule add https://github.com/itachi1706/CheesecakeCEPASReader.git cepaslib`
+ git submodule add https://github.com/itachi1706/CheesecakeCEPASReader.git cepaslib 
 
-## How to use
+How to use
+• Add the following lines to your project-level (/) build.gradle dependency
 
-* Add the following lines to your project-level (/) build.gradle dependency
-```gradle
+
 classpath 'com.squareup.sqldelight:gradle-plugin:1.1.3'
-```
-* Add the following lines to your app-level (/app) build.gradle dependency
-```gradle
+
+
+
+• Add the following lines to your app-level (/app) build.gradle dependency
+
+
 implementation project(':cepaslib')
-```
-* Add the following lines to settings.gradle
-```gradle
+
+
+
+• Add the following lines to settings.gradle
+
+
 include ':cepaslib'
-```
-* To invoke the activity add the following code
-```java
+
+
+
+• To invoke the activity add the following code
+
+
 startActivity(new Intent(this, MainActivity.class));
 finish();
-```
-* Note: If your theme is a dark theme, add the following to your Main Activity (if you have initialized SharedPreferece, you do not need to reinitialize it)
-// TODO: To reimplement dark mode toggle
-```java
+
+
+
+• Note: If your theme is a dark theme, add the following to your Main Activity (if you have initialized SharedPreferece, you do not need to reinitialize it) // TODO: To reimplement dark mode toggle
+
+
 SharedPreference sp = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 sp.edit().putBoolean("cepas_dark_theme", true).apply();
-```
-* In your settings screen activity where you wish to add the settings to, add the following line 
-```java
+
+
+
+• In your settings screen activity where you wish to add the settings to, add the following line
+
+
 new SettingsHandler(getActivity()).initSettings(this);
-```
-* Make the Preferences button in the library to point to your own settings screen if you wish for it, add the following to add the class to your SharedPreferences
-```java
+
+
+
+• Make the Preferences button in the library to point to your own settings screen if you wish for it, add the following to add the class to your SharedPreferences
+
+
 CEPASLibBuilder.setPreferenceClass(YourPreference.class);
-```
-* To show the "About" menu option, add the following  
-__Java__
-```java
+
+
+
+• To show the "About" menu option, add the following
+
+
+# Java
 CEPASLibBuilder.INSTANCE.shouldShowAboutMenuItem(true);
-```
-__Kotlin__
-```kotlin
+
+
+
+
+# Kotlin
 CEPASLibBuilder.shouldShowAboutMenuItem(true)
-```
+
+
+
