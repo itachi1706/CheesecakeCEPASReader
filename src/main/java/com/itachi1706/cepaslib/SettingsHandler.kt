@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
+import android.preference.PreferenceCategory
 import android.preference.PreferenceFragment
 import android.preference.SwitchPreference
 import android.util.Log
@@ -41,6 +42,8 @@ class SettingsHandler(private val activity: Activity) {
             isLaunchFromBgEnabled = newValue as Boolean
             true
         }
+        // Hide dark mode toggle (we will use the main thing instead)
+        (fragment.preferenceManager.findPreference("cepas_cat") as PreferenceCategory).removePreference(fragment.findPreference("pref_dark_mode"))
     }
 
     companion object {

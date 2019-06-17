@@ -24,7 +24,8 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <PreferenceCategory
-        android:title="@string/pref_title">
+        android:title="@string/pref_title"
+        android:key="cepas_cat">
         <SwitchPreference
             android:title="@string/launch_from_background"
             android:persistent="false"
