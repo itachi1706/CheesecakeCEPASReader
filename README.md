@@ -41,11 +41,13 @@ new SettingsHandler(getActivity()).initSettings(this);
 CEPASLibBuilder.setPreferenceClass(YourPreference.class);
 ```
 * To show the "About" menu option, add the following  
-__Java__
+
 ```java
+// Java
 CEPASLibBuilder.INSTANCE.shouldShowAboutMenuItem(true);
 ```
-__Kotlin__
+
 ```kotlin
+// Kotlin
 CEPASLibBuilder.shouldShowAboutMenuItem(true)
 ```
