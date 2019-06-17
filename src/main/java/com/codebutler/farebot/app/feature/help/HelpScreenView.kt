@@ -48,12 +48,17 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
                         imageResId = R.drawable.ezlink_card,
                         name = "EZ-Link",
                         locationResId = R.string.location_singapore,
-                        cardType = CardType.CEPAS,
-                        extraNoteResId = R.string.ezlink_card_note
+                        cardType = CardType.CEPAS
                 ),
                 SupportedCard(
                         imageResId = R.drawable.nets_card,
                         name = "NETS FlashPay",
+                        locationResId = R.string.location_singapore,
+                        cardType = CardType.CEPAS
+                ),
+                SupportedCard(
+                        imageResId = R.drawable.sg_concession,
+                        name = "EZ-Link Concession Cards (Schools, Child, Senior, NSF)",
                         locationResId = R.string.location_singapore,
                         cardType = CardType.CEPAS
                 )

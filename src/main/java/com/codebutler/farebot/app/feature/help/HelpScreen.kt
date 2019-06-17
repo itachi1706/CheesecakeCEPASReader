@@ -27,6 +27,7 @@ import com.codebutler.farebot.R
 import com.codebutler.farebot.app.core.inject.ScreenScope
 import com.codebutler.farebot.app.core.ui.ActionBarOptions
 import com.codebutler.farebot.app.core.ui.FareBotScreen
+import com.codebutler.farebot.app.core.util.ActionBarOptionsDefaults
 import com.codebutler.farebot.app.feature.main.MainActivity
 import dagger.Component
 
@@ -34,10 +35,7 @@ class HelpScreen : FareBotScreen<HelpScreen.HelpComponent, HelpScreenView>() {
 
     override fun getTitle(context: Context): String = context.getString(R.string.supported_cards)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptions(
-            backgroundColorRes = R.color.accent,
-            textColorRes = R.color.white
-    )
+    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
     override fun onCreateView(context: Context): HelpScreenView = HelpScreenView(context)
 

@@ -31,6 +31,7 @@ import com.codebutler.farebot.app.core.inject.ScreenScope
 import com.codebutler.farebot.app.core.transit.TransitFactoryRegistry
 import com.codebutler.farebot.app.core.ui.ActionBarOptions
 import com.codebutler.farebot.app.core.ui.FareBotScreen
+import com.codebutler.farebot.app.core.util.ActionBarOptionsDefaults
 import com.codebutler.farebot.app.feature.card.advanced.CardAdvancedScreen
 import com.codebutler.farebot.app.feature.card.map.TripMapScreen
 import com.codebutler.farebot.app.feature.main.MainActivity
@@ -56,11 +57,7 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
     @Inject lateinit var activityOperations: ActivityOperations
     @Inject lateinit var transitFactoryRegistry: TransitFactoryRegistry
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptions(
-            backgroundColorRes = R.color.accent,
-            textColorRes = R.color.white,
-            shadow = false
-    )
+    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault(shadow = false)
 
     override fun onCreateView(context: Context): CardScreenView = CardScreenView(context)
 

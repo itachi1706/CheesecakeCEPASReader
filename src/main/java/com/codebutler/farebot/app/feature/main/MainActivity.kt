@@ -119,7 +119,7 @@ class MainActivity : AppCompatActivity(),
         navigator.onCreate(this, savedInstanceState)
     }
 
-    override fun onSaveInstanceState(outState: Bundle?) {
+    override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         navigator.onSaveInstanceState(outState)
     }

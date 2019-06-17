@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <!--
-  screen_main.xml
+  item_transaction.xml
 
   This file is part of FareBot.
   Learn more at: https://codebutler.github.io/farebot/
@@ -22,30 +21,27 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<menu
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <item
-        android:id="@+id/history"
-        android:title="@string/history"
-        android:icon="@drawable/ic_history_grey_24dp"
-        app:showAsAction="ifRoom"/>
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/grid_unit_2x"
+        android:layout_marginBottom="@dimen/grid_unit_1x"
+        android:layout_marginStart="@dimen/grid_unit_2x"
+        android:textColor="@color/accent"
+        android:textSize="@dimen/text_primary"
+        android:textStyle="bold"
+        tools:text="June 3rd, 2017"/>
 
-    <item
-        android:id="@+id/help"
-        android:title="@string/supported_cards"
-        android:icon="@drawable/ic_help_outline_grey_24dp"
-        app:showAsAction="ifRoom"/>
-
-    <item
-        android:id="@+id/prefs"
-        android:title="@string/preferences"
-        android:icon="@android:drawable/ic_menu_preferences"
-        app:showAsAction="never"/>
-    <item
-        android:id="@+id/about"
-        android:title="@string/about"
-        android:icon="@android:drawable/ic_menu_info_details"
-        app:showAsAction="never"/>
-</menu>
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

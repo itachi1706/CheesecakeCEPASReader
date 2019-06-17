@@ -29,10 +29,11 @@ import android.content.pm.PackageManager
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 import android.os.Bundle
-import android.preference.CheckBoxPreference
-import android.preference.Preference
-import android.preference.PreferenceActivity
+import android.preference.*
+import android.util.Log
 import android.view.MenuItem
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.codebutler.farebot.R
 import com.codebutler.farebot.app.feature.bg.BackgroundTagActivity
 
@@ -44,24 +45,46 @@ class FareBotPreferenceActivity : PreferenceActivity(), Preference.OnPreferenceC
     }
 
     private lateinit var preferenceLaunchFromBackground: CheckBoxPreference
+    private lateinit var preferenceDarkMode: ListPreference
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         addPreferencesFromResource(R.xml.prefs)
 
         actionBar?.setDisplayHomeAsUpEnabled(true)
+        setDarkMode(PreferenceManager.getDefaultSharedPreferences(this)?.getString("pref_dark_mode", "default"))
 
         preferenceLaunchFromBackground = findPreference("pref_launch_from_background") as CheckBoxPreference
         preferenceLaunchFromBackground.isChecked = launchFromBgEnabled
         preferenceLaunchFromBackground.onPreferenceChangeListener = this
+
+        preferenceDarkMode = findPreference("pref_dark_mode") as ListPreference
+        preferenceDarkMode.onPreferenceChangeListener = this
     }
 
     override fun onPreferenceChange(preference: Preference, newValue: Any): Boolean {
         if (preference === preferenceLaunchFromBackground) {
             launchFromBgEnabled = newValue as Boolean
             return true
+        } else if (preference === preferenceDarkMode) {
+            setDarkMode(newValue as String)
+            Toast.makeText(this, "Dark Mode will update after you restart the app", Toast.LENGTH_LONG).show()
+            return true
         }
         return false
+    }
+
+    private fun setDarkMode(newValue: String?) {
+        when (newValue ?: "default") {
+            "light" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_NO, "Light")
+            "dark" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_YES, "Dark")
+            else -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, "default system")
+        }
+    }
+
+    private fun changeDarkModeTheme(newTheme: Int, themeName: String) {
+        Log.i("AppThemeChanger", "Switching over to $themeName mode")
+        AppCompatDelegate.setDefaultNightMode(newTheme)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

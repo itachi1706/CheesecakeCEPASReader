@@ -46,6 +46,7 @@ import com.codebutler.farebot.app.core.kotlin.filterAndGetOptional
 import com.codebutler.farebot.app.core.transit.TransitFactoryRegistry
 import com.codebutler.farebot.app.core.ui.ActionBarOptions
 import com.codebutler.farebot.app.core.ui.FareBotScreen
+import com.codebutler.farebot.app.core.util.ActionBarOptionsDefaults
 import com.codebutler.farebot.app.core.util.ErrorUtils
 import com.codebutler.farebot.app.core.util.ExportHelper
 import com.codebutler.farebot.app.feature.card.CardScreen
@@ -79,10 +80,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
 
     override fun getTitle(context: Context): String = context.getString(R.string.history)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptions(
-            backgroundColorRes = R.color.accent,
-            textColorRes = R.color.white
-    )
+    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
     override fun onCreateView(context: Context): HistoryScreenView =
             HistoryScreenView(context, activityOperations, this)

@@ -54,7 +54,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_primary"
-            android:textColor="#424242"
+            android:textColor="#E0E0E0"
             android:includeFontPadding="false"
             tools:text="Yurikamome"/>
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/grid_unit_1x"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_secondary"
             tools:text="Shinbashi -> Oumi" />
     </LinearLayout>
@@ -87,7 +87,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_primary"
             android:fontFamily="sans-serif-medium"
             android:alpha="0.87"

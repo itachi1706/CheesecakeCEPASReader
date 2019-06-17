@@ -30,6 +30,7 @@ import com.codebutler.farebot.app.core.inject.ScreenScope
 import com.codebutler.farebot.app.core.kotlin.compact
 import com.codebutler.farebot.app.core.ui.ActionBarOptions
 import com.codebutler.farebot.app.core.ui.FareBotScreen
+import com.codebutler.farebot.app.core.util.ActionBarOptionsDefaults
 import com.codebutler.farebot.app.feature.main.MainActivity
 import com.codebutler.farebot.transit.Trip
 
@@ -37,10 +38,7 @@ class TripMapScreen(private val trip: Trip) : FareBotScreen<TripMapScreen.Compon
 
     override fun getTitle(context: Context): String = context.getString(R.string.map)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptions(
-            backgroundColorRes = R.color.accent,
-            textColorRes = R.color.white
-    )
+    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
     override fun onCreateView(context: Context): TripMapScreenView = TripMapScreenView(context, trip)
 

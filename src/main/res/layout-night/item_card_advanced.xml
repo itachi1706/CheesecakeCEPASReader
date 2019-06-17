@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  screen_card.xml
+  item_card_advanced.xml
 
   This file is part of FareBot.
   Learn more at: https://codebutler.github.io/farebot/
@@ -21,55 +21,36 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".app.feature.main.MainActivity">
-
-    <TextView
-        android:id="@+id/error"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:visibility="gone"
-        tools:text="@string/unknown_card_desc" />
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    android:focusable="true"
+    android:clickable="true">
 
     <LinearLayout
-        android:id="@+id/balance_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/grid_unit_2x"
-        android:paddingStart="@dimen/grid_unit_9x"
-        android:paddingEnd="@dimen/grid_unit_2x"
-        android:paddingBottom="@dimen/grid_unit_2x"
+        android:minHeight="?android:listPreferredItemHeight"
+        android:padding="@dimen/grid_unit_2x"
         android:orientation="vertical"
-        android:background="#00ACC1"
-        android:elevation="4dp"
-        android:gravity="center">
+        android:gravity="start|center_vertical">
 
         <TextView
-            android:id="@+id/balance"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="54sp"
+            android:textSize="@dimen/text_primary"
             android:textColor="@color/white"
-            android:includeFontPadding="false"
-            tools:text="SGD300"/>
+            tools:text="Title" />
+
         <TextView
+            android:id="@+id/value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_secondary"
-            android:textColor="#004F59"
-            android:text="@string/balance"/>
+            tools:text="Value" />
     </LinearLayout>
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
-</LinearLayout>
+</FrameLayout>

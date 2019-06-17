@@ -34,6 +34,7 @@ import com.codebutler.farebot.app.core.activity.ActivityOperations
 import com.codebutler.farebot.app.core.inject.ScreenScope
 import com.codebutler.farebot.app.core.ui.ActionBarOptions
 import com.codebutler.farebot.app.core.ui.FareBotScreen
+import com.codebutler.farebot.app.core.util.ActionBarOptionsDefaults
 import com.codebutler.farebot.app.core.util.ErrorUtils
 import com.codebutler.farebot.app.feature.card.CardScreen
 import com.codebutler.farebot.app.feature.help.HelpScreen
@@ -57,7 +58,9 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
 
     override fun getTitle(context: Context): String = context.getString(R.string.app_name)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptions(shadow = false)
+    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault(backgroundColor = android.R.color.transparent,
+            textColorRes = if (ActionBarOptionsDefaults.isNightModeEnabled(activity)) R.color.white else R.color.black,
+            shadow = false)
 
     override fun onShow(context: Context) {
         super.onShow(context)

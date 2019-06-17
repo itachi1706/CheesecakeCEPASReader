@@ -69,7 +69,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="@dimen/grid_unit_2x"
                 android:contentDescription="@string/keys_required"
-                android:src="@drawable/ic_lock_black_24dp"
+                android:src="@drawable/ic_lock_24dp"
                 android:alpha="0.54"/>
         </LinearLayout>
         <FrameLayout
@@ -92,7 +92,7 @@
                 android:textAllCaps="true"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/white"
                 android:background="@color/card_unsupported"
                 android:layout_gravity="center"
                 android:padding="4dp"/>
