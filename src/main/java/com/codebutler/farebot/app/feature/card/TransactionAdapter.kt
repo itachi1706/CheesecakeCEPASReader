@@ -28,11 +28,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.LayoutRes
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.codebutler.farebot.R
 import com.codebutler.farebot.app.core.kotlin.bindView
 import com.codebutler.farebot.app.core.kotlin.inflate
 import com.codebutler.farebot.app.feature.card.TransactionAdapter.TransactionViewHolder.*
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.jakewharton.rxrelay2.PublishRelay
 import com.xwray.groupie.ViewHolder
 import java.util.*
@@ -79,6 +81,8 @@ class TransactionAdapter(
         companion object {
             fun wrapLayout(parent: ViewGroup, @LayoutRes layoutId: Int): View =
                     parent.inflate(R.layout.item_transaction).apply {
+                if (CEPASLibBuilder.customAccentColor)
+                    findViewById<TextView>(R.id.header).setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.accentColor))
                 findViewById<ViewGroup>(R.id.container).inflate(layoutId, true)
             }
         }
@@ -142,6 +146,9 @@ class TransactionAdapter(
                 agency.text = viewModel.agency
                 amount.text = viewModel.amount
                 time.text = viewModel.time
+
+                // Update based on accent color
+                amount.setTextColor(CEPASLibBuilder.accentColor)
             }
         }
 

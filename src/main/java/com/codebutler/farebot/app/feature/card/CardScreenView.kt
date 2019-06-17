@@ -23,14 +23,16 @@
 package com.codebutler.farebot.app.feature.card
 
 import android.content.Context
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.codebutler.farebot.R
 import com.codebutler.farebot.app.core.kotlin.bindView
 import com.codebutler.farebot.transit.TransitInfo
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.jakewharton.rxrelay2.PublishRelay
 import com.wealthfront.magellan.BaseScreenView
 import com.xwray.groupie.GroupAdapter
@@ -41,6 +43,7 @@ class CardScreenView(context: Context) : BaseScreenView<CardScreen>(context) {
     private val clicksRelay = PublishRelay.create<TransactionViewModel>()
 
     private val balanceLayout: LinearLayout by bindView(R.id.balance_layout)
+    private val label: TextView by bindView(R.id.unedit_balance_label)
     private val balanceTextView: TextView by bindView(R.id.balance)
     private val errorTextView: TextView by bindView(R.id.error)
     private val recycler: RecyclerView by bindView(R.id.recycler)
@@ -48,6 +51,12 @@ class CardScreenView(context: Context) : BaseScreenView<CardScreen>(context) {
     init {
         inflate(context, R.layout.screen_card, this)
         recycler.layoutManager = LinearLayoutManager(context)
+
+        if (CEPASLibBuilder.customTitleBarColor) {
+            // Edit balance layout color based on accent
+            balanceLayout.setBackgroundColor(ResourcesCompat.getColor(resources, CEPASLibBuilder.titleBarColor, null))
+            label.setTextColor(ResourcesCompat.getColor(resources, CEPASLibBuilder.textColor, null))
+        }
     }
 
     internal fun observeItemClicks(): Observable<TransactionViewModel> = clicksRelay.hide()

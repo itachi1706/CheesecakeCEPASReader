@@ -47,7 +47,7 @@
         android:paddingEnd="@dimen/grid_unit_2x"
         android:paddingBottom="@dimen/grid_unit_2x"
         android:orientation="vertical"
-        android:background="#00ACC1"
+        android:background="@color/accent"
         android:elevation="4dp"
         android:gravity="center">
 
@@ -64,6 +64,7 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_secondary"
             android:textColor="#004F59"
+            android:id="@+id/unedit_balance_label"
             android:text="@string/balance"/>
     </LinearLayout>
 

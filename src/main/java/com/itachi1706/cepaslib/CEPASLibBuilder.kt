@@ -2,6 +2,8 @@ package com.itachi1706.cepaslib
 
 import android.content.Context
 import android.view.MenuItem
+import androidx.annotation.ColorRes
+import com.codebutler.farebot.R
 
 /**
  * Created by Kenneth on 13/6/2019.
@@ -12,6 +14,12 @@ object CEPASLibBuilder {
     var prefClass: Class<*>? = null
     var menuHandler: LibMenuItemHandler? = null
     var showAbout: Boolean = false
+    @ColorRes var titleBarColor: Int = R.color.accent
+    @ColorRes var accentColor: Int = R.color.accent
+    @ColorRes var textColor: Int = R.color.white
+
+    var customTitleBarColor = false
+    var customAccentColor = false
 
     fun setPreferenceClass(preferenceClass: Class<*>) {
         prefClass = preferenceClass
@@ -27,6 +35,20 @@ object CEPASLibBuilder {
 
     fun shouldShowAboutMenuItem(should: Boolean) {
         showAbout = should
+    }
+
+    fun updateTitleBarColor(@ColorRes newTitleBarColor: Int) {
+        titleBarColor = newTitleBarColor
+        customTitleBarColor = true
+    }
+
+    fun updateAccentColor(@ColorRes newAccentColor: Int) {
+        accentColor = newAccentColor
+        customAccentColor = true
+    }
+
+    fun updateTextColor(@ColorRes newTextColor: Int) {
+        textColor = newTextColor
     }
 
     fun processMenuItemsFurther(menuItem: MenuItem, context: Context) {
