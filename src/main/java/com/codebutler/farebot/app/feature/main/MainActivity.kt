@@ -28,6 +28,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.Menu
@@ -59,6 +60,7 @@ import com.codebutler.farebot.card.serialize.CardSerializer
 import com.codebutler.farebot.persist.CardKeysPersister
 import com.codebutler.farebot.persist.CardPersister
 import com.google.android.material.appbar.AppBarLayout
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.jakewharton.rxrelay2.PublishRelay
 import com.wealthfront.magellan.*
 import dagger.BindsInstance
@@ -183,6 +185,8 @@ class MainActivity : AppCompatActivity(),
 
         supportActionBar?.setDisplayHomeAsUpEnabled(!navigator.atRoot())
 
+        if (CEPASLibBuilder.homeScreenWithBackButton && navigator.atRoot()) supportActionBar?.apply { setDisplayHomeAsUpEnabled(true) }
+
         toolbar.setTitleTextColor(getColor(options.textColorRes, Color.BLACK))
         toolbar.title = screen.getTitle(this)
         toolbar.subtitle = null
@@ -193,10 +197,12 @@ class MainActivity : AppCompatActivity(),
         val curColorForAnim = if (curColor == Color.TRANSPARENT) adjustAlpha(newColor) else curColor
         val newColorForAnim = if (newColor == Color.TRANSPARENT) adjustAlpha(curColor) else newColor
 
-        animToolbarBg?.cancel()
-        animToolbarBg = ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim).apply {
-            duration = shortAnimationDuration
-            start()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            animToolbarBg?.cancel()
+            animToolbarBg = ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim).apply {
+                duration = shortAnimationDuration
+                start()
+            }
         }
 
         ViewCompat.setElevation(appBarLayout, if (options.shadow) toolbarElevation else 0f)

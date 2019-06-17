@@ -56,7 +56,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
 
     override fun onCreateView(context: Context): HomeScreenView = HomeScreenView(context, this)
 
-    override fun getTitle(context: Context): String = context.getString(R.string.app_name)
+    override fun getTitle(context: Context): String = CEPASLibBuilder.customTitle ?: context.getString(R.string.app_name)
 
     override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault(backgroundColor = android.R.color.transparent,
             textColorRes = if (ActionBarOptionsDefaults.isNightModeEnabled(activity)) R.color.white else R.color.black,

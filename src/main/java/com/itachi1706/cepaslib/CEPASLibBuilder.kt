@@ -17,6 +17,8 @@ object CEPASLibBuilder {
     @ColorRes var titleBarColor: Int = R.color.accent
     @ColorRes var accentColor: Int = R.color.accent
     @ColorRes var textColor: Int = R.color.white
+    var customTitle: String? = null
+    var homeScreenWithBackButton: Boolean = false
 
     var customTitleBarColor = false
     var customAccentColor = false
