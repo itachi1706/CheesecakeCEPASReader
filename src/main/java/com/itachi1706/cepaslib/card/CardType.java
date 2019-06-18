@@ -1,8 +1,10 @@
 /*
  * CardType.java
  *
- * Copyright 2011-2014 Eric Butler <eric@codebutler.com>
- * Copyright 2015, 2018 Michael Farrell <micolous+git@gmail.com>
+ * This file is part of FareBot.
+ * Learn more at: https://codebutler.github.io/farebot/
+ *
+ * Copyright (C) 2014-2016 Eric Butler <eric@codebutler.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,46 +19,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package com.itachi1706.cepaslib.card;
 
 public enum CardType {
-    MifareClassic(0),
-    MifareUltralight(1),
-    MifareDesfire(2),
-    CEPAS(3),
-    FeliCa(4),
-    ISO7816(5),
-    Unknown(65535);
-
-    private int mValue;
-
-    CardType(int value) {
-        mValue = value;
-    }
-
-    public static CardType parseValue(String value) {
-        return CardType.class.getEnumConstants()[Integer.parseInt(value)];
-    }
-
-    public int toInteger() {
-        return mValue;
-    }
+    MifareClassic,
+    MifareUltralight,
+    MifareDesfire,
+    CEPAS,
+    FeliCa,
+    Sample;
 
     public String toString() {
-        switch (mValue) {
-            case 0:
+        switch (this) {
+            case MifareClassic:
                 return "MIFARE Classic";
-            case 1:
+            case MifareUltralight:
                 return "MIFARE Ultralight";
-            case 2:
+            case MifareDesfire:
                 return "MIFARE DESFire";
-            case 3:
+            case CEPAS:
                 return "CEPAS";
-            case 4:
+            case FeliCa:
                 return "FeliCa";
-            case 5:
-                return "ISO7816";
-            case 65535:
+            case Sample:
+                return "Sample Card";
             default:
                 return "Unknown";
         }

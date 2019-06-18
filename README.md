@@ -11,7 +11,7 @@ To use this library, run in your main project the following command
 
 * Add the following lines to your project-level (/) build.gradle dependency
 ```gradle
-classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.6'
+classpath 'com.squareup.sqldelight:gradle-plugin:1.1.3'
 ```
 * Add the following lines to your app-level (/app) build.gradle dependency
 ```gradle
@@ -21,33 +21,13 @@ implementation project(':cepaslib')
 ```gradle
 include ':cepaslib'
 ```
-* In your AndroidManifest.xml file you will define the activity that will call the fragment CEPASCardScanFragment, make sure it contains the following
-```xml
-<activity android:name="<path>"
-        android:configChanges="keyboardHidden|orientation"
-        android:label="<name>"
-        android:screenOrientation="sensorPortrait"
-        tools:ignore="AppLinkUrlError">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <action android:name="android.intent.action.EDIT" />
-            <action android:name="android.intent.action.PICK" />
-
-            <category android:name="android.intent.category.DEFAULT" />
-
-            <data android:mimeType="vnd.android.cursor.dir/${applicationId}.card" />
-        </intent-filter>
-</activity>
- ```
-* In the onCreate method of your activity, call the following to invoke the fragment
+* To invoke the activity add the following code
 ```java
-if (getSupportFragmentManager().findFragmentById(android.R.id.content)==null) {
-    getSupportFragmentManager().beginTransaction()
-            .add(android.R.id.content, new CEPASCardScanFragment())
-            .commit();
-}
+startActivity(new Intent(this, MainActivity.class));
+finish();
 ```
 * Note: If your theme is a dark theme, add the following to your Main Activity (if you have initialized SharedPreferece, you do not need to reinitialize it)
+// TODO: To reimplement dark mode toggle
 ```java
 SharedPreference sp = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
 sp.edit().putBoolean("cepas_dark_theme", true).apply();
@@ -56,11 +36,20 @@ sp.edit().putBoolean("cepas_dark_theme", true).apply();
 ```java
 new SettingsHandler(getActivity()).initSettings(this);
 ```
-* In your application styles folder, add the following items
-```xml
-<item name="TransportIcons">@array/TransportIcons</item>
-<item name="ListHeaderTextColor">@android:color/background_dark</item>
-<item name="LockImage">@drawable/locked</item>
-<item name="DrawableClosedIndicator">@drawable/expander_close_holo_light</item>
-<item name="DrawableOpenIndicator">@drawable/expander_open_holo_light</item>
+* Make the Preferences button in the library to point to your own settings screen if you wish for it, add the following to add the class to your SharedPreferences
+```java
+CEPASLibBuilder.setPreferenceClass(YourPreference.class);
 ```
+* To show the "About" menu option, add the following  
+
+```java
+// Java
+CEPASLibBuilder.INSTANCE.shouldShowAboutMenuItem(true);
+```
+
+```kotlin
+// Kotlin
+CEPASLibBuilder.shouldShowAboutMenuItem(true)
+```
+
+* For more information and other library modification capabilities look at [CEPASLibBuilder.kt](https://github.com/itachi1706/CheesecakeCEPASReader/blob/master/src/main/java/com/itachi1706/cepaslib/CEPASLibBuilder.kt)

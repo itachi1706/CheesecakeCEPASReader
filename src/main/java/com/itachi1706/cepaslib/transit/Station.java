@@ -1,7 +1,11 @@
 /*
  * Station.java
  *
- * Copyright (C) 2011 Eric Butler <eric@codebutler.com>
+ * This file is part of FareBot.
+ * Learn more at: https://codebutler.github.io/farebot/
+ *
+ * Copyright (C) 2011, 2015-2016 Eric Butler <eric@codebutler.com>
+ * Copyright (C) 2016 Michael Farrell <micolous+git@gmail.com>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,124 +23,42 @@
 
 package com.itachi1706.cepaslib.transit;
 
-import android.os.Parcel;
-import android.os.Parcelable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
-import com.itachi1706.cepaslib.CEPASReaderApplication;
-import com.itachi1706.cepaslib.util.StationTableReader;
-import com.itachi1706.cepaslib.util.Utils;
-import com.itachi1706.cepaslib.R;
-import com.itachi1706.sgcardreader.proto.Stations;
+import com.google.auto.value.AutoValue;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
+@AutoValue
+public abstract class Station {
 
-public class Station implements Parcelable {
-    public static final Creator<Station> CREATOR = new Creator<Station>() {
-        public Station createFromParcel(Parcel parcel) {
-            return new Station(parcel);
-        }
-
-        public Station[] newArray(int size) {
-            return new Station[size];
-        }
-    };
-    private final String mCompanyName, mLineName, mStationName, mShortStationName, mLatitude, mLongitude, mLanguage;
-    private final boolean mIsUnknown;
-    private final String mHumanReadableId;
-    private final List<String> mAttributes;
-
-    private Station(String humanReadableId, String stationName, boolean isUnknown) {
-        this(humanReadableId, null, null, stationName,
-                null, null, null, null, isUnknown);
+    @NonNull
+    public static Builder builder() {
+        return new AutoValue_Station.Builder();
     }
 
-    private Station(String humanReadableId, String companyName, String lineName,
-                    String stationName, String shortStationName, String latitude,
-                    String longitude, String language, boolean isUnknown) {
-        mHumanReadableId = humanReadableId;
-        mCompanyName = companyName;
-        mLineName = lineName;
-        mStationName = stationName;
-        mShortStationName = shortStationName;
-        mLatitude = latitude;
-        mLongitude = longitude;
-        mLanguage = language;
-        mAttributes = new ArrayList<>();
-        mIsUnknown = isUnknown;
+    @NonNull
+    public static Station create(String stationName, String shortStationName, String latitude, String longitude) {
+        return new AutoValue_Station.Builder()
+                .stationName(stationName)
+                .shortStationName(shortStationName)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
     }
 
-    private Station(Parcel parcel) {
-        mCompanyName = parcel.readString();
-        mLineName = parcel.readString();
-        mStationName = parcel.readString();
-        mShortStationName = parcel.readString();
-        mLatitude = parcel.readString();
-        mLongitude = parcel.readString();
-        mLanguage = parcel.readString();
-        mIsUnknown = parcel.readInt() == 1;
-        mHumanReadableId = parcel.readString();
-        mAttributes = new ArrayList<>();
-        parcel.readList(mAttributes, Station.class.getClassLoader());
+    @NonNull
+    public static Station create(String name, String code, String abbreviation, String latitude, String longitude) {
+        return new AutoValue_Station.Builder()
+                .stationName(name)
+                .code(code)
+                .abbreviation(abbreviation)
+                .latitude(latitude)
+                .longitude(longitude)
+                .build();
     }
 
-    public String getStationName() {
-        String ret;
-        if (mStationName == null)
-            ret = Utils.localizeString(R.string.unknown_format, mHumanReadableId);
-        else
-            ret = mStationName;
-        if (showRawId() && mStationName != null && !mStationName.equals(mHumanReadableId))
-            ret = String.format(Locale.ENGLISH, "%s [%s]", ret, mHumanReadableId);
-        if (!mAttributes.isEmpty())
-            for (String attribute : mAttributes)
-                ret = String.format(Locale.ENGLISH, "%s, %s", ret, attribute);
-        return ret;
-    }
-
-    private boolean showRawId() {
-        return CEPASReaderApplication.showRawStationIds();
-    }
-
-    public String getShortStationName() {
-        String ret;
-        if (mStationName == null && mShortStationName == null)
-            ret = Utils.localizeString(R.string.unknown_format, mHumanReadableId);
-        else
-            ret = (mShortStationName != null) ? mShortStationName : mStationName;
-        if (showRawId() && mStationName != null && !mStationName.equals(mHumanReadableId))
-            ret = String.format(Locale.ENGLISH, "%s [%s]", ret, mHumanReadableId);
-        if (!mAttributes.isEmpty())
-            for (String attribute : mAttributes)
-                ret = String.format(Locale.ENGLISH, "%s, %s", ret, attribute);
-        return ret;
-    }
-
-    public String getCompanyName() {
-        return mCompanyName;
-    }
-
-    public String getLineName() {
-        return mLineName;
-    }
-
-    public String getLatitude() {
-        return mLatitude;
-    }
-
-    public String getLongitude() {
-        return mLongitude;
-    }
-
-    /**
-     * Language that the station line name and station name are written in. If null, then use
-     * the system locale instead.
-     *
-     * https://developer.android.com/reference/java/util/Locale.html#forLanguageTag(java.lang.String)
-     */
-    public String getLanguage() {
-        return mLanguage;
+    public String getDisplayStationName() {
+        return (getShortStationName() != null) ? getShortStationName() : getStationName();
     }
 
     public boolean hasLocation() {
@@ -144,57 +66,49 @@ public class Station implements Parcelable {
                 && getLongitude() != null && !getLongitude().isEmpty();
     }
 
-    public int describeContents() {
-        return 0;
-    }
+    @Nullable
+    public abstract String getStationName();
 
-    public void writeToParcel(Parcel parcel, int flags) {
-        parcel.writeString(mCompanyName);
-        parcel.writeString(mLineName);
-        parcel.writeString(mStationName);
-        parcel.writeString(mShortStationName);
-        parcel.writeString(mLatitude);
-        parcel.writeString(mLongitude);
-        parcel.writeString(mLanguage);
-        parcel.writeInt(mIsUnknown ? 1 : 0);
-        parcel.writeString(mHumanReadableId);
-        parcel.writeList(mAttributes);
-    }
+    @Nullable
+    public abstract String getShortStationName();
 
-    public boolean isUnknown() {
-        return mIsUnknown;
-    }
+    @Nullable
+    public abstract String getCompanyName();
 
-    public static Station unknown(String id) {
-        return new Station(id, null, true);
-    }
+    @Nullable
+    public abstract String getLineName();
 
-    public static Station unknown(Integer id) {
-        return unknown("0x" + Integer.toHexString(id));
-    }
+    @Nullable
+    public abstract String getLatitude();
 
-    public static Station nameOnly(String name) {
-        return new Station(name, name, false);
-    }
+    @Nullable
+    public abstract String getLongitude();
 
-    public Station addAttribute(String s) {
-        mAttributes.add(s);
-        return this;
-    }
+    @Nullable
+    public abstract String getCode();
 
-    public static Station fromProto(String humanReadableID, Stations.Station ps,
-                                    Stations.Operator po, Stations.Line pl, String ttsHintLanguage,
-                                    StationTableReader str) {
-        boolean hasLocation = ps.getLatitude() != 0 && ps.getLongitude() != 0;
+    @Nullable
+    public abstract String getAbbreviation();
 
-        return new Station(
-                humanReadableID,
-                po == null ? null : str.selectBestName(po.getName(), true),
-                pl == null ? null : str.selectBestName(pl.getName(), true),
-                str.selectBestName(ps.getName(), false),
-                str.selectBestName(ps.getName(), true),
-                hasLocation ? Float.toString(ps.getLatitude()) : null,
-                hasLocation ? Float.toString(ps.getLongitude()) : null,
-                ttsHintLanguage, false);
+    @AutoValue.Builder
+    public abstract static class Builder {
+
+        public abstract Builder stationName(String stationName);
+
+        public abstract Builder shortStationName(String shortStationName);
+
+        public abstract Builder companyName(String companyName);
+
+        public abstract Builder lineName(String lineName);
+
+        public abstract Builder latitude(String latitude);
+
+        public abstract Builder longitude(String longitude);
+
+        public abstract Builder code(String code);
+
+        public abstract Builder abbreviation(String abbreviation);
+
+        public abstract Station build();
     }
 }
