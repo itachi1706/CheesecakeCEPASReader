@@ -51,3 +51,5 @@ CEPASLibBuilder.INSTANCE.shouldShowAboutMenuItem(true);
 // Kotlin
 CEPASLibBuilder.shouldShowAboutMenuItem(true)
 ```
+
+* For more information and other library modification capabilities look at [CEPASLibBuilder.kt](https://github.com/itachi1706/CheesecakeCEPASReader/blob/master/src/main/java/com/itachi1706/cepaslib/CEPASLibBuilder.kt)
