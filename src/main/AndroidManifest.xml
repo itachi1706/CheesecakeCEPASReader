@@ -23,7 +23,7 @@
 
 <manifest
     xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.codebutler.farebot">
+    package="com.itachi1706.cepaslib">
 
     <uses-permission android:name="android.permission.NFC" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -45,18 +45,18 @@
 
     <application
         android:label="@string/app_name"
-        android:name="com.codebutler.farebot.app.core.app.FareBotApplication"
+        android:name=".app.core.app.FareBotApplication"
         android:allowBackup="true"
         android:supportsRtl="true">
 
         <activity
-            android:name="com.codebutler.farebot.app.feature.main.MainActivity"
+            android:name=".app.feature.main.MainActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait"
             android:theme="@style/FareBot.Theme.Main"/>
 
         <activity
-            android:name="com.codebutler.farebot.app.feature.prefs.FareBotPreferenceActivity"
+            android:name=".app.feature.prefs.FareBotPreferenceActivity"
             android:label="@string/preferences"
             android:theme="@style/FareBot.Theme.Prefs"/>
 

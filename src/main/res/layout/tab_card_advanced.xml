@@ -21,7 +21,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<com.codebutler.farebot.app.feature.card.advanced.CardAdvancedTabView
+<com.itachi1706.cepaslib.app.feature.card.advanced.CardAdvancedTabView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -30,4 +30,4 @@
         android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
-</com.codebutler.farebot.app.feature.card.advanced.CardAdvancedTabView>
+</com.itachi1706.cepaslib.app.feature.card.advanced.CardAdvancedTabView>

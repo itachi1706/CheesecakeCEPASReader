@@ -27,4 +27,4 @@
 -dontwarn org.checkerframework.**
 
 # FareBot
--keep class com.codebutler.farebot.base.ui.FareBotUiTree
+-keep class com.itachi1706.cepaslib.base.ui.FareBotUiTree

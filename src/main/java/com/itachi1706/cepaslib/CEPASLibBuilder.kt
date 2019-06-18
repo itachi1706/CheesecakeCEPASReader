@@ -3,7 +3,7 @@ package com.itachi1706.cepaslib
 import android.content.Context
 import android.view.MenuItem
 import androidx.annotation.ColorRes
-import com.codebutler.farebot.R
+import com.itachi1706.cepaslib.R
 
 /**
  * Created by Kenneth on 13/6/2019.

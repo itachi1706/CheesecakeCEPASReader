@@ -11,8 +11,8 @@ import android.preference.PreferenceCategory
 import android.preference.PreferenceFragment
 import android.preference.SwitchPreference
 import android.util.Log
-import com.codebutler.farebot.app.feature.bg.BackgroundTagActivity
-import com.codebutler.farebot.app.feature.prefs.FareBotPreferenceActivity
+import com.itachi1706.cepaslib.app.feature.bg.BackgroundTagActivity
+import com.itachi1706.cepaslib.app.feature.prefs.FareBotPreferenceActivity
 
 /**
  * Created by Kenneth on 21/2/2019.
@@ -35,7 +35,7 @@ class SettingsHandler(private val activity: Activity) {
         }
 
     fun initSettings(fragment: PreferenceFragment) {
-        fragment.addPreferencesFromResource(com.codebutler.farebot.R.xml.prefs)
+        fragment.addPreferencesFromResource(R.xml.prefs)
         val mPreferenceLaunchFromBackground = fragment.findPreference("pref_launch_from_background") as SwitchPreference
         mPreferenceLaunchFromBackground.isChecked = isLaunchFromBgEnabled
         mPreferenceLaunchFromBackground.setOnPreferenceChangeListener { _, newValue ->
