@@ -32,8 +32,11 @@ import android.view.ViewPropertyAnimator
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
+import com.itachi1706.cepaslib.app.core.util.ActionBarOptionsDefaults
 import com.wealthfront.magellan.BaseScreenView
 
 @SuppressLint("ViewConstructor")
@@ -86,6 +89,8 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
             errorViewGroup.visibility = View.GONE
             return
         }
+        if (ActionBarOptionsDefaults.isNightModeEnabled(context)) errorTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
+        if (CEPASLibBuilder.customAccentColor) errorButton.setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.accentColor))
         when (error) {
             NfcError.DISABLED -> {
                 errorTextView.setText(R.string.nfc_off_error)
