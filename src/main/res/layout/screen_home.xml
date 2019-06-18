@@ -22,11 +22,11 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<FrameLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
     <ImageView
@@ -36,7 +36,7 @@
         android:layout_gravity="center"
         android:layout_marginLeft="@dimen/grid_unit_6x"
         android:layout_marginRight="@dimen/grid_unit_6x"
-        android:src="@drawable/img_home_splash"
+        app:srcCompat="@drawable/img_home_splash"
         tools:ignore="ContentDescription" />
 
     <ProgressBar
