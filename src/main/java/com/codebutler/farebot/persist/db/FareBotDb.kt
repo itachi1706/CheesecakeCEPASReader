@@ -29,6 +29,7 @@ abstract class FareBotDb : RoomDatabase() {
 
         private fun buildDatabase(context: Context): FareBotDb =
                 Room.databaseBuilder(context, FareBotDb::class.java, DATABASE_NAME)
+                        .allowMainThreadQueries()
                         .addMigrations(object : Migration(1, 2) {
                             override fun migrate(database: SupportSQLiteDatabase) {
                                 // Migration from Sqldelight to Room. Nothing to change.

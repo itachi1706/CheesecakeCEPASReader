@@ -23,6 +23,7 @@
 package com.codebutler.farebot.transit.ezlink;
 
 import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 
 import com.codebutler.farebot.card.cepas.CEPASTransaction;
@@ -32,6 +33,7 @@ import com.google.auto.value.AutoValue;
 
 import java.text.NumberFormat;
 import java.util.Currency;
+import java.util.Objects;
 
 @AutoValue
 abstract class EZLinkTrip extends Trip {
@@ -56,12 +58,9 @@ abstract class EZLinkTrip extends Trip {
         if (getTransaction().getType() == CEPASTransaction.TransactionType.BUS
                 || getTransaction().getType() == CEPASTransaction.TransactionType.BUS_REFUND) {
             String routeString = getTransaction().getUserData().substring(3, 7).replace(" ", "");
-            if (EZLinkData.SBS_BUSES.contains(routeString)) {
-                return "SBS";
-            } else if (EZLinkData.CS_BUSES.contains(routeString)) {
-                return "Commute Solutions";
-            }
-            return "SMRT/SG Buses";
+            if (!EZLinkData.initData) EZLinkData.initialize(resources);
+            if (EZLinkData.SG_BUSES.containsKey(routeString)) return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getLongName();
+            return "SG Buses";
         }
         if (getTransaction().getType() == CEPASTransaction.TransactionType.CREATION
                 || getTransaction().getType() == CEPASTransaction.TransactionType.TOP_UP
@@ -79,13 +78,9 @@ abstract class EZLinkTrip extends Trip {
         if (getTransaction().getType() == CEPASTransaction.TransactionType.BUS
                 || getTransaction().getType() == CEPASTransaction.TransactionType.BUS_REFUND) {
             String routeString = getTransaction().getUserData().substring(3, 7).replace(" ", "");
-            if (EZLinkData.SBS_BUSES.contains(routeString)) {
-                return "SBS";
-            } else if (EZLinkData.CS_BUSES.contains(routeString)) {
-                return "CS";
-            }
-            // TODO: Handle for SMRT, Go Ahead and Tower Transit
-            return "SMRT/SG";
+            if (!EZLinkData.initData) EZLinkData.initialize(resources);
+            if (EZLinkData.SG_BUSES.containsKey(routeString)) return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getShortName();
+            return "SGB";
         }
         if (getTransaction().getType() == CEPASTransaction.TransactionType.CREATION
                 || getTransaction().getType() == CEPASTransaction.TransactionType.TOP_UP
