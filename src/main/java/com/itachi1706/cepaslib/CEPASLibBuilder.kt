@@ -16,6 +16,7 @@ object CEPASLibBuilder {
     var showAbout: Boolean = false
     @ColorRes var titleBarColor: Int = R.color.accent
     @ColorRes var accentColor: Int = R.color.accent
+    @ColorRes var errorColor: Int? = null
     @ColorRes var textColor: Int = R.color.white
     var customTitle: String? = null
     var homeScreenWithBackButton: Boolean = false
@@ -51,6 +52,10 @@ object CEPASLibBuilder {
 
     fun updateTextColor(@ColorRes newTextColor: Int) {
         textColor = newTextColor
+    }
+
+    fun updateErrorColor(@ColorRes newErrorColor: Int) {
+        errorColor = newErrorColor
     }
 
     fun processMenuItemsFurther(menuItem: MenuItem, context: Context) {

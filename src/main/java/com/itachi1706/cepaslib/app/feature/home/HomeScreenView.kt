@@ -90,7 +90,7 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
             return
         }
         if (ActionBarOptionsDefaults.isNightModeEnabled(context)) errorTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
-        if (CEPASLibBuilder.customAccentColor) errorButton.setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.accentColor))
+        if (CEPASLibBuilder.errorColor != null) errorButton.setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.errorColor))
         when (error) {
             NfcError.DISABLED -> {
                 errorTextView.setText(R.string.nfc_off_error)
