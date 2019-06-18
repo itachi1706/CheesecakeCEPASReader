@@ -12,6 +12,9 @@ To use this library, run in your main project the following command
 * Add the following lines to your project-level (/) build.gradle dependency
 ```gradle
 classpath 'com.squareup.sqldelight:gradle-plugin:1.1.3'
+plugins {
+    id 'com.github.ben-manes.versions' version '0.21.0'
+}
 ```
 * Add the following lines to your app-level (/app) build.gradle dependency
 ```gradle
@@ -26,11 +29,9 @@ include ':cepaslib'
 startActivity(new Intent(this, MainActivity.class));
 finish();
 ```
-* Note: If your theme is a dark theme, add the following to your Main Activity (if you have initialized SharedPreferece, you do not need to reinitialize it)
-// TODO: To reimplement dark mode toggle
+* Note: If your theme is a dark theme, ensure that AppCompatDelegate has properly updated it. View options possible [here](https://developer.android.com/reference/android/support/v7/app/AppCompatDelegate.html#mode_night_auto)
 ```java
-SharedPreference sp = PreferenceManager.getDefaultSharedPreferences(this.getApplicationContext());
-sp.edit().putBoolean("cepas_dark_theme", true).apply();
+AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES); // View more at AppCompatDelegate file
 ```
 * In your settings screen activity where you wish to add the settings to, add the following line 
 ```java
