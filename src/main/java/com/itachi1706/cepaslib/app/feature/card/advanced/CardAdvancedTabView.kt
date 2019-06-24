@@ -25,8 +25,10 @@ package com.itachi1706.cepaslib.app.feature.card.advanced
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
@@ -37,17 +39,18 @@ class CardAdvancedTabView : FrameLayout {
 
     private val recyclerView: RecyclerView by bindView(R.id.recycler)
 
-    constructor(context: Context?) :
+    constructor(context: Context) :
             super(context)
 
-    constructor(context: Context?, attrs: AttributeSet?) :
+    constructor(context: Context, attrs: AttributeSet?) :
             super(context, attrs)
 
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) :
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr)
 
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @Suppress("unused")
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) :
+    constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) :
             super(context, attrs, defStyleAttr, defStyleRes)
 
     fun setAdvancedUi(fareBotUiTree: FareBotUiTree) {
@@ -59,7 +62,7 @@ class CardAdvancedTabView : FrameLayout {
             init {
                 val attrs = intArrayOf(android.R.attr.listDivider)
                 val ta = context.applicationContext.obtainStyledAttributes(attrs)
-                divider = ta.getDrawable(0)
+                divider = ta.getDrawable(0)!!
                 ta.recycle()
             }
 
