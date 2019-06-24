@@ -146,7 +146,7 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
 
         private fun isCardSupported(context: Context, supportedCard: SupportedCard): Boolean {
             if (NfcAdapter.getDefaultAdapter(context) == null) {
-                return true
+                return false // No NFC
             }
             val supportsMifareClassic = context.packageManager.hasSystemFeature("com.nxp.mifare")
             if (supportedCard.cardType == CardType.MifareClassic && !supportsMifareClassic) {

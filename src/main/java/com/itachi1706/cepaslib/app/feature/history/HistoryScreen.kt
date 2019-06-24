@@ -24,20 +24,19 @@
 
 package com.itachi1706.cepaslib.app.feature.history
 
-import android.Manifest
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.AsyncTask
+import android.os.Build
 import android.os.Environment
+import android.provider.OpenableColumns
 import android.view.Menu
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.inject.ScreenScope
@@ -60,7 +59,6 @@ import dagger.Component
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.io.File
 import java.lang.ref.WeakReference
 import javax.inject.Inject
 
@@ -68,8 +66,8 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
 
     companion object {
         private const val REQUEST_SELECT_FILE = 1
-        private const val REQUEST_PERMISSION_STORAGE = 2
-        private const val FILENAME = "farebot-export.json"
+        private const val REQUEST_SELECT_EXPORT_FILE = 2
+        private const val FILENAME = "cepasreader-export.json"
     }
 
     @Inject lateinit var activityOperations: ActivityOperations
@@ -128,17 +126,16 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards())
                             activity.startActivity(intent)
                         }
-                        R.id.save -> exportToFile()
-                    }
-                }
-
-        activityOperations.permissionResult
-                .autoDisposable(this)
-                .subscribe { (requestCode, _, grantResults) ->
-                    when (requestCode) {
-                        REQUEST_PERMISSION_STORAGE -> {
-                            if (grantResults.getOrNull(0) == PackageManager.PERMISSION_GRANTED) {
-                                exportToFileWithPermission()
+                        R.id.save -> {
+                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
+                                Toast.makeText(activity, R.string.export_fail_android_version_too_old, Toast.LENGTH_SHORT).show()
+                            } else {
+                                val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                                    addCategory(Intent.CATEGORY_OPENABLE)
+                                    type = "text/json"
+                                    putExtra(Intent.EXTRA_TITLE, FILENAME)
+                                }
+                                activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
                             }
                         }
                     }
@@ -152,6 +149,13 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             if (resultCode == Activity.RESULT_OK) {
                                 data?.data?.let {
                                     importFromFile(it)
+                                }
+                            }
+                        }
+                        REQUEST_SELECT_EXPORT_FILE -> {
+                            if (resultCode == Activity.RESULT_OK) {
+                                data?.data?.let {
+                                    exportToFileWithSAF(it)
                                 }
                             }
                         }
@@ -241,37 +245,43 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         }
     }
 
-    private fun exportToFile() {
-        val permission = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        if (permission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(activity,
-                    arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    REQUEST_PERMISSION_STORAGE)
-        } else {
-            exportToFileWithPermission()
-        }
-    }
-
-    private fun exportToFileWithPermission() {
+    private fun exportToFileWithSAF(uri: Uri) {
         Single.fromCallable {
-            val file = File(Environment.getExternalStorageDirectory(), FILENAME)
-            file.writeText(exportHelper.exportCards())
+            activity?.contentResolver?.openOutputStream(uri)
+                    ?.bufferedWriter()
+                    .use { it?.write(exportHelper.exportCards()) }
         }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .autoDisposable(this)
                 .subscribe({
-                    Toast.makeText(activity, activity.getString(R.string.saved_to_x, FILENAME), Toast.LENGTH_SHORT)
+                    Toast.makeText(activity, activity.getString(R.string.saved_to_x, getFileName(uri)), Toast.LENGTH_SHORT)
                             .show()
                 }, { ex -> ErrorUtils.showErrorAlert(activity, ex) })
     }
 
+    private fun getFileName(uri: Uri): String {
+        val cursor: Cursor? = activity.contentResolver.query(uri, null, null, null, null, null)
+        var name = FILENAME
+        cursor?.use {
+            if (it.moveToFirst()) {
+                name = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+            }
+        }
+        return name
+    }
+
+
     private fun importFromFile(uri: Uri) {
         Single.fromCallable {
-            val json = activity.contentResolver.openInputStream(uri)
-                    .bufferedReader()
-                    .use { it.readText() }
-            exportHelper.importCards(json)
+            val json = activity?.contentResolver?.openInputStream(uri)
+                    ?.bufferedReader()
+                    .use { it?.readText() }
+            if (json == null) {
+                Toast.makeText(activity, activity.getString(R.string.import_fail), Toast.LENGTH_SHORT).show()
+                exportHelper.importCards("")
+            }
+            else exportHelper.importCards(json)
         }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
