@@ -42,7 +42,7 @@ import java.util.TreeMap;
 
 final class EZLinkData {
 
-    // Get data from http://api.itachi1706.com/api/busservices.php
+    // Get data from https://api.itachi1706.com/api/busservices.php
     static void initialize(@NonNull Resources resources) {
         if (initData) return; // Already initialized
         String busData = readFromRaw(resources, R.raw.busdata);
