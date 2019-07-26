@@ -7,12 +7,12 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
-import android.preference.Preference
-import android.preference.PreferenceCategory
 import android.preference.PreferenceFragment
-import android.preference.SwitchPreference
 import android.util.Log
+import androidx.preference.Preference
+import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
+import androidx.preference.SwitchPreference
 import com.itachi1706.cepaslib.app.feature.bg.BackgroundTagActivity
 import com.itachi1706.cepaslib.app.feature.prefs.FareBotPreferenceActivity
 
@@ -39,14 +39,14 @@ class SettingsHandler(private val activity: Activity) {
     @Deprecated("Migrate to AndroidX PreferenceFragmentCompat if possible", replaceWith = ReplaceWith("PreferenceFragmentCompat", "androidx.preference.PreferenceFragmentCompat"))
     fun initSettings(fragment: PreferenceFragment) {
         fragment.addPreferencesFromResource(R.xml.prefs)
-        val mPreferenceLaunchFromBackground = fragment.findPreference("pref_launch_from_background") as SwitchPreference
+        val mPreferenceLaunchFromBackground = fragment.findPreference("pref_launch_from_background") as android.preference.SwitchPreference
         mPreferenceLaunchFromBackground.isChecked = isLaunchFromBgEnabled
         mPreferenceLaunchFromBackground.setOnPreferenceChangeListener { _, newValue ->
             isLaunchFromBgEnabled = newValue as Boolean
             true
         }
         // Hide dark mode toggle (we will use the main thing instead)
-        (fragment.preferenceManager.findPreference("cepas_cat") as PreferenceCategory).removePreference(fragment.findPreference("pref_dark_mode"))
+        (fragment.preferenceManager.findPreference("cepas_cat") as android.preference.PreferenceCategory).removePreference(fragment.findPreference("pref_dark_mode"))
     }
 
     fun initSettings(fragmentCompat: PreferenceFragmentCompat) {
