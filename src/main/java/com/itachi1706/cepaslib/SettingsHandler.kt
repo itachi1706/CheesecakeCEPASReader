@@ -9,7 +9,6 @@ import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_DISABLED
 import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 import android.preference.PreferenceFragment
 import android.util.Log
-import androidx.preference.Preference
 import androidx.preference.PreferenceCategory
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
@@ -58,7 +57,7 @@ class SettingsHandler(private val activity: Activity) {
             true
         }
         // Hide dark mode toggle (we will use the main thing instead)
-        (fragmentCompat.preferenceManager.findPreference("cepas_cat") as PreferenceCategory?)?.removePreference(fragmentCompat.findPreference("pref_dark_mode") as Preference?)
+        (fragmentCompat.preferenceManager.findPreference("cepas_cat") as PreferenceCategory).removePreference(fragmentCompat.findPreference("pref_dark_mode"))
     }
 
     companion object {
