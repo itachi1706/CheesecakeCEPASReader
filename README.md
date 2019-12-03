@@ -1,5 +1,6 @@
 CheesecakeCEPASReader
 ========
+[![JIRA Issues](https://img.shields.io/badge/JIRA-Issues-blue)](https://itachi1706.atlassian.net/browse/CCRANDLIB)
 
 This is my personal module for reading CEPAS cards based off FareBot
 
