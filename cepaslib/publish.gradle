@@ -1,0 +1,94 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    archiveClassifier.set("sources")
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    exclude '**/BuildConfig.java'
+    excludes = ['**/*.kt'] // < ---- Exclude all kotlin files from javadoc file.
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    archiveClassifier.set("javadoc")
+    from javadoc.destinationDir
+}
+
+afterEvaluate {
+    javadoc.classpath += files(android.libraryVariants.collect { variant ->
+        variant.javaCompileProvider.get().classpath.files
+    })
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+version android.defaultConfig.versionName
+group 'com.itachi1706.cepaslib'
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'CEPAS Card Reader Library'
+            description 'A slimmed down version based off Farebot targeting CEPAS-based cards only'
+            url 'https://github.com/itachi1706/CheesecakeCEPASReader'
+            inceptionYear '2019'
+
+            packaging 'aar'
+            groupId this.group
+            artifactId 'cepaslib'
+            version this.version
+
+            licenses {
+                license {
+                    name 'GNU General Public License version 3'
+                    url 'https://opensource.org/licenses/GPL-3.0'
+                }
+            }
+            scm {
+                connection 'https://github.com/itachi1706/CheesecakeCEPASReader.git'
+                url 'https://github.com/itachi1706/CheesecakeCEPASReader'
+
+            }
+            developers {
+                developer {
+                    id = 'itachi1706'
+                    name 'Kenneth'
+                }
+            }
+        }
+    }
+}
+
+bintray {
+    Properties localProps = new Properties()
+    def localPropFile = file('../local.properties')
+    if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+    user = localProps != null && localProps.containsKey('bintray.user') ? localProps.getProperty('bintray.user') : System.getenv('BINTRAY_USER')
+    key = localProps != null && localProps.containsKey('bintray.apikey') ? localProps.getProperty('bintray.apikey') : System.getenv('BINTRAY_API_KEY')
+    configurations = ['archives']
+    pkg {
+        repo = 'ccn-android-lib'
+        name = 'cepas-reader'
+        userOrg = 'itachi1706'
+        description = "A slimmed down version of Farebot that specifically targets CEPAS-based cards only"
+        publish = true
+        publicDownloadNumbers = true
+        licenses = ['GPL-3.0']
+        vcsUrl = 'https://github.com/itachi1706/CheesecakeCEPASReader.git'
+        dryRun = false
+        version {
+            name = this.version
+            desc = "Release ${this.version}"
+            released = new Date()
+            vcsTag = this.version
+        }
+    }
+}

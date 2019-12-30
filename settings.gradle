@@ -1,0 +1,2 @@
+include ':app', ':cepaslib'
+rootProject.name='Cheesecake CEPAS Reader Sample'
