@@ -106,3 +106,5 @@ dependencies {
     annotationProcessor "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
     annotationProcessor "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
 }
+
+apply from: 'publish.gradle'

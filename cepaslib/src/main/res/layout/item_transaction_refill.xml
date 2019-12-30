@@ -23,6 +23,7 @@
 
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -36,8 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/grid_unit_2x"
         android:layout_gravity="center"
-        android:src="@drawable/ic_transaction_tvm_32dp"
-        android:contentDescription="@string/refill"/>
+        app:srcCompat="@drawable/ic_transaction_tvm_32dp"
+        android:contentDescription="@string/refill"
+        android:layout_marginRight="@dimen/grid_unit_2x" />
 
     <TextView
         android:id="@+id/agency"
@@ -52,9 +54,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/grid_unit_2x"
-        android:gravity="end
-"
-        android:orientation="vertical">
+        android:gravity="end"
+        android:orientation="vertical"
+        android:layout_marginLeft="@dimen/grid_unit_2x">
 
         <TextView
             android:id="@+id/amount"

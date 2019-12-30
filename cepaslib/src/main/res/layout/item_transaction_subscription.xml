@@ -41,7 +41,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:textStyle="bold"
-            tools:text="Company" />
+            tools:text="Company"
+            android:layout_marginRight="4dp" />
 
         <TextView
             android:id="@+id/name"

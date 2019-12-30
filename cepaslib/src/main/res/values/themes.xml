@@ -27,7 +27,6 @@
     <style name="FareBot.Theme" parent="Theme.AppCompat.DayNight"/>
 
     <style name="FareBot.Theme.Main">
-        <item name="android:windowTranslucentStatus">true</item>
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionModeOverlay">true</item>
