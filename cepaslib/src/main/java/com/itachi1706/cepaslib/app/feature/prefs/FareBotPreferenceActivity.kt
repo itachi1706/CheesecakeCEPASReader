@@ -51,7 +51,7 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
     class FareBotPreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
 
-        private lateinit var preferenceLaunchFromBackground: CheckBoxPreference
+        private lateinit var preferenceLaunchFromBackground: SwitchPreference
         private lateinit var preferenceDarkMode: ListPreference
 
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
@@ -59,7 +59,7 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
             setDarkMode(PreferenceManager.getDefaultSharedPreferences(context)?.getString("pref_dark_mode", "default"))
 
-            preferenceLaunchFromBackground = findPreference("pref_launch_from_background") as CheckBoxPreference
+            preferenceLaunchFromBackground = findPreference("pref_launch_from_background") as SwitchPreference
             preferenceLaunchFromBackground.isChecked = launchFromBgEnabled
             preferenceLaunchFromBackground.onPreferenceChangeListener = this
 
