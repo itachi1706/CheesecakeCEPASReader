@@ -28,6 +28,9 @@ dependencies {
 }
 ```
 
+## Usage - JCenter
+__Coming Soon__
+
 ## How to use
 
 * Add the following lines to your project-level (/) build.gradle dependency
