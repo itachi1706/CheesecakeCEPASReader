@@ -1,21 +1,30 @@
-# Add project specific ProGuard rules here.
-# You can control the set of applied configuration files using the
-# proguardFiles setting in build.gradle.
-#
-# For more details, see
-#   http://developer.android.com/guide/developing/tools/proguard.html
+# Options
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-verbose
+-dontoptimize
+-dontpreverify
+-dontobfuscate
 
-# If your project uses WebView with JS, uncomment the following
-# and specify the fully qualified class name to the JavaScript interface
-# class:
-#-keepclassmembers class fqcn.of.javascript.interface.for.webview {
-#   public *;
-#}
+# Android
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
 
-# Uncomment this to preserve the line number information for
-# debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+# Dependencies
+-keep class com.google.android.gms.**
+-keep class com.wealthfront.magellan.Screen
+-dontwarn com.google.auto.value.**
+-dontwarn com.google.common.**
+-dontnote android.net.http.**
+-dontnote org.apache.http.**
+-dontnote sun.misc.Unsafe
+-dontnote com.google.common.util.concurrent.MoreExecutors
+-dontnote com.google.api.client.util.Key
+-dontnote com.google.common.collect.MapMakerInternalMap$ReferenceEntry
+-dontwarn javax.lang.model.element.Modifier
+-dontwarn afu.org.checkerframework.**
+-dontwarn org.checkerframework.**
 
-# If you keep the line number information, uncomment this to
-# hide the original source file name.
-#-renamesourcefileattribute SourceFile
+# FareBot
+-keep class com.itachi1706.cepaslib.base.ui.FareBotUiTree

@@ -1,2 +1,82 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.itachi1706.cepaslib" />
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ AndroidManifest.xml
+  ~
+  ~ This file is part of FareBot.
+  ~ Learn more at: https://codebutler.github.io/farebot/
+  ~
+  ~ Copyright (C) 2017 Eric Butler <eric@codebutler.com>
+  ~
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+  -->
+
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.itachi1706.cepaslib">
+
+    <uses-permission android:name="android.permission.NFC" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" android:maxSdkVersion="18" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
+    <uses-feature android:name="android.hardware.nfc" android:required="false" />
+
+    <!-- Google Maps V2 -->
+    <permission
+        android:name="${applicationId}.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature"/>
+    <uses-permission android:name="${applicationId}.permission.MAPS_RECEIVE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true"/>
+
+    <application
+        android:label="@string/app_name"
+        android:name=".app.core.app.FareBotApplication"
+        android:allowBackup="true"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".app.feature.main.MainActivity"
+            android:configChanges="keyboardHidden|orientation"
+            android:screenOrientation="portrait"
+            android:theme="@style/FareBot.Theme.Main"/>
+
+        <activity
+            android:name=".app.feature.prefs.FareBotPreferenceActivity"
+            android:label="@string/preferences"
+            android:theme="@style/FareBot.Theme.Prefs"/>
+
+        <activity
+            android:name=".app.feature.bg.BackgroundTagActivity"
+            android:enabled="false"
+            android:noHistory="true"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/scan_cepas"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.nfc.action.TAG_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.nfc.action.TECH_DISCOVERED" />
+            </intent-filter>
+            <meta-data
+                android:name="android.nfc.action.TECH_DISCOVERED"
+                android:resource="@xml/filter_nfc" />
+        </activity>
+    </application>
+</manifest>
