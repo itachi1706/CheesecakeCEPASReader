@@ -22,7 +22,7 @@ repositories {
 		url  "https://dl.bintray.com/itachi1706/ccn-android-lib"
 	}
 }
-...
+…
 dependencies {
   implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
 }
@@ -42,9 +42,9 @@ dependencies {
 * Add the following lines to your project-level (/) build.gradle dependency
 ```gradle
 buildscript {
-    ...
+    …
     dependencies {
-        ...
+        …
         classpath 'com.squareup.sqldelight:gradle-plugin:1.1.3'
     }
 }
