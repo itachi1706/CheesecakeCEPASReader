@@ -29,7 +29,13 @@ dependencies {
 ```
 
 ## Usage - JCenter
-__Coming Soon__
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+dependencies {
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See Bintray badge for latest version number
+}
+```
 
 ## How to use
 
