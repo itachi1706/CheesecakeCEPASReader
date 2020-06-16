@@ -9,8 +9,6 @@ CheesecakeCEPASReader
 [![Test Coverage](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/coverage.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/coverage) 
 [![Issue Count](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/issue_count.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader)
 
-**NOTE: We are in the midst of allowing an easier way to access through JCenter, use the Bintray method in the meantime**
-
 This is a slimmed down library for reading CEPAS-based cards such as Singapore EZ-Link cards based off FareBot
 
 ## Usage - Bintray
