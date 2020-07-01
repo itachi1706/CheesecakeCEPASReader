@@ -36,7 +36,7 @@ sealed class TransactionViewModel(val context: Context) {
     abstract val date: Date?
 
     val time: String?
-        get() = if (date != null) DateFormat.getTimeInstance(DateFormat.SHORT).format(date) else null
+        get() = if (date != null) DateFormat.getTimeInstance(DateFormat.SHORT).format(date!!) else null
 
     class TripViewModel(context: Context, val trip: Trip) : TransactionViewModel(context) {
 

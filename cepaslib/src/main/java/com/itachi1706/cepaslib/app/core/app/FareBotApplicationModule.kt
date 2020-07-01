@@ -23,7 +23,7 @@
 package com.itachi1706.cepaslib.app.core.app
 
 import android.content.SharedPreferences
-import android.preference.PreferenceManager
+import androidx.preference.PreferenceManager
 import com.itachi1706.cepaslib.app.core.nfc.TagReaderFactory
 import com.itachi1706.cepaslib.app.core.serialize.CardKeysSerializer
 import com.itachi1706.cepaslib.app.core.serialize.gson.*

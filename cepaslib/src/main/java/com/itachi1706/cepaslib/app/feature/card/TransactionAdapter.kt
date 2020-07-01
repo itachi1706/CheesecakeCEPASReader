@@ -95,7 +95,7 @@ class TransactionAdapter(
                 if (item is TransactionViewModel.SubscriptionViewModel) {
                     header.text = header.context.getString(R.string.subscriptions)
                 } else {
-                    header.text = DateFormat.getLongDateFormat(header.context).format(item.date)
+                    item.date?.let { header.text = DateFormat.getLongDateFormat(header.context).format(it) }
                 }
             }
         }

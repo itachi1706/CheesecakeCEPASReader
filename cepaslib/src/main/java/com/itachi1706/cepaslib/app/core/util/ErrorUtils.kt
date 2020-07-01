@@ -52,6 +52,6 @@ object ErrorUtils {
         if (TextUtils.isEmpty(errorMessage)) {
             errorMessage = ex1.toString()
         }
-        return errorMessage
+        return errorMessage ?: ""
     }
 }
