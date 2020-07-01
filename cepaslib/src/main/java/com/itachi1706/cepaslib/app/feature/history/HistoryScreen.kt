@@ -117,7 +117,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                         }
                         R.id.copy -> {
                             val exportClip = ClipData.newPlainText(null, exportHelper.exportCards())
-                            clipboardManager.primaryClip = exportClip
+                            clipboardManager.setPrimaryClip(exportClip)
                             Toast.makeText(activity, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show()
                         }
                         R.id.share -> {
