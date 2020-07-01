@@ -59,11 +59,11 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
             setDarkMode(PreferenceManager.getDefaultSharedPreferences(context)?.getString("pref_dark_mode", "default"))
 
-            preferenceLaunchFromBackground = findPreference("pref_launch_from_background") as SwitchPreference
+            preferenceLaunchFromBackground = findPreference("pref_launch_from_background")!!
             preferenceLaunchFromBackground.isChecked = launchFromBgEnabled
             preferenceLaunchFromBackground.onPreferenceChangeListener = this
 
-            preferenceDarkMode = findPreference("pref_dark_mode") as ListPreference
+            preferenceDarkMode = findPreference("pref_dark_mode")!!
             preferenceDarkMode.onPreferenceChangeListener = this
         }
 
@@ -94,7 +94,7 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
         override fun onOptionsItemSelected(item: MenuItem): Boolean {
             if (item.itemId == android.R.id.home) {
-                activity!!.finish()
+                requireActivity().finish()
                 return true
             }
             return super.onOptionsItemSelected(item)
@@ -102,14 +102,14 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
         private var launchFromBgEnabled: Boolean
             get() {
-                val componentName = ComponentName(context!!, BackgroundTagActivity::class.java)
-                val componentEnabledSetting = activity!!.packageManager.getComponentEnabledSetting(componentName)
+                val componentName = ComponentName(requireContext(), BackgroundTagActivity::class.java)
+                val componentEnabledSetting = requireActivity().packageManager.getComponentEnabledSetting(componentName)
                 return componentEnabledSetting == COMPONENT_ENABLED_STATE_ENABLED
             }
             set(enabled) {
-                val componentName = ComponentName(context!!, BackgroundTagActivity::class.java)
+                val componentName = ComponentName(requireContext(), BackgroundTagActivity::class.java)
                 val newState = if (enabled) COMPONENT_ENABLED_STATE_ENABLED else COMPONENT_ENABLED_STATE_DISABLED
-                activity!!.packageManager.setComponentEnabledSetting(componentName, newState, PackageManager.DONT_KILL_APP)
+                requireActivity().packageManager.setComponentEnabledSetting(componentName, newState, PackageManager.DONT_KILL_APP)
             }
     }
 }

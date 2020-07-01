@@ -43,7 +43,7 @@ class SettingsHandler(private val activity: Activity) {
             true
         }
         // Hide dark mode toggle (we will use the main thing instead)
-        (fragmentCompat.preferenceManager.findPreference("cepas_cat") as PreferenceCategory).removePreference(fragmentCompat.findPreference("pref_dark_mode"))
+        (fragmentCompat.preferenceManager.findPreference<PreferenceCategory>("cepas_cat"))!!.removePreference(fragmentCompat.findPreference("pref_dark_mode"))
     }
 
     companion object {
