@@ -47,7 +47,7 @@ android {
 
 def autoDisposeVersion   = '0.8.0'
 def autoValueGsonVersion = '1.3.0'
-def autoValueVersion     = '1.6.5'
+def autoValueVersion     = '1.7.4'
 def daggerVersion        = '2.30.1'
 def groupieVersion       = '2.3.0'
 def kotlinVersion        = '1.3.31'
