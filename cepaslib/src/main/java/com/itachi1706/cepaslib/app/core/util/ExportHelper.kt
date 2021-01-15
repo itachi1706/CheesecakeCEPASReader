@@ -22,6 +22,9 @@
 
 package com.itachi1706.cepaslib.app.core.util
 
+import android.content.Context
+import android.content.pm.PackageInfo
+import android.os.Build
 import com.google.gson.Gson
 import com.itachi1706.cepaslib.BuildConfig
 import com.itachi1706.cepaslib.card.RawCard
@@ -35,9 +38,22 @@ class ExportHelper(
     private val gson: Gson
 ) {
 
-    fun exportCards(): String = gson.toJson(Export(
-            versionName = BuildConfig.VERSION_NAME,
-            versionCode = BuildConfig.VERSION_CODE,
+    private fun getPackageInfo(ctx: Context?): PackageInfo? {
+        return ctx?.packageManager?.getPackageInfo(ctx.packageName, 0);
+    }
+
+    @Suppress("DEPRECATION")
+    private fun getVersionCode(pInfo: PackageInfo?): Long? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            pInfo?.longVersionCode
+        } else {
+            pInfo?.versionCode?.toLong()
+        }
+    }
+
+    fun exportCards(ctx: Context?): String = gson.toJson(Export(
+            versionName = getPackageInfo(ctx)?.versionName ?: "Unknown",
+            versionCode = getVersionCode(getPackageInfo(ctx)) ?: 0,
             cards = cardPersister.cards.map { cardSerializer.deserialize(it.data) }
     ))
 
@@ -49,8 +65,8 @@ class ExportHelper(
     }
 
     private data class Export(
-        internal val versionName: String,
-        internal val versionCode: Int,
-        internal val cards: List<RawCard<*>>
+        val versionName: String,
+        val versionCode: Long,
+        val cards: List<RawCard<*>>
     )
 }

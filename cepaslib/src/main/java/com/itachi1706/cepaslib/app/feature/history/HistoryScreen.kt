@@ -119,14 +119,14 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             }
                         }
                         R.id.copy -> {
-                            val exportClip = ClipData.newPlainText(null, exportHelper.exportCards())
+                            val exportClip = ClipData.newPlainText(null, exportHelper.exportCards(context))
                             clipboardManager.setPrimaryClip(exportClip)
                             Toast.makeText(activity, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show()
                         }
                         R.id.share -> {
                             val intent = Intent(Intent.ACTION_SEND)
                             intent.type = "text/plain"
-                            intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards())
+                            intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards(context))
                             activity.startActivity(intent)
                         }
                         R.id.save -> {
@@ -252,7 +252,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         Single.fromCallable {
             activity?.contentResolver?.openOutputStream(uri)
                     ?.bufferedWriter()
-                    .use { it?.write(exportHelper.exportCards()) }
+                    .use { it?.write(exportHelper.exportCards(activity?.applicationContext)) }
         }
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
