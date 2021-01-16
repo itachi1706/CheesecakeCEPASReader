@@ -38,7 +38,7 @@ class LastValueRelay<T> private constructor() : Relay<T>() {
 
     override fun accept(value: T) {
         if (hasObservers()) {
-            relay.accept(value)
+            relay.accept(value!!)
         } else {
             lastValue.set(value)
         }

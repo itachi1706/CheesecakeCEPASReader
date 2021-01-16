@@ -31,12 +31,15 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
+import com.google.android.material.appbar.AppBarLayout
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.activity.ActivityResult
@@ -59,8 +62,6 @@ import com.itachi1706.cepaslib.app.feature.home.HomeScreen
 import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardKeysPersister
 import com.itachi1706.cepaslib.persist.CardPersister
-import com.google.android.material.appbar.AppBarLayout
-import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.jakewharton.rxrelay2.PublishRelay
 import com.wealthfront.magellan.*
 import dagger.BindsInstance
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(),
     private val toolbar by bindView<Toolbar>(R.id.toolbar)
 
     private val activityResultRelay = PublishRelay.create<ActivityResult>()
-    private val handler = Handler()
+    private val handler = Handler(Looper.getMainLooper())
     private val menuItemClickRelay = PublishRelay.create<MenuItem>()
     private val permissionsResultRelay = PublishRelay.create<RequestPermissionsResult>()
 

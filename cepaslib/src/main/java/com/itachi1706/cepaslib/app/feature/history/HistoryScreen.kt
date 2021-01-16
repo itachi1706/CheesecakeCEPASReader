@@ -20,8 +20,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-@file:Suppress("UNNECESSARY_NOT_NULL_ASSERTION")
-
 package com.itachi1706.cepaslib.app.feature.history
 
 import android.app.Activity
@@ -31,7 +29,6 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
-import android.os.AsyncTask
 import android.os.Build
 import android.os.Environment
 import android.provider.OpenableColumns
@@ -59,7 +56,10 @@ import dagger.Component
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.lang.ref.WeakReference
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScreenView>(), HistoryScreenView.Listener {
@@ -169,21 +169,18 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
     }
 
     override fun onDeleteSelectedItems(items: List<HistoryViewModel>) {
-        DeleteCard(this).execute(items)
+        CoroutineScope(Dispatchers.IO).launch {
+            withContext(Dispatchers.IO) {
+                deleteCardTask(items)
+            }
+        }
     }
 
-    class DeleteCard(context: HistoryScreen) : AsyncTask<List<HistoryViewModel>, Void, Void>() {
-
-        private val activityRef: WeakReference<HistoryScreen> = WeakReference(context)
-
-        override fun doInBackground(vararg items: List<HistoryViewModel>): Void? {
-            val activity = activityRef.get() ?: return null
-            for ((savedCard) in items[0]) {
-                activity.cardPersister.deleteCard(savedCard)
-            }
-            activity.loadCards()
-            return null
+    private fun deleteCardTask(items: List<HistoryViewModel>) {
+        for ((savedCard) in items) {
+            cardPersister.deleteCard(savedCard)
         }
+        loadCards()
     }
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): HistoryComponent =
