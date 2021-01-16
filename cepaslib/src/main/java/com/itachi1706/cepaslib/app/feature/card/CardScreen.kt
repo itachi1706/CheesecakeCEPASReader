@@ -100,12 +100,10 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
         view.observeItemClicks()
                 .autoDisposable(this)
                 .subscribe { viewModel ->
-                    when (viewModel) {
-                        is TransactionViewModel.TripViewModel -> {
-                            val trip = viewModel.trip
-                            if (trip.startStation?.hasLocation() == true || trip.endStation?.hasLocation() == true) {
-                                navigator.goTo(TripMapScreen(trip))
-                            }
+                    if (viewModel is TransactionViewModel.TripViewModel) {
+                        val trip = viewModel.trip
+                        if (trip.startStation?.hasLocation() == true || trip.endStation?.hasLocation() == true) {
+                            navigator.goTo(TripMapScreen(trip))
                         }
                     }
                 }
