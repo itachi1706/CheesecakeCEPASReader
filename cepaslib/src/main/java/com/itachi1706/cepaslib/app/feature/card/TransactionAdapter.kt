@@ -30,13 +30,13 @@ import android.widget.TextView
 import androidx.annotation.LayoutRes
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.*
-import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.jakewharton.rxrelay2.PublishRelay
-import com.xwray.groupie.ViewHolder
+import com.xwray.groupie.GroupieViewHolder
 import java.util.*
 
 class TransactionAdapter(
@@ -76,7 +76,7 @@ class TransactionAdapter(
         is TransactionViewModel.SubscriptionViewModel -> TYPE_SUBSCRIPTION
     }
 
-    sealed class TransactionViewHolder(itemView: View) : ViewHolder(itemView) {
+    sealed class TransactionViewHolder(itemView: View) : GroupieViewHolder(itemView) {
 
         companion object {
             fun wrapLayout(parent: ViewGroup, @LayoutRes layoutId: Int): View =
