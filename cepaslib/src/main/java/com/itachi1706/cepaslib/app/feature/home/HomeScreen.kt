@@ -126,7 +126,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
     }
 
     override fun onNfcErrorButtonClicked() {
-        activity.startActivity(Intent(Settings.ACTION_WIRELESS_SETTINGS))
+        activity.startActivity(Intent(Settings.ACTION_NFC_SETTINGS))
     }
 
     override fun createComponent(parentComponent: MainActivityComponent): HomeComponent =

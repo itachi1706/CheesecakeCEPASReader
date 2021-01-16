@@ -61,7 +61,7 @@
     <string name="tag_lost_message">Avoid moving card until reading is complete.</string>
     <string name="unknown_card">Unknown Card</string>
     <string name="unknown_card_desc">This card is not supported by FareBot</string>
-    <string name="wireless_settings">Wireless Settings</string>
+    <string name="wireless_settings">NFC Settings</string>
     <string name="delete">Delete</string>
     <string name="scan_cepas">Scan CEPAS Card</string>
     <string name="setting_dark_mode">Application Dark Mode</string>
