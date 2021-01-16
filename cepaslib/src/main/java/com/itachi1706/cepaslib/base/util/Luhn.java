@@ -61,7 +61,7 @@ public final class Luhn {
     private static int[] digitsOf(String integer) {
         int[] out = new int[integer.length()];
         for (int index = 0; index < integer.length(); index++) {
-            out[index] = Integer.valueOf(integer.substring(index, index + 1));
+            out[index] = Integer.parseInt(integer.substring(index, index + 1));
         }
 
         return out;

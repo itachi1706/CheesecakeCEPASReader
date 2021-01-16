@@ -66,7 +66,7 @@ public abstract class CEPASTransaction {
         int date = ((0xff000000 & (rawData[4] << 24))
                 | (0x00ff0000 & (rawData[5] << 16))
                 | (0x0000ff00 & (rawData[6] << 8))
-                | (0x000000ff & (rawData[7] << 0)))
+                | (0x000000ff & (rawData[7])))
                 + 788947200 - (16 * 3600);
 
         byte[] userData = new byte[9];

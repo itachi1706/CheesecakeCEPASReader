@@ -26,7 +26,6 @@ import android.content.Context
 import android.content.pm.PackageInfo
 import android.os.Build
 import com.google.gson.Gson
-import com.itachi1706.cepaslib.BuildConfig
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
@@ -39,7 +38,7 @@ class ExportHelper(
 ) {
 
     private fun getPackageInfo(ctx: Context?): PackageInfo? {
-        return ctx?.packageManager?.getPackageInfo(ctx.packageName, 0);
+        return ctx?.packageManager?.getPackageInfo(ctx.packageName, 0)
     }
 
     @Suppress("DEPRECATION")

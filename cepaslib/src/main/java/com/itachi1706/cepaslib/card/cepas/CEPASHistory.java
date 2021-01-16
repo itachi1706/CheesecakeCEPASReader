@@ -48,7 +48,7 @@ public abstract class CEPASHistory {
     @NonNull
     public static CEPASHistory create(int purseId, @Nullable byte[] historyData) {
         if (historyData == null) {
-            return new AutoValue_CEPASHistory(purseId, Collections.<CEPASTransaction>emptyList(), false, null);
+            return new AutoValue_CEPASHistory(purseId, Collections.emptyList(), false, null);
         }
         int recordSize = 16;
         int purseCount = historyData.length / recordSize;

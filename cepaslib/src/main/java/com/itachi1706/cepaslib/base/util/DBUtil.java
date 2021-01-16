@@ -72,7 +72,7 @@ public abstract class DBUtil {
         return false;
     }
 
-    public SQLiteDatabase openDatabase() throws SQLException, IOException {
+    public SQLiteDatabase openDatabase() throws SQLException {
         if (mDatabase != null) {
             return mDatabase;
         }

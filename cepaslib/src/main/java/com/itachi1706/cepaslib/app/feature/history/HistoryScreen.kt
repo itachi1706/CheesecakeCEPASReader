@@ -130,16 +130,12 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             activity.startActivity(intent)
                         }
                         R.id.save -> {
-                            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-                                Toast.makeText(activity, R.string.export_fail_android_version_too_old, Toast.LENGTH_SHORT).show()
-                            } else {
-                                val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                                    addCategory(Intent.CATEGORY_OPENABLE)
-                                    type = "text/json"
-                                    putExtra(Intent.EXTRA_TITLE, FILENAME)
-                                }
-                                activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
+                            val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                                addCategory(Intent.CATEGORY_OPENABLE)
+                                type = "text/json"
+                                putExtra(Intent.EXTRA_TITLE, FILENAME)
                             }
+                            activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
                         }
                     }
                 }

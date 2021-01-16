@@ -73,19 +73,9 @@ public abstract class RawCEPASCard implements RawCard<CEPASCard> {
     @Override
     public CEPASCard parse() {
         List<CEPASPurse> purses = newArrayList(transform(purses(),
-                new Function<RawCEPASPurse, CEPASPurse>() {
-                    @Override
-                    public CEPASPurse apply(RawCEPASPurse rawCEPASPurse) {
-                        return rawCEPASPurse.parse();
-                    }
-                }));
+                RawCEPASPurse::parse));
         List<CEPASHistory> histories = newArrayList(transform(histories(),
-                new Function<RawCEPASHistory, CEPASHistory>() {
-                    @Override
-                    public CEPASHistory apply(RawCEPASHistory rawCEPASHistory) {
-                        return rawCEPASHistory.parse();
-                    }
-                }));
+                RawCEPASHistory::parse));
         return CEPASCard.create(tagId(), scannedAt(), purses, histories);
     }
 

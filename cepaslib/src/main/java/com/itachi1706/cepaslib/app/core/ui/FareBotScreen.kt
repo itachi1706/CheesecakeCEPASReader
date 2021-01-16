@@ -56,7 +56,7 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
         }
     }
 
-    @Deprecated("override getActionBarOptions instead")
+    @Deprecated("override getActionBarOptions instead", replaceWith = ReplaceWith("getActionBarOptions()"))
     final override fun getActionBarColorRes(): Int {
         return super.getActionBarColorRes()
     }

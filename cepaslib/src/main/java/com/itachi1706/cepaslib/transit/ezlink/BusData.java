@@ -21,8 +21,8 @@ final class BusData {
 
     static class OperatorName {
 
-        private String shortName;
-        private String longName;
+        private final String shortName;
+        private final String longName;
 
         OperatorName(String publicBus) {
             this.shortName = publicBus;

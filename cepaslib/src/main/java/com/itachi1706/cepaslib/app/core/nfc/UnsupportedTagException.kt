@@ -24,7 +24,7 @@ package com.itachi1706.cepaslib.app.core.nfc
 
 class UnsupportedTagException(private val techList: Array<String>, private val tagId: String) : Exception() {
 
-    override val message: String?
+    override val message: String
         get() {
             val techs = techList.map { tech -> tech.replace("android.nfc.tech.", "") }.joinToString { "\n " }
             return "Identifier: $tagId\n\nTechnologies:$techs"

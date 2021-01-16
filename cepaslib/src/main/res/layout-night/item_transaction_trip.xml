@@ -39,8 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/grid_unit_2x"
         tools:src="@drawable/ic_transaction_bus_32dp"
-        tools:ignore="ContentDescription"
-        android:layout_marginRight="@dimen/grid_unit_2x" />
+        tools:ignore="ContentDescription" />
 
     <LinearLayout
         android:layout_width="0dp"
@@ -81,8 +80,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/grid_unit_2x"
         android:gravity="end"
-        android:orientation="vertical"
-        android:layout_marginLeft="@dimen/grid_unit_2x">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/fare"

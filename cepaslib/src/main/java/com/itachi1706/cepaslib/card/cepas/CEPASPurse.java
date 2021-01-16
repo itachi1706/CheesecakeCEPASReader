@@ -100,15 +100,8 @@ public abstract class CEPASPurse {
     @NonNull
     public static CEPASPurse create(int purseId, @NonNull byte[] purseData) {
         boolean isValid;
-        String errorMessage;
-        if (purseData == null) {
-            purseData = new byte[128];
-            isValid = false;
-            errorMessage = "";
-        } else {
-            isValid = true;
-            errorMessage = "";
-        }
+        String errorMessage = "";
+        isValid = true;
 
         byte cepasVersion = purseData[0];
         byte purseStatus = purseData[1];

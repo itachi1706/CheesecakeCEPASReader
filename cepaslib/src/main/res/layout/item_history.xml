@@ -30,7 +30,6 @@
     android:minHeight="?android:listPreferredItemHeightSmall"
     android:padding="@dimen/grid_unit_1x"
     android:background="?android:selectableItemBackground"
-    android:foreground="@drawable/fg_item_selectable"
     android:focusable="true"
     android:clickable="true"
     android:gravity="center_vertical"

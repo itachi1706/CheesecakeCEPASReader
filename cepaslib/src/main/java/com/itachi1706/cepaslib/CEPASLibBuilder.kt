@@ -3,7 +3,6 @@ package com.itachi1706.cepaslib
 import android.content.Context
 import android.view.MenuItem
 import androidx.annotation.ColorRes
-import com.itachi1706.cepaslib.R
 
 /**
  * Created by Kenneth on 13/6/2019.
@@ -12,7 +11,7 @@ import com.itachi1706.cepaslib.R
 object CEPASLibBuilder {
 
     var prefClass: Class<*>? = null
-    var menuHandler: LibMenuItemHandler? = null
+    private var menuHandler: LibMenuItemHandler? = null
     var showAbout: Boolean = false
     @ColorRes var titleBarColor: Int = R.color.accent
     @ColorRes var accentColor: Int = R.color.accent

@@ -29,8 +29,8 @@ import com.itachi1706.cepaslib.card.RawCard;
 public interface CardSerializer {
 
     @NonNull
-    String serialize(@NonNull RawCard card);
+    String serialize(@NonNull RawCard<?> card);
 
     @NonNull
-    RawCard deserialize(@NonNull String data);
+    RawCard<?> deserialize(@NonNull String data);
 }

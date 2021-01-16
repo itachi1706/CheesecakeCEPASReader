@@ -38,8 +38,7 @@
         android:textColor="#006D8F"
         android:textSize="@dimen/text_primary"
         android:textStyle="bold"
-        tools:text="June 3rd, 2017"
-        android:layout_marginLeft="@dimen/grid_unit_2x" />
+        tools:text="June 3rd, 2017" />
 
     <FrameLayout
         android:id="@+id/container"

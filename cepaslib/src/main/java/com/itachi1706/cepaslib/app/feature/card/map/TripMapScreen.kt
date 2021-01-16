@@ -88,7 +88,7 @@ class TripMapScreen(private val trip: Trip) : FareBotScreen<TripMapScreen.Compon
     }
 
     @ScreenScope
-    @dagger.Component(dependencies = arrayOf(MainActivity.MainActivityComponent::class))
+    @dagger.Component(dependencies = [MainActivity.MainActivityComponent::class])
     interface Component {
         fun inject(screen: TripMapScreen)
     }

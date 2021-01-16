@@ -59,7 +59,7 @@ public class EZLinkTransitFactory implements TransitFactory<CEPASCard, EZLinkTra
         String serialNumber = cepasCard.getPurse(3).getCAN().hex();
         int balance = cepasCard.getPurse(3).getPurseBalance();
         EZLinkTrip[] trips = parseTrips(serialNumber, cepasCard);
-        return EZLinkTransitInfo.create(serialNumber, ImmutableList.<Trip>copyOf(trips), balance);
+        return EZLinkTransitInfo.create(serialNumber, ImmutableList.copyOf(trips), balance);
     }
 
     @NonNull

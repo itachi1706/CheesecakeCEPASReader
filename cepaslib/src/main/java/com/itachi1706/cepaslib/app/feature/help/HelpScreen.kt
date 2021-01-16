@@ -49,7 +49,7 @@ class HelpScreen : FareBotScreen<HelpScreen.HelpComponent, HelpScreenView>() {
     }
 
     @ScreenScope
-    @Component(dependencies = arrayOf(MainActivity.MainActivityComponent::class))
+    @Component(dependencies = [MainActivity.MainActivityComponent::class])
     interface HelpComponent {
         fun inject(helpScreen: HelpScreen)
     }

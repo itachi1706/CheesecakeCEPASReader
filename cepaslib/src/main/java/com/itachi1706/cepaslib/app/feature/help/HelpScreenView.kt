@@ -138,7 +138,7 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
             if (supportedCard.cardType == CardType.CEPAS) {
                 notes.add(context.getString(R.string.card_not_compatible))
             }
-            if (!notes.isEmpty()) {
+            if (notes.isNotEmpty()) {
                 return notes.joinToString(" ")
             }
             return null

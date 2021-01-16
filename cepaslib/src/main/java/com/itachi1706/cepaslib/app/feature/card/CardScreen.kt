@@ -115,7 +115,7 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
         menu?.findItem(R.id.card_advanced)?.isVisible = content != null
     }
 
-    private fun loadContent(): Single<Content> = Single.create<Content> { e ->
+    private fun loadContent(): Single<Content> = Single.create { e ->
         try {
             val card = rawCard.parse()
             val transitInfo = transitFactoryRegistry.parseTransitInfo(card)

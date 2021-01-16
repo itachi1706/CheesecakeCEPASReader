@@ -89,7 +89,7 @@ class CardStream(
     fun observeErrors(): Observable<Throwable> = errorRelay.hide()
 
     class CardUnauthorizedException : Throwable() {
-        override val message: String?
+        override val message: String
             get() = "Unauthorized"
     }
 }

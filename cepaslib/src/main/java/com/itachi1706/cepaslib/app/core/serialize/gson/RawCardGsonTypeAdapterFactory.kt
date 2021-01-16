@@ -56,7 +56,7 @@ class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
         return RawCardTypeAdapter(delegates) as TypeAdapter<T>
     }
 
-    private class RawCardTypeAdapter internal constructor(
+    private class RawCardTypeAdapter(
         private val delegates: Map<CardType, TypeAdapter<RawCard<*>>>
     ) : TypeAdapter<RawCard<*>>() {
 
