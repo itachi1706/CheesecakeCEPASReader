@@ -9,9 +9,39 @@ CheesecakeCEPASReader
 [![Test Coverage](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/coverage.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/coverage) 
 [![Issue Count](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/issue_count.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader)
 
+**NOTE: We are in the midst of allowing an easier way to access through Maven Central, use the Artifactory method in the meantime**
+
 This is a slimmed down library for reading CEPAS-based cards such as Singapore EZ-Link cards based off FareBot
 
-## Usage - Bintray
+## Usage - Artifactory
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	maven {
+		url "https://itachi1706.jfrog.io/artifactory/ccn-android-libs/"
+	}
+}
+…
+dependencies {
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
+}
+```
+
+## Usage - Maven Central (WIP)
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	mavenCentral()
+}
+…
+dependencies {
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
+}
+```
+
+## Usage - Bintray (Deprecated)
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
 
 ```gradle
@@ -26,7 +56,7 @@ dependencies {
 }
 ```
 
-## Usage - JCenter
+## Usage - JCenter (Deprecated)
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
 
 ```gradle

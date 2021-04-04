@@ -1,5 +1,8 @@
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.jfrog.artifactory'
+apply plugin: 'maven-publish'
+apply plugin: 'signing'
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
@@ -10,6 +13,7 @@ task javadoc(type: Javadoc) {
     source = android.sourceSets.main.java.srcDirs
     classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
     exclude '**/BuildConfig.java'
+    options.encoding = 'UTF-8'
     excludes = ['**/*.kt'] // < ---- Exclude all kotlin files from javadoc file.
 }
 
@@ -66,6 +70,7 @@ install {
     }
 }
 
+// Bintray (Deprecated)
 bintray {
     Properties localProps = new Properties()
     def localPropFile = file('../local.properties')
@@ -89,6 +94,110 @@ bintray {
             desc = "Release ${this.version}"
             released = new Date()
             vcsTag = this.version
+        }
+    }
+}
+
+afterEvaluate {
+    Properties localProps = new Properties()
+    def localPropFile = file('../local.properties')
+    if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+    def ossrhUsername = localProps != null && localProps.containsKey('ossrhUsername') ? localProps.getProperty('ossrhUsername') : System.getenv('OSSRH_USER')
+    def ossrhPassword = localProps != null && localProps.containsKey('ossrhPassword') ? localProps.getProperty('ossrhPassword') : System.getenv('OSSRH_PASSWORD')
+
+    artifactoryPublish.dependsOn('build')
+    publishing {
+        repositories {
+            maven {
+                def releaseRepo = "https://s01.sonatype.org/service/local/staging/deploy/maven2/"
+                def snapshotRepo = "https://s01.sonatype.org/content/repositories/snapshots/"
+                url = version.endsWith('SNAPSHOT') ? releaseRepo : snapshotRepo
+                credentials {
+                    username = ossrhUsername
+                    password = ossrhPassword
+                }
+            }
+        }
+        publications {
+            aar(MavenPublication) {
+                from components.release
+                groupId = this.group
+                artifactId = 'cepaslib'
+                version = this.version
+
+                pom {
+                    name = 'CEPAS Card Reader Library'
+                    description = 'A slimmed down version based off Farebot targeting CEPAS-based cards only'
+                    url = 'https://github.com/itachi1706/CheesecakeCEPASReader'
+                    inceptionYear = '2019'
+                    packaging = 'aar'
+
+                    licenses {
+                        license {
+                            name = 'GNU General Public License version 3'
+                            url = 'https://opensource.org/licenses/GPL-3.0'
+                        }
+                    }
+                    scm {
+                        connection = 'https://github.com/itachi1706/CheesecakeCEPASReader.git'
+                        url = 'https://github.com/itachi1706/CheesecakeCEPASReader'
+
+                    }
+                    developers {
+                        developer {
+                            id = 'itachi1706'
+                            name = 'Kenneth'
+                        }
+                    }
+                }
+
+                // Tell maven to prepare the generated "*.aar" file for publishing
+                artifact(sourcesJar)
+                artifact(javadocJar)
+                artifact("$buildDir/outputs/aar/${project.getName()}-release.aar")
+            }
+        }
+    }
+
+    signing {
+        def signingKey = localProps != null && localProps.containsKey('signing.key') ? localProps.getProperty('signing.key') : System.getenv('GPG_SIGN_KEY')
+        def signingPassword = localProps != null && localProps.containsKey('signing.password') ? localProps.getProperty('signing.password') : System.getenv('GPG_SIGN_PASSWORD')
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications.aar
+    }
+
+    artifactoryPublish {
+        publications(publishing.publications.aar)
+    }
+}
+
+// Artifactory
+artifactory {
+    Properties localProps = new Properties()
+    def localPropFile = file('../local.properties')
+    if (localPropFile.canRead()) { localProps.load(new FileInputStream(localPropFile)) }
+
+    def userStr = localProps != null && localProps.containsKey('artifactory.user') ? localProps.getProperty('artifactory.user') : System.getenv('ARTIFACTORY_USER')
+    def passwordStr = localProps != null && localProps.containsKey('artifactory.password') ? localProps.getProperty('artifactory.password') : System.getenv('ARTIFACTORY_PASSWORD')
+    def urlStr = localProps != null && localProps.containsKey('artifactory.contextUrl') ? localProps.getProperty('artifactory.contextUrl') : System.getenv('ARTIFACTORY_CONTEXTURL')
+
+    contextUrl = urlStr   //The base Artifactory URL if not overridden by the publisher/resolver
+    publish {
+        repository {
+            repoKey = 'ccn-android-libs'
+            username = userStr
+            password = passwordStr
+            maven = true
+        }
+    }
+    resolve {
+        repository {
+            repoKey = 'ccn-android-libs-virt'
+            username = userStr
+            password = passwordStr
+            maven = true
+
         }
     }
 }
