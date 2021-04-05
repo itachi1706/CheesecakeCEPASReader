@@ -1,7 +1,7 @@
 CheesecakeCEPASReader
 ========
+[![Maven Central](https://img.shields.io/maven-central/v/com.itachi1706.cepaslib/cepaslib)](https://search.maven.org/artifact/com.itachi1706.cepaslib/cepaslib)
 [![JIRA Issues](https://img.shields.io/badge/JIRA-Issues-blue)](https://itachi1706.atlassian.net/browse/CCRANDLIB)
-[![Bintray](https://img.shields.io/bintray/v/itachi1706/ccn-android-lib/cepas-reader)](https://bintray.com/itachi1706/ccn-android-lib/cepas-reader/_latestVersion)
 [![GitHub Actions](https://github.com/itachi1706/CheesecakeCEPASReader/workflows/Android%20CI/badge.svg)](https://github.com/itachi1706/CheesecakeCEPASReader/actions)
 [![GitHub release](https://img.shields.io/github/release/itachi1706/CheesecakeCEPASReader.svg)](https://github.com/itachi1706/CheesecakeCEPASReader/releases) 
 [![GitHub license](https://img.shields.io/github/license/itachi1706/CheesecakeCEPASReader.svg)](https://github.com/itachi1706/CheesecakeCEPASReader/blob/master/LICENSE) 
@@ -9,9 +9,20 @@ CheesecakeCEPASReader
 [![Test Coverage](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/coverage.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/coverage) 
 [![Issue Count](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader/badges/issue_count.svg)](https://codeclimate.com/github/itachi1706/CheesecakeCEPASReader)
 
-**NOTE: We are in the midst of allowing an easier way to access through Maven Central, use the Artifactory method in the meantime**
-
 This is a slimmed down library for reading CEPAS-based cards such as Singapore EZ-Link cards based off FareBot
+
+## Usage - Maven Central
+To use this library in an Android Project, add the following lines into your app-level build.gradle file
+
+```gradle
+repositories {
+	mavenCentral()
+}
+…
+dependencies {
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See badge for latest version
+}
+```
 
 ## Usage - Artifactory
 To use this library in an Android Project, add the following lines into your app-level build.gradle file
@@ -24,20 +35,7 @@ repositories {
 }
 …
 dependencies {
-  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
-}
-```
-
-## Usage - Maven Central (WIP)
-To use this library in an Android Project, add the following lines into your app-level build.gradle file
-
-```gradle
-repositories {
-	mavenCentral()
-}
-…
-dependencies {
-  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See badge for latest version
 }
 ```
 
@@ -52,7 +50,7 @@ repositories {
 }
 …
 dependencies {
-  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See bintray badge for latest version
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See badge for latest version
 }
 ```
 
@@ -61,7 +59,7 @@ To use this library in an Android Project, add the following lines into your app
 
 ```gradle
 dependencies {
-  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See Bintray badge for latest version number
+  implementation 'com.itachi1706.cepaslib:cepaslib:<latest-version>' // See badge for latest version number
 }
 ```
 
