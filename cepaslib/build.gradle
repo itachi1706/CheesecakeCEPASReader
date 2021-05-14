@@ -84,7 +84,7 @@ dependencies {
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
     implementation 'androidx.preference:preference-ktx:1.1.1'
     implementation "androidx.cardview:cardview:1.0.0"
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.0"
 
     compileOnly "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
     compileOnly "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
