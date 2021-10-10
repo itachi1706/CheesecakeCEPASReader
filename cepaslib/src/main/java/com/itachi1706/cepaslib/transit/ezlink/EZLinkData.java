@@ -87,7 +87,6 @@ final class EZLinkData {
     // Coordinates taken from respective Wikipedia MRT pages
     private static final Map<String, Station> MRT_STATIONS = new TreeMap<String, Station>() {
         private static final long serialVersionUID = 1L;
-
         {
             // Transaction Codes
             put("GTM", Station.create("GTM Manual Top-up", "GTM", "GTM", null, null));
@@ -96,7 +95,7 @@ final class EZLinkData {
             // North-East Line (NEL)
             put("HBF", Station.create("HarbourFront", "NE1 / CC29", "HBF", "1.265297", "103.82225"));
             put("HBC", Station.create("HarbourFront", "NE1 / CC29", "HBC", "1.265297", "103.82225"));
-            put("OTP", Station.create("Outram Park", "NE3 / EW16", "OTP", "1.280225", "103.839486"));
+            put("OTP", Station.create("Outram Park", "NE3 / EW16 / TE17", "OTP", "1.280225", "103.839486"));
             put("CNT", Station.create("Chinatown", "NE4 / DT19", "CNT", "1.28485", "103.844006"));
             put("CQY", Station.create("Clarke Quay", "NE5", "CQY", "1.288708", "103.846606"));
             put("DBN", Station.create("Dhoby Ghaut", "CC1 / NS24 / NE6", "DBN", "1.299156", "103.845736"));
@@ -122,7 +121,7 @@ final class EZLinkData {
             put("KAP", Station.create("King Albert Park", "DT6", "KAP", "1.335502", "103.783739"));
             put("SAV", Station.create("Sixth Avenue", "DT7", "SAV", "1.330670", "103.797372"));
             put("TKK", Station.create("Tan Kah Kee", "DT8", "TKK", "1.325963", "103.807280"));
-            put("STV", Station.create("Stevens", "DT10", "STV", "1.320009", "103.825868"));
+            put("STV", Station.create("Stevens", "DT10 / TE11", "STV", "1.320009", "103.825868"));
             put("RCR", Station.create("Rochor", "DT13", "RCR", "1.304045", "103.852392"));
             put("PMN", Station.create("Promenade", "CC4 / DT15", "PMN", "1.293131", "103.861064"));
             put("BFD", Station.create("Bayfront", "CE1 / DT16", "BFT", "1.282347", "103.859317"));
@@ -142,6 +141,8 @@ final class EZLinkData {
             put("TPE", Station.create("Tampines East", "DT33", "TPE", "1.356055", "103.954381"));
             put("UPC", Station.create("Upper Changi", "DT34", "UPC", "1.341632", "103.961420"));
             put("XPD", Station.create("Expo", "CG1 / DT35", "XPO", "1.335469", "103.961767"));
+            put("XLN", Station.create("Xilin", "DT36", "XLN", "1.1944", "103.5754"));
+            put("SGB", Station.create("Sungei Bedok", "DT37 / TE31", "SGB", "1.1913", "103.5726"));
 
             // Circle Line (CCL)
             put("DBG", Station.create("Dhoby Ghaut", "CC1 / NS24 / NE6", "DBG", "1.299156", "103.845736"));
@@ -163,7 +164,7 @@ final class EZLinkData {
             // Alternate name (Circle line entrance)
             put("BHC", Station.create("Bishan", "CC15 / NS17", "BHC", "1.351236", "103.848456"));
             put("MRM", Station.create("Marymount", "CC16", "MRM", "1.349078", "103.839492"));
-            put("CDT", Station.create("Caldecott", "CC17", "CDT", "1.337761", "103.839447"));
+            put("CDT", Station.create("Caldecott", "CC17 / TE9", "CDT", "1.337761", "103.839447"));
             put("BTN", Station.create("Botanic Gardens", "CC19 / DT9", "BTN", "1.322519", "103.815406"));
             put("FRR", Station.create("Farrer Road", "CC20", "FRR", "1.317319", "103.807431"));
             put("HLV", Station.create("Holland Village", "CC21", "HLV", "1.312078", "103.796208"));
@@ -234,7 +235,7 @@ final class EZLinkData {
             put("YWT", Station.create("Yew Tee", "NS5", "YWT", "1.396986", "103.747239"));
             put("KRJ", Station.create("Kranji", "NS7", "KRJ", "1.425047", "103.761853"));
             put("MSL", Station.create("Marsiling", "NS8", "MSL", "1.432636", "103.774283"));
-            put("WDL", Station.create("Woodlands", "NS9", "WDL", "1.437094", "103.786483"));
+            put("WDL", Station.create("Woodlands", "NS9 / TE2", "WDL", "1.437094", "103.786483"));
             put("ADM", Station.create("Admiralty", "NS10", "ADM", "1.440689", "103.800933"));
             put("SBW", Station.create("Sembawang", "NS11", "SBW", "1.449025", "103.820153"));
             put("YIS", Station.create("Yishun", "NS13", "YIS", "1.429464", "103.835239"));
@@ -248,12 +249,12 @@ final class EZLinkData {
             put("NEW", Station.create("Newton", "NS21 / DT11", "NEW", "1.312956", "103.838442"));
             // Alternate name (Downtown line entrance)
             put("NTD", Station.create("Newton", "NS21 / DT11", "NTD", "1.312956", "103.838442"));
-            put("ORC", Station.create("Orchard", "NS22", "ORC", "1.304314", "103.831939"));
+            put("ORC", Station.create("Orchard", "NS22 / TE14", "ORC", "1.304314", "103.831939"));
             put("SOM", Station.create("Somerset", "NS23", "SOM", "1.300514", "103.839028"));
 //            put("DBG", Station.create("Dhoby Ghaut", "NS24 / NE6 / CC1", "DBG", "1.299156", "103.845736"));
 //            put("CTH", Station.create("City Hall", "NS25 / EW13", "CTH", "1.293239", "103.852219"));
 //            put("RFP", Station.create("Raffles Place", "NS26 / EW14", "RFP", "1.283881", "103.851533"));
-            put("MRB", Station.create("Marina Bay", "NS27 / CE2", "MRB", "1.276097", "103.854675"));
+            put("MRB", Station.create("Marina Bay", "NS27 / CE2 / TE20", "MRB", "1.276097", "103.854675"));
             put("MSP", Station.create("Marina South Pier", "NS28", "MSP", "1.270958", "103.863242"));
 
             // Sengkang LRT (East Loop)
@@ -302,6 +303,44 @@ final class EZLinkData {
             put("BP12", Station.create("Jelapang", "BP12", "BP12", "1.386691", "103.764494"));
             put("BP13", Station.create("Senja", "BP13", "BP13", "1.382700898", "103.762363"));
             put("BP14", Station.create("Ten Mile Junction", "BP14", "BP14", "1.380349", "103.760129"));
+
+            // Thomson-East Coast Line (TEL)
+            put("WDN", Station.create("Woodlands North", "TE1", "WDN", "1.4482", "103.7851"));
+//            put("WDL", Station.create("Woodlands", "TE2 / NS9", "WDL", "1.437094", "103.786483"));
+            put("WDS", Station.create("Woodlands South", "TE3", "WDS", "1.2538", "103.4738"));
+            put("SPL", Station.create("Springleaf", "TE4", "SPL", "1.2352", "103.4906"));
+            put("LTR", Station.create("Lentor", "TE5", "LTR", "1.2305", "103.5012"));
+            put("MFL", Station.create("Mayflower", "TE6", "MFL", "1.2221", "103.5014"));
+            put("BRH", Station.create("Bright Hill", "TE7", "BRH", "1.2142", "103.4956"));
+            put("UTS", Station.create("Upper Thomson", "TE8", "UTS", "1.2115", "103.5000"));
+//            put("CDT", Station.create("Caldecott", "CC17 / TE9", "CDT", "1.337761", "103.839447"));
+            put("MPL", Station.create("Mount Pleasant", "TE10", "MPL", "1.1943", "103.5008"));
+//            put("STV", Station.create("Stevens", "TE11 / DT10", "STV", "1.320009", "103.825868"));
+            put("NPR", Station.create("Napier", "TE12", "NPR", "1.1825", "103.4909"));
+            put("OBV", Station.create("Orchard Boulevard", "TE13", "OBV", "1.1809", "103.4930"));
+//            put("ORC", Station.create("Orchard", "TE14 / NS22", "ORC", "1.304314", "103.831939"));
+            put("GRW", Station.create("Great World", "TE15", "GRW", "1.1742", "103.5001"));
+            put("HVL", Station.create("Havelock", "TE16", "HVL", "1.1716", "103.5001"));
+//            put("OTP", Station.create("Outram Park", "TE17 / NE3 / EW16", "OTP", "1.280225", "103.839486"));
+            put("MAX", Station.create("Maxwell", "TE18", "MAX", "1.1649", "103.5038"));
+            put("SHW", Station.create("Shenton Way", "TE19", "SHW", "1.1639", "103.5103"));
+//            put("MRB", Station.create("Marina Bay", "TE20 / NS27 / CE2", "MRB", "1.276097", "103.854675"));
+            put("MRS", Station.create("Marina South", "TE21", "MRS", "1.1626", "103.5147"));
+            put("GRB", Station.create("Gardens by the Bay", "TE22", "GRB", "1.1642", "103.5205"));
+            put("FDM", Station.create("Founders' Memorial", "TE22A", "FDM", "1.2912", "103.8687"));
+            put("TRH", Station.create("Tanjong Rhu", "TE23", "TRH", "1.1750", "103.5224"));
+            put("KTP", Station.create("Katong Park", "TE24", "KTP", "1.297825", "103.885331"));
+            put("TKT", Station.create("Tanjong Katong", "TE25", "TKT", "1.1757", "103.5352"));
+            put("MPR", Station.create("Marine Parade", "TE26", "MPR", "1.3026301", "103.9049619"));
+            put("MTC", Station.create("Marine Terrace", "TE27", "MTC", "1.305985", "103.913332"));
+            put("SGL", Station.create("Siglap", "TE28", "SGL", "1.309770", "103.928967"));
+            put("BSR", Station.create("Bayshore", "TE29", "BSR", "1.314712", "103.943717"));
+            put("BDS", Station.create("Bedok South", "TE30", "BDS", "1.316613", "103.948276"));
+//            put("SGB", Station.create("Sungei Bedok", "TE31 / DT37", "SGB", "1.1913", "103.5726"));
+
+            // Cross Island Line (CR)
+
+            // Jurong Region Line
         }
     };
 
