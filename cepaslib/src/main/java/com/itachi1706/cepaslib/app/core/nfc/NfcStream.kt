@@ -22,6 +22,7 @@
 
 package com.itachi1706.cepaslib.app.core.nfc
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
@@ -32,6 +33,7 @@ import android.nfc.tech.IsoDep
 import android.nfc.tech.MifareClassic
 import android.nfc.tech.MifareUltralight
 import android.nfc.tech.NfcF
+import android.os.Build
 import android.os.Bundle
 import com.cantrowitz.rxbroadcast.RxBroadcast
 import com.itachi1706.cepaslib.app.core.rx.LastValueRelay
@@ -60,11 +62,16 @@ class NfcStream(private val activity: Activity) {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun onResume() {
         val intent = Intent(ACTION)
         intent.`package` = activity.packageName
 
-        val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(activity, 0, intent, 0)
+        }
         val nfcAdapter = NfcAdapter.getDefaultAdapter(activity)
         nfcAdapter?.enableForegroundDispatch(activity, pendingIntent, null, TECH_LISTS)
     }

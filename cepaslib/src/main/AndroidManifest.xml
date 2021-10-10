@@ -66,6 +66,7 @@
             android:noHistory="true"
             android:configChanges="keyboardHidden|orientation"
             android:label="@string/scan_cepas"
+            android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED"/>
