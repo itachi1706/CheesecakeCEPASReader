@@ -27,12 +27,12 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.jakewharton.rxrelay2.BehaviorRelay
-import com.uber.autodispose.LifecycleScopeProvider
-import com.uber.autodispose.OutsideLifecycleException
+import com.uber.autodispose.OutsideScopeException
+import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
+import com.uber.autodispose.lifecycle.LifecycleScopeProvider
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.ScreenView
 import io.reactivex.Observable
-import io.reactivex.functions.Function
 
 @Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")
 abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenLifecycleEvent>
@@ -47,11 +47,11 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
     }
 
     companion object {
-        private val CORRESPONDING_EVENTS = Function<ScreenLifecycleEvent, ScreenLifecycleEvent> { lastEvent ->
+        private val CORRESPONDING_EVENTS = CorrespondingEventsFunction<ScreenLifecycleEvent> { lastEvent ->
             when (lastEvent) {
                 ScreenLifecycleEvent.RESUME -> ScreenLifecycleEvent.PAUSE
                 ScreenLifecycleEvent.SHOW -> ScreenLifecycleEvent.HIDE
-                else -> throw OutsideLifecycleException("what! $lastEvent")
+                else -> throw OutsideScopeException("what! $lastEvent")
             }
         }
     }
@@ -89,7 +89,7 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
 
     final override fun lifecycle(): Observable<ScreenLifecycleEvent> = lifecycleRelay.hide()
 
-    final override fun correspondingEvents(): Function<ScreenLifecycleEvent, ScreenLifecycleEvent> =
+    final override fun correspondingEvents(): CorrespondingEventsFunction<ScreenLifecycleEvent> =
             CORRESPONDING_EVENTS
 
     final override fun peekLifecycle(): ScreenLifecycleEvent = lifecycleRelay.value!!

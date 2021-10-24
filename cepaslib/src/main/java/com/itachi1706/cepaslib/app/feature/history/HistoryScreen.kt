@@ -51,7 +51,7 @@ import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.itachi1706.cepaslib.persist.db.model.SavedCard
 import com.itachi1706.cepaslib.transit.TransitIdentity
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDispose
 import dagger.Component
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -91,81 +91,91 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         super.onShow(context)
 
         activityOperations.menuItemClick
-                .autoDisposable(this)
-                .subscribe { menuItem ->
-                    val clipboardManager = activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                    when (menuItem.itemId) {
-                        R.id.import_file -> {
-                            val target: Intent
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) target = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                            else {
-                                // Allowed deprecated code as it is for pre KitKat devices support (API <=19)
-                                @Suppress("DEPRECATION") val storageUri = Uri.fromFile(Environment.getExternalStorageDirectory())
-                                target = Intent(Intent.ACTION_GET_CONTENT)
-                                target.putExtra(Intent.EXTRA_STREAM, storageUri)
-                            }
-                            target.type = "*/*"
-                            activity.startActivityForResult(Intent.createChooser(target, activity.getString(R.string.select_file)), REQUEST_SELECT_FILE)
+            .autoDispose(this)
+            .subscribe { menuItem ->
+                val clipboardManager =
+                    activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+                when (menuItem.itemId) {
+                    R.id.import_file -> {
+                        val target: Intent
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) target =
+                            Intent(Intent.ACTION_OPEN_DOCUMENT)
+                        else {
+                            // Allowed deprecated code as it is for pre KitKat devices support (API <=19)
+                            @Suppress("DEPRECATION") val storageUri =
+                                Uri.fromFile(Environment.getExternalStorageDirectory())
+                            target = Intent(Intent.ACTION_GET_CONTENT)
+                            target.putExtra(Intent.EXTRA_STREAM, storageUri)
                         }
-                        R.id.import_clipboard -> {
-                            val importClip = clipboardManager.primaryClip
-                            if (importClip != null && importClip.itemCount > 0) {
-                                val text = importClip.getItemAt(0).coerceToText(activity).toString()
-                                Single.fromCallable { exportHelper.importCards(text) }
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .autoDisposable(this)
-                                        .subscribe { cards -> onCardsImported(cards) }
-                            }
-                        }
-                        R.id.copy -> {
-                            val exportClip = ClipData.newPlainText(null, exportHelper.exportCards(context))
-                            clipboardManager.setPrimaryClip(exportClip)
-                            Toast.makeText(activity, R.string.copied_to_clipboard, Toast.LENGTH_SHORT).show()
-                        }
-                        R.id.share -> {
-                            val intent = Intent(Intent.ACTION_SEND)
-                            intent.type = "text/plain"
-                            intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards(context))
-                            activity.startActivity(intent)
-                        }
-                        R.id.save -> {
-                            val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
-                                addCategory(Intent.CATEGORY_OPENABLE)
-                                type = "text/json"
-                                putExtra(Intent.EXTRA_TITLE, FILENAME)
-                            }
-                            activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
+                        target.type = "*/*"
+                        activity.startActivityForResult(
+                            Intent.createChooser(
+                                target,
+                                activity.getString(R.string.select_file)
+                            ), REQUEST_SELECT_FILE
+                        )
+                    }
+                    R.id.import_clipboard -> {
+                        val importClip = clipboardManager.primaryClip
+                        if (importClip != null && importClip.itemCount > 0) {
+                            val text = importClip.getItemAt(0).coerceToText(activity).toString()
+                            Single.fromCallable { exportHelper.importCards(text) }
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .autoDispose(this)
+                                .subscribe { cards -> onCardsImported(cards) }
                         }
                     }
+                    R.id.copy -> {
+                        val exportClip =
+                            ClipData.newPlainText(null, exportHelper.exportCards(context))
+                        clipboardManager.setPrimaryClip(exportClip)
+                        Toast.makeText(activity, R.string.copied_to_clipboard, Toast.LENGTH_SHORT)
+                            .show()
+                    }
+                    R.id.share -> {
+                        val intent = Intent(Intent.ACTION_SEND)
+                        intent.type = "text/plain"
+                        intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards(context))
+                        activity.startActivity(intent)
+                    }
+                    R.id.save -> {
+                        val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            type = "text/json"
+                            putExtra(Intent.EXTRA_TITLE, FILENAME)
+                        }
+                        activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
+                    }
                 }
+            }
 
         activityOperations.activityResult
-                .autoDisposable(this)
-                .subscribe { (requestCode, resultCode, data) ->
-                    when (requestCode) {
-                        REQUEST_SELECT_FILE -> {
-                            if (resultCode == Activity.RESULT_OK) {
-                                data?.data?.let {
-                                    importFromFile(it)
-                                }
+            .autoDispose(this)
+            .subscribe { (requestCode, resultCode, data) ->
+                when (requestCode) {
+                    REQUEST_SELECT_FILE -> {
+                        if (resultCode == Activity.RESULT_OK) {
+                            data?.data?.let {
+                                importFromFile(it)
                             }
                         }
-                        REQUEST_SELECT_EXPORT_FILE -> {
-                            if (resultCode == Activity.RESULT_OK) {
-                                data?.data?.let {
-                                    exportToFileWithSAF(it)
-                                }
+                    }
+                    REQUEST_SELECT_EXPORT_FILE -> {
+                        if (resultCode == Activity.RESULT_OK) {
+                            data?.data?.let {
+                                exportToFileWithSAF(it)
                             }
                         }
                     }
                 }
+            }
 
         loadCards()
 
         view.observeItemClicks()
-                .autoDisposable(this)
-                .subscribe { viewModel -> navigator.goTo(CardScreen(viewModel.rawCard)) }
+            .autoDispose(this)
+            .subscribe { viewModel -> navigator.goTo(CardScreen(viewModel.rawCard)) }
     }
 
     override fun onDeleteSelectedItems(items: List<HistoryViewModel>) {
@@ -194,12 +204,12 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
 
     private fun loadCards() {
         observeCards()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe(
-                        { viewModels -> view.setViewModels(viewModels) },
-                        { e -> ErrorUtils.showErrorToast(activity, e) })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe(
+                { viewModels -> view.setViewModels(viewModels) },
+                { e -> ErrorUtils.showErrorToast(activity, e) })
     }
 
     private fun observeCards(): Single<List<HistoryViewModel>> {
@@ -231,29 +241,41 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
 
         if (cardIds.size == 1) {
-            Single.create<Optional<SavedCard>> { e -> e.onSuccess(Optional(cardPersister.getCard(cardIds[0]))) }
-                    .filterAndGetOptional()
-                    .map { savedCard -> cardSerializer.deserialize(savedCard.data) }
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .autoDisposable(this)
-                    .subscribe { rawCard -> navigator.goTo(CardScreen(rawCard)) }
+            Single.create<Optional<SavedCard>> { e ->
+                e.onSuccess(
+                    Optional(
+                        cardPersister.getCard(
+                            cardIds[0]
+                        )
+                    )
+                )
+            }
+                .filterAndGetOptional()
+                .map { savedCard -> cardSerializer.deserialize(savedCard.data) }
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .autoDispose(this)
+                .subscribe { rawCard -> navigator.goTo(CardScreen(rawCard)) }
         }
     }
 
     private fun exportToFileWithSAF(uri: Uri) {
         Single.fromCallable {
             activity?.contentResolver?.openOutputStream(uri)
-                    ?.bufferedWriter()
-                    .use { it?.write(exportHelper.exportCards(activity?.applicationContext)) }
+                ?.bufferedWriter()
+                .use { it?.write(exportHelper.exportCards(activity?.applicationContext)) }
         }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe({
-                    Toast.makeText(activity, activity.getString(R.string.saved_to_x, getFileName(uri)), Toast.LENGTH_SHORT)
-                            .show()
-                }, { ex -> ErrorUtils.showErrorAlert(activity, ex) })
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe({
+                Toast.makeText(
+                    activity,
+                    activity.getString(R.string.saved_to_x, getFileName(uri)),
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }, { ex -> ErrorUtils.showErrorAlert(activity, ex) })
     }
 
     private fun getFileName(uri: Uri): String {
@@ -261,7 +283,8 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         var name = FILENAME
         cursor?.use {
             if (it.moveToFirst()) {
-                name = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                val data = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                name = it.getString(data)
             }
         }
         return name
@@ -271,18 +294,21 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
     private fun importFromFile(uri: Uri) {
         Single.fromCallable {
             val json = activity?.contentResolver?.openInputStream(uri)
-                    ?.bufferedReader()
-                    .use { it?.readText() }
+                ?.bufferedReader()
+                .use { it?.readText() }
             if (json == null) {
-                Toast.makeText(activity, activity.getString(R.string.import_fail), Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    activity,
+                    activity.getString(R.string.import_fail),
+                    Toast.LENGTH_SHORT
+                ).show()
                 exportHelper.importCards("")
-            }
-            else exportHelper.importCards(json)
+            } else exportHelper.importCards(json)
         }
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe { cards -> onCardsImported(cards) }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe { cards -> onCardsImported(cards) }
     }
 
     @ScreenScope

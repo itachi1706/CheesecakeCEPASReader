@@ -29,7 +29,9 @@ import android.nfc.TagLostException
 import android.provider.Settings
 import android.view.Menu
 import androidx.appcompat.app.AlertDialog
+import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
+import com.itachi1706.cepaslib.SettingsHandler
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.inject.ScreenScope
 import com.itachi1706.cepaslib.app.core.ui.ActionBarOptions
@@ -40,9 +42,7 @@ import com.itachi1706.cepaslib.app.feature.card.CardScreen
 import com.itachi1706.cepaslib.app.feature.help.HelpScreen
 import com.itachi1706.cepaslib.app.feature.history.HistoryScreen
 import com.itachi1706.cepaslib.app.feature.main.MainActivity.MainActivityComponent
-import com.itachi1706.cepaslib.CEPASLibBuilder
-import com.itachi1706.cepaslib.SettingsHandler
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDispose
 import dagger.Component
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -66,15 +66,15 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
         super.onShow(context)
 
         activityOperations.menuItemClick
-                .autoDisposable(this)
-                .subscribe { menuItem ->
-                    when (menuItem.itemId) {
-                        R.id.history -> navigator.goTo(HistoryScreen())
-                        R.id.help -> navigator.goTo(HelpScreen())
-                        R.id.prefs -> activity.startActivity(SettingsHandler.launchSettings(activity))
-                        else -> CEPASLibBuilder.processMenuItemsFurther(menuItem, activity)
-                    }
+            .autoDispose(this)
+            .subscribe { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.history -> navigator.goTo(HistoryScreen())
+                    R.id.help -> navigator.goTo(HelpScreen())
+                    R.id.prefs -> activity.startActivity(SettingsHandler.launchSettings(activity))
+                    else -> CEPASLibBuilder.processMenuItemsFurther(menuItem, activity)
                 }
+            }
 
         val adapter = NfcAdapter.getDefaultAdapter(context)
         if (adapter == null) {
@@ -86,38 +86,38 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
         }
 
         cardStream.observeCards()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe { card ->
-                    navigator.goTo(CardScreen(card))
-                }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe { card ->
+                navigator.goTo(CardScreen(card))
+            }
 
         cardStream.observeLoading()
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe { loading -> view.showLoading(loading) }
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe { loading -> view.showLoading(loading) }
 
         cardStream.observeErrors()
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe { ex ->
-                    when (ex) {
-                        is CardStream.CardUnauthorizedException -> AlertDialog.Builder(activity)
-                                .setTitle(R.string.locked_card)
-                                .setMessage(R.string.keys_required)
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
-                        is TagLostException -> AlertDialog.Builder(activity)
-                                .setTitle(R.string.tag_lost)
-                                .setMessage(R.string.tag_lost_message)
-                                .setPositiveButton(android.R.string.ok, null)
-                                .show()
-                        else -> {
-                            ErrorUtils.showErrorAlert(activity, ex)
-                        }
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe { ex ->
+                when (ex) {
+                    is CardStream.CardUnauthorizedException -> AlertDialog.Builder(activity)
+                        .setTitle(R.string.locked_card)
+                        .setMessage(R.string.keys_required)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show()
+                    is TagLostException -> AlertDialog.Builder(activity)
+                        .setTitle(R.string.tag_lost)
+                        .setMessage(R.string.tag_lost_message)
+                        .setPositiveButton(android.R.string.ok, null)
+                        .show()
+                    else -> {
+                        ErrorUtils.showErrorAlert(activity, ex)
                     }
                 }
+            }
     }
 
     override fun onUpdateMenu(menu: Menu) {

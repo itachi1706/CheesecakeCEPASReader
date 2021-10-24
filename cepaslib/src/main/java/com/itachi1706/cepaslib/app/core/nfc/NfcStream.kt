@@ -32,6 +32,7 @@ import android.nfc.tech.IsoDep
 import android.nfc.tech.MifareClassic
 import android.nfc.tech.MifareUltralight
 import android.nfc.tech.NfcF
+import android.os.Build
 import android.os.Bundle
 import com.cantrowitz.rxbroadcast.RxBroadcast
 import com.itachi1706.cepaslib.app.core.rx.LastValueRelay
@@ -64,7 +65,11 @@ class NfcStream(private val activity: Activity) {
         val intent = Intent(ACTION)
         intent.`package` = activity.packageName
 
-        val pendingIntent = PendingIntent.getBroadcast(activity, 0, intent, 0)
+        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_MUTABLE)
+        } else {
+            PendingIntent.getBroadcast(activity, 0, intent, 0)
+        }
         val nfcAdapter = NfcAdapter.getDefaultAdapter(activity)
         nfcAdapter?.enableForegroundDispatch(activity, pendingIntent, null, TECH_LISTS)
     }

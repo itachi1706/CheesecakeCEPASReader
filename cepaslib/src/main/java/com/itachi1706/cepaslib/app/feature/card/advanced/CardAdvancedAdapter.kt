@@ -22,16 +22,16 @@
 
 package com.itachi1706.cepaslib.app.feature.card.advanced
 
-import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
-import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
+import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.base.ui.FareBotUiTree
 import com.itachi1706.cepaslib.base.util.ByteArray
-import java.util.Locale
+import java.util.*
 
 // This is not very efficient.️
 class CardAdvancedAdapter(fareBotUiTree: FareBotUiTree) :
@@ -101,7 +101,7 @@ class CardAdvancedAdapter(fareBotUiTree: FareBotUiTree) :
                 val viewModelValue = viewModel.value
                 if (viewModelValue != null) {
                     when (viewModelValue) {
-                        is ByteArray -> value.text = viewModelValue.hex().toUpperCase(Locale.US)
+                        is ByteArray -> value.text = viewModelValue.hex().uppercase(Locale.US)
                         else -> value.text = viewModel.value.toString()
                     }
                     value.visibility = View.VISIBLE

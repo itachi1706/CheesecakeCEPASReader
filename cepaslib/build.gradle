@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.3"
+    compileSdkVersion 31
+    buildToolsVersion "31.0.0"
 
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 30
+        targetSdkVersion 31
         versionCode 133
         versionName "2.1.0"
 
@@ -35,16 +35,20 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
     }
     lintOptions {
-        abortOnError !isGHActions
+        //abortOnError !isGHActions
+        abortOnError false
     }
 
 }
 
-def autoDisposeVersion   = '0.8.0'
+def autoDisposeVersion   = '1.4.0'
 def autoValueGsonVersion = '1.3.1'
 def autoValueVersion     = '1.8.2'
 def daggerVersion        = '2.39.1'
@@ -59,7 +63,7 @@ dependencies {
     implementation 'androidx.core:core-ktx:1.6.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -67,8 +71,8 @@ dependencies {
     // Farebot
     implementation "com.uber.autodispose:autodispose:${autoDisposeVersion}"
     implementation "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-android-kotlin:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-kotlin:${autoDisposeVersion}"
+    implementation "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
+    implementation "com.uber.autodispose:autodispose-error-prone:${autoDisposeVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"

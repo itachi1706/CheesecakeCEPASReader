@@ -38,7 +38,7 @@ import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.card.Card
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.transit.TransitInfo
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDispose
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -65,48 +65,48 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
         super.onShow(context)
 
         activityOperations.menuItemClick
-                .autoDisposable(this)
-                .subscribe { menuItem ->
-                    when (menuItem.itemId) {
-                        R.id.card_advanced -> {
-                            content?.let {
-                                navigator.goTo(CardAdvancedScreen(it.card, it.transitInfo))
-                            }
+            .autoDispose(this)
+            .subscribe { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.card_advanced -> {
+                        content?.let {
+                            navigator.goTo(CardAdvancedScreen(it.card, it.transitInfo))
                         }
                     }
                 }
+            }
 
         loadContent()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .autoDisposable(this)
-                .subscribe { content ->
-                    this.content = content
-                    if (content.transitInfo != null) {
-                        (activity as AppCompatActivity).supportActionBar?.apply {
-                            title = content.transitInfo.getCardName(view.resources)
-                            subtitle = content.transitInfo.serialNumber
-                        }
-                        view.setTransitInfo(content.transitInfo, content.viewModels)
-                    } else {
-                        (activity as AppCompatActivity).supportActionBar?.apply {
-                            title = context.getString(R.string.unknown_card)
-                        }
-                        view.setError(context.getString(R.string.unknown_card_desc))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .autoDispose(this)
+            .subscribe { content ->
+                this.content = content
+                if (content.transitInfo != null) {
+                    (activity as AppCompatActivity).supportActionBar?.apply {
+                        title = content.transitInfo.getCardName(view.resources)
+                        subtitle = content.transitInfo.serialNumber
                     }
-                    activity.invalidateOptionsMenu()
+                    view.setTransitInfo(content.transitInfo, content.viewModels)
+                } else {
+                    (activity as AppCompatActivity).supportActionBar?.apply {
+                        title = context.getString(R.string.unknown_card)
+                    }
+                    view.setError(context.getString(R.string.unknown_card_desc))
                 }
+                activity.invalidateOptionsMenu()
+            }
 
         view.observeItemClicks()
-                .autoDisposable(this)
-                .subscribe { viewModel ->
-                    if (viewModel is TransactionViewModel.TripViewModel) {
-                        val trip = viewModel.trip
-                        if (trip.startStation?.hasLocation() == true || trip.endStation?.hasLocation() == true) {
-                            navigator.goTo(TripMapScreen(trip))
-                        }
+            .autoDispose(this)
+            .subscribe { viewModel ->
+                if (viewModel is TransactionViewModel.TripViewModel) {
+                    val trip = viewModel.trip
+                    if (trip.startStation?.hasLocation() == true || trip.endStation?.hasLocation() == true) {
+                        navigator.goTo(TripMapScreen(trip))
                     }
                 }
+            }
     }
 
     override fun onUpdateMenu(menu: Menu?) {

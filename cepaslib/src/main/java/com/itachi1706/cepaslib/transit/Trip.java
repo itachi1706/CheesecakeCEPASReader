@@ -86,6 +86,7 @@ public abstract class Trip {
      * format their travel costs in dollars.  Instead, it should be shown in Yen, which the Japanese
      * currency formatter does.
      *
+     * @param resources Resource Object
      * @return The cost of the fare formatted in the local currency of the card.
      */
     @Nullable
