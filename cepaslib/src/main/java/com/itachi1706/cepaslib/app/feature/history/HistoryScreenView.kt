@@ -24,18 +24,18 @@ package com.itachi1706.cepaslib.app.feature.history
 
 import android.annotation.SuppressLint
 import android.content.Context
-import androidx.appcompat.view.ActionMode
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.appcompat.view.ActionMode
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.autodispose.android.scope
-import com.uber.autodispose.autoDisposable
+import com.uber.autodispose.autoDispose
 import com.wealthfront.magellan.BaseScreenView
 import io.reactivex.Observable
 
@@ -63,17 +63,24 @@ class HistoryScreenView(
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         selectionRelay
-                .autoDisposable(scope())
-                .subscribe { items ->
-                    if (items.isNotEmpty()) {
-                        if (actionMode == null) {
-                            actionMode = activityOperations.startActionMode(object : ActionMode.Callback {
-                                override fun onCreateActionMode(actionMode: ActionMode, menu: Menu): Boolean {
+            .autoDispose(scope())
+            .subscribe { items ->
+                if (items.isNotEmpty()) {
+                    if (actionMode == null) {
+                        actionMode =
+                            activityOperations.startActionMode(object : ActionMode.Callback {
+                                override fun onCreateActionMode(
+                                    actionMode: ActionMode,
+                                    menu: Menu
+                                ): Boolean {
                                     actionMode.menuInflater.inflate(R.menu.action_history, menu)
                                     return true
                                 }
 
-                                override fun onActionItemClicked(actionMode: ActionMode, menuItem: MenuItem): Boolean {
+                                override fun onActionItemClicked(
+                                    actionMode: ActionMode,
+                                    menuItem: MenuItem
+                                ): Boolean {
                                     @Suppress("UNCHECKED_CAST")
                                     when (menuItem.itemId) {
                                         R.id.delete -> {
@@ -84,20 +91,23 @@ class HistoryScreenView(
                                     return false
                                 }
 
-                                override fun onPrepareActionMode(p0: ActionMode?, p1: Menu?): Boolean = false
+                                override fun onPrepareActionMode(
+                                    p0: ActionMode?,
+                                    p1: Menu?
+                                ): Boolean = false
 
                                 override fun onDestroyActionMode(actionMode: ActionMode?) {
                                     this@HistoryScreenView.actionMode = null
                                     (recyclerView.adapter as? HistoryAdapter)?.clearSelectedItems()
                                 }
                             })
-                        }
-                        actionMode?.title = items.size.toString()
-                        actionMode?.tag = items
-                    } else {
-                        actionMode?.finish()
                     }
+                    actionMode?.title = items.size.toString()
+                    actionMode?.tag = items
+                } else {
+                    actionMode?.finish()
                 }
+            }
     }
 
     override fun onDetachedFromWindow() {
