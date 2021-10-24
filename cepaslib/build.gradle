@@ -71,6 +71,7 @@ dependencies {
     implementation "com.uber.autodispose:autodispose:${autoDisposeVersion}"
     implementation "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
     implementation "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
+    implementation "com.uber.autodispose:autodispose-error-prone:${autoDisposeVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"

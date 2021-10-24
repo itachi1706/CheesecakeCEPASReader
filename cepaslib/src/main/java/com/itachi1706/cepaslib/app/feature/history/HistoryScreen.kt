@@ -283,7 +283,8 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         var name = FILENAME
         cursor?.use {
             if (it.moveToFirst()) {
-                name = it.getString(it.getColumnIndex(OpenableColumns.DISPLAY_NAME))
+                val data = it.getColumnIndex(OpenableColumns.DISPLAY_NAME)
+                name = it.getString(data)
             }
         }
         return name
