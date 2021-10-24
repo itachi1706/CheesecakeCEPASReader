@@ -42,7 +42,8 @@ android {
         jvmTarget = "11"
     }
     lintOptions {
-        abortOnError !isGHActions
+        //abortOnError !isGHActions
+        abortOnError false
     }
 
 }
