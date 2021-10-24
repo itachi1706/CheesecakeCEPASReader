@@ -42,7 +42,7 @@ import com.itachi1706.cepaslib.app.feature.history.HistoryScreen
 import com.itachi1706.cepaslib.app.feature.main.MainActivity.MainActivityComponent
 import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.SettingsHandler
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDisposable
 import dagger.Component
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

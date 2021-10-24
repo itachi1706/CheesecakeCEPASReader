@@ -35,7 +35,7 @@ import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.jakewharton.rxrelay2.PublishRelay
 import com.uber.autodispose.android.scope
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDisposable
 import com.wealthfront.magellan.BaseScreenView
 import io.reactivex.Observable
 

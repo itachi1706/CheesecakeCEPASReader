@@ -38,7 +38,7 @@ import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.card.Card
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.transit.TransitInfo
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDisposable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

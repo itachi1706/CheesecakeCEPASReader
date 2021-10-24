@@ -51,7 +51,7 @@ import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.itachi1706.cepaslib.persist.db.model.SavedCard
 import com.itachi1706.cepaslib.transit.TransitIdentity
-import com.uber.autodispose.kotlin.autoDisposable
+import com.uber.autodispose.autoDisposable
 import dagger.Component
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
