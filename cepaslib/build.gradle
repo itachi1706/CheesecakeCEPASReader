@@ -55,7 +55,7 @@ def daggerVersion        = '2.40.5'
 def groupieVersion       = '2.9.0'
 def kotlinVersion        = '1.6.10'
 def magellanVersion      = '1.1.0'
-def roomVersion          = '2.3.0'
+def roomVersion          = '2.4.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
