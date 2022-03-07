@@ -64,11 +64,11 @@
     <string name="wireless_settings">NFC Settings</string>
     <string name="delete">Delete</string>
     <string name="scan_cepas">Scan CEPAS Card</string>
-    <string name="setting_dark_mode">Application Dark Mode</string>
+    <string name="setting_dark_mode">Application Theme</string>
     <string-array name="dark_mode">
-        <item>Follow System</item>
-        <item>Off</item>
-        <item>On</item>
+        <item>System Default</item>
+        <item>Light</item>
+        <item>Dark</item>
     </string-array>
     <string-array name="dark_mode_items">
         <item>default</item>
