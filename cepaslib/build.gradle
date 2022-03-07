@@ -53,13 +53,11 @@ def autoValueGsonVersion = '1.3.1'
 def autoValueVersion     = '1.9'
 def daggerVersion        = '2.41'
 def groupieVersion       = '2.9.0'
-def kotlinVersion        = '1.6.10'
 def magellanVersion      = '1.1.0'
 def roomVersion          = '2.4.2'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.7.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
@@ -78,7 +76,6 @@ dependencies {
     implementation "com.xwray:groupie-databinding:${groupieVersion}"
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.google.guava:guava:31.1-android'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${kotlinVersion}"
     implementation "com.wealthfront:magellan:${magellanVersion}"
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
     implementation 'com.cantrowitz:rxbroadcast:2.0.0'
@@ -86,7 +83,7 @@ dependencies {
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
     implementation "com.google.android.material:material:1.5.0"
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation 'androidx.preference:preference-ktx:1.1.1'
+    implementation 'androidx.preference:preference-ktx:1.2.0'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
