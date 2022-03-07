@@ -31,7 +31,6 @@ import android.content.pm.PackageManager.COMPONENT_ENABLED_STATE_ENABLED
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.preference.*
@@ -57,7 +56,7 @@ class FareBotPreferenceActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.prefs, rootKey)
 
-            setDarkMode(PreferenceManager.getDefaultSharedPreferences(context)?.getString("pref_dark_mode", "default"))
+            setDarkMode(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("pref_dark_mode", "default"))
 
             preferenceLaunchFromBackground = findPreference("pref_launch_from_background")!!
             preferenceLaunchFromBackground.isChecked = launchFromBgEnabled
@@ -73,7 +72,6 @@ class FareBotPreferenceActivity : AppCompatActivity() {
                 return true
             } else if (preference === preferenceDarkMode) {
                 setDarkMode(newValue as String)
-                Toast.makeText(context, "Dark Mode will update after you restart the app", Toast.LENGTH_LONG).show()
                 return true
             }
             return false
