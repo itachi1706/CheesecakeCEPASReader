@@ -77,7 +77,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.9.0'
     implementation 'com.google.guava:guava:31.1-android'
     implementation "com.wealthfront:magellan:${magellanVersion}"
-    implementation 'com.google.android.gms:play-services-maps:18.0.2'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.cantrowitz:rxbroadcast:2.0.0'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
     implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
