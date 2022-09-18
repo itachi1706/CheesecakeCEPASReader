@@ -54,7 +54,7 @@ def autoValueVersion     = '1.9'
 def daggerVersion        = '2.43.2'
 def groupieVersion       = '2.9.0'
 def magellanVersion      = '1.1.0'
-def roomVersion          = '2.4.2'
+def roomVersion          = '2.4.3'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
