@@ -74,7 +74,7 @@ dependencies {
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"
-    implementation 'com.google.code.gson:gson:2.9.1'
+    implementation 'com.google.code.gson:gson:2.10'
     implementation 'com.google.guava:guava:31.1-android'
     implementation "com.wealthfront:magellan:${magellanVersion}"
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
@@ -91,7 +91,7 @@ dependencies {
     compileOnly "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
 
     api "androidx.legacy:legacy-support-v4:1.0.0"
-    api 'com.google.code.gson:gson:2.9.0'
+    api 'com.google.code.gson:gson:2.10'
     api "androidx.room:room-runtime:${roomVersion}"
 
     kapt "com.google.auto.value:auto-value:${autoValueVersion}"
