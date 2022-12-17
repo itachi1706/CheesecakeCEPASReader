@@ -41,5 +41,6 @@ sonarqube {
         property "sonar.projectKey", "itachi1706_CheesecakeCEPASReader"
         property "sonar.organization", "itachi1706"
         property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.androidLint.reportPaths", "${project.buildDir}/reports/lint-results.xml"
     }
 }
