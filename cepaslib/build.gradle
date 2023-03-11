@@ -7,7 +7,7 @@ def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
 android {
     compileSdkVersion 31
     buildToolsVersion "31.0.0"
-
+    namespace 'com.itachi1706.cepaslib'
 
     defaultConfig {
         minSdkVersion 19
@@ -41,7 +41,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-    lintOptions {
+    lint {
         //abortOnError !isGHActions
         abortOnError false
     }
