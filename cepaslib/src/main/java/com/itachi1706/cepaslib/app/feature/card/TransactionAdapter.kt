@@ -34,10 +34,13 @@ import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.app.core.kotlin.inflate
-import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.*
+import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.RefillViewHolder
+import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.SubscriptionViewHolder
+import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.TripViewHolder
 import com.jakewharton.rxrelay2.PublishRelay
 import com.xwray.groupie.GroupieViewHolder
-import java.util.*
+import java.util.Calendar
+import java.util.Date
 
 class TransactionAdapter(
     private val viewModels: List<TransactionViewModel>,
@@ -148,7 +151,7 @@ class TransactionAdapter(
                 time.text = viewModel.time
 
                 // Update based on accent color
-                amount.setTextColor(CEPASLibBuilder.accentColor)
+                amount.setTextColor(ContextCompat.getColor(viewModel.context, CEPASLibBuilder.accentColor))
             }
         }
 
