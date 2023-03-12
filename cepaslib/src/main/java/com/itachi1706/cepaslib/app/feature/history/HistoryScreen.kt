@@ -29,8 +29,6 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.net.Uri
-import android.os.Build
-import android.os.Environment
 import android.provider.OpenableColumns
 import android.view.Menu
 import android.widget.Toast
@@ -97,16 +95,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                     activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 when (menuItem.itemId) {
                     R.id.import_file -> {
-                        val target: Intent
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) target =
-                            Intent(Intent.ACTION_OPEN_DOCUMENT)
-                        else {
-                            // Allowed deprecated code as it is for pre KitKat devices support (API <=19)
-                            @Suppress("DEPRECATION") val storageUri =
-                                Uri.fromFile(Environment.getExternalStorageDirectory())
-                            target = Intent(Intent.ACTION_GET_CONTENT)
-                            target.putExtra(Intent.EXTRA_STREAM, storageUri)
-                        }
+                        val target = Intent(Intent.ACTION_OPEN_DOCUMENT)
                         target.type = "*/*"
                         activity.startActivityForResult(
                             Intent.createChooser(

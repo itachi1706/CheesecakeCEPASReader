@@ -22,6 +22,7 @@
 
 package com.itachi1706.cepaslib.app.core.nfc
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
@@ -68,6 +69,7 @@ class NfcStream(private val activity: Activity) {
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun onResume() {
         val intent = Intent(ACTION)
         intent.`package` = activity.packageName
