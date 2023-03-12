@@ -78,7 +78,7 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
                 .alpha(0f)
                 .setDuration(shortAnimationDuration)
                 .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator?) {
+                    override fun onAnimationEnd(animation: Animator) {
                         viewFadeOut.visibility = View.GONE
                     }
                 })

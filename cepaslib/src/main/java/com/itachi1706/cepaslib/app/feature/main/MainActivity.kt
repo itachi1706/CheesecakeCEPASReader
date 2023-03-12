@@ -34,6 +34,7 @@ import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -114,6 +115,7 @@ class MainActivity : AppCompatActivity(),
         component.inject(this)
         navigator.addLifecycleListener(this)
         nfcStream.onCreate(this, savedInstanceState)
+        onBackPressedDispatcher.addCallback(this, onBackPressedCallback)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
@@ -144,11 +146,14 @@ class MainActivity : AppCompatActivity(),
         navigator.onDestroy(this)
     }
 
-    override fun onBackPressed() {
-        if (!navigator.handleBack()) {
-            super.onBackPressed()
+    private val onBackPressedCallback = object : OnBackPressedCallback(true) {
+        override fun handleOnBackPressed() {
+            if (!navigator.handleBack()) {
+                finish()
+            }
         }
     }
+
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         navigator.onCreateOptionsMenu(menu)
         return true
