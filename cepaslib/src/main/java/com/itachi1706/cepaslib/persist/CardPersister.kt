@@ -20,24 +20,14 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.itachi1706.cepaslib.persist;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+package com.itachi1706.cepaslib.persist
 
-import com.itachi1706.cepaslib.persist.db.model.SavedCard;
+import com.itachi1706.cepaslib.persist.db.model.SavedCard
 
-import java.util.List;
-
-public interface CardPersister {
-
-    @NonNull
-    List<SavedCard> getCards();
-
-    @Nullable
-    SavedCard getCard(long id);
-
-    long insertCard(@NonNull SavedCard card);
-
-    void deleteCard(@NonNull SavedCard card);
+interface CardPersister {
+    val cards: List<SavedCard>
+    fun getCard(id: Long): SavedCard?
+    fun insertCard(card: SavedCard): Long
+    fun deleteCard(card: SavedCard)
 }
