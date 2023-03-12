@@ -62,22 +62,20 @@ final class EZLinkData {
 
     private static String readFromRaw(Resources resources, @RawRes int resId) {
         //Get Data From Text Resource File Contains Json Data.
-        InputStream inputStream = resources.openRawResource(resId);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try (InputStream inputStream = resources.openRawResource(resId)) {
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
 
-        int ctr;
-        try {
+            int ctr;
             ctr = inputStream.read();
             while (ctr != -1) {
                 byteArrayOutputStream.write(ctr);
                 ctr = inputStream.read();
             }
-            inputStream.close();
+            return byteArrayOutputStream.toString();
         } catch (IOException e) {
             e.printStackTrace();
             return "";
         }
-        return byteArrayOutputStream.toString();
     }
 
     static final HashMap<String, BusData.OperatorName> SG_BUSES = new HashMap<>();

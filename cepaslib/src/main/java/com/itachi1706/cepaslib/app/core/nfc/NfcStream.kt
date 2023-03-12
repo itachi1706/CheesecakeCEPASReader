@@ -22,6 +22,7 @@
 
 package com.itachi1706.cepaslib.app.core.nfc
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
 import android.content.Intent
@@ -33,6 +34,7 @@ import android.nfc.tech.MifareClassic
 import android.nfc.tech.MifareUltralight
 import android.nfc.tech.NfcF
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import com.cantrowitz.rxbroadcast.RxBroadcast
 import com.itachi1706.cepaslib.app.core.rx.LastValueRelay
@@ -55,12 +57,19 @@ class NfcStream(private val activity: Activity) {
 
     fun onCreate(activity: Activity, savedInstanceState: Bundle?) {
         if (savedInstanceState == null) {
-            activity.intent.getParcelableExtra<Tag>(INTENT_EXTRA_TAG)?.let {
-                relay.accept(it)
+            @Suppress("DEPRECATION")
+            when {
+                SDK_INT >= Build.VERSION_CODES.TIRAMISU -> activity.intent.getParcelableExtra<Tag>(INTENT_EXTRA_TAG, Tag::class.java)?.let {
+                    relay.accept(it)
+                }
+                else -> activity.intent.getParcelableExtra<Tag>(INTENT_EXTRA_TAG)?.let {
+                    relay.accept(it)
+                }
             }
         }
     }
 
+    @SuppressLint("UnspecifiedImmutableFlag")
     fun onResume() {
         val intent = Intent(ACTION)
         intent.`package` = activity.packageName
@@ -80,8 +89,15 @@ class NfcStream(private val activity: Activity) {
     }
 
     fun observe(): Observable<Tag> {
-        val broadcastIntents = RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
-                .map { it.getParcelableExtra<Tag>(INTENT_EXTRA_TAG) }
+        val broadcastIntents = when {
+            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
+                    .map { it.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java) }
+            else -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
+                .map {
+                    @Suppress("DEPRECATION")
+                    it.getParcelableExtra(INTENT_EXTRA_TAG)
+                }
+        }
         return Observable.merge(relay, broadcastIntents)
     }
 }

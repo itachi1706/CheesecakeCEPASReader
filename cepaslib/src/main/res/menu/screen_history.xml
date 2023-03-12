@@ -34,7 +34,7 @@
     <item android:title="@string/export_all">
         <menu>
             <item android:id="@+id/copy"
-                  android:title="@string/copy" />
+                  android:title="@string/copy_str" />
             <item android:id="@+id/share"
                   android:title="@string/share" />
             <item android:id="@+id/save"

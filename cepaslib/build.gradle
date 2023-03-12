@@ -5,13 +5,13 @@ apply plugin: 'kotlin-kapt'
 def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
 
 android {
-    compileSdkVersion 31
-    buildToolsVersion "31.0.0"
+    compileSdkVersion 33
+    buildToolsVersion "33.0.2"
     namespace 'com.itachi1706.cepaslib'
 
     defaultConfig {
         minSdkVersion 19
-        targetSdkVersion 31
+        targetSdkVersion 33
         versionCode 405
         versionName "2.3.1"
 

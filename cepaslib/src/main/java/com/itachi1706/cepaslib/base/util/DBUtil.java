@@ -68,9 +68,7 @@ public abstract class DBUtil {
      *
      * @return true if exact match is required, false if it just must be at minimum this number.
      */
-    private boolean allowGreaterDatabaseVersions() {
-        return false;
-    }
+    private boolean allowGreaterDatabaseVersions = false;
 
     public SQLiteDatabase openDatabase() throws SQLException {
         if (mDatabase != null) {
@@ -105,7 +103,7 @@ public abstract class DBUtil {
         try {
             tempDatabase = SQLiteDatabase.openDatabase(file.getPath(), null, SQLiteDatabase.OPEN_READONLY);
             int currentVersion = tempDatabase.getVersion();
-            if (allowGreaterDatabaseVersions()
+            if (allowGreaterDatabaseVersions
                     ? currentVersion < getDesiredVersion()
                     : currentVersion != getDesiredVersion()) {
                 Log.d(TAG, String.format("Updating %s database. Old: %s, new: %s", getDBName(), currentVersion,

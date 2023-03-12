@@ -13,6 +13,7 @@ jobs:
       with:
         distribution: 'adopt'
         java-version: 11
+        cache: 'gradle'
     - name: Make Gradle executable
       run: chmod +x gradlew
     - name: Build with Gradle
@@ -30,6 +31,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: Make Gradle executable
         run: chmod +x gradlew
       - name: Generate Artifactory artifact and publish release and upload
@@ -78,6 +80,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 11
+          cache: 'gradle'
       - name: Make Gradle executable
         run: chmod +x gradlew
       - name: Generate Maven Central artifact and publish release and upload

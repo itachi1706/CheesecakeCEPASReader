@@ -38,6 +38,7 @@ class ExportHelper(
 ) {
 
     private fun getPackageInfo(ctx: Context?): PackageInfo? {
+        // TODO: Ref: https://stackoverflow.com/questions/73388061/android-13-sdk-33-packagemanager-getpackageinfostring-int-deprecated-what
         return ctx?.packageManager?.getPackageInfo(ctx.packageName, 0)
     }
 
