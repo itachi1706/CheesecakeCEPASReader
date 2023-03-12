@@ -91,7 +91,7 @@ dependencies {
     compileOnly "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
 
     api "androidx.legacy:legacy-support-v4:1.0.0"
-    api 'com.google.code.gson:gson:2.10'
+    api 'com.google.code.gson:gson:2.10.1'
     api "androidx.room:room-runtime:${roomVersion}"
     api "androidx.room:room-ktx:${roomVersion}"
 
