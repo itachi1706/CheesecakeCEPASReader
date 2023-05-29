@@ -75,7 +75,7 @@ dependencies {
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"
     implementation 'com.google.code.gson:gson:2.10.1'
-    implementation 'com.google.guava:guava:31.1-android'
+    implementation 'com.google.guava:guava:32.0.0-android'
     implementation "com.wealthfront:magellan:${magellanVersion}"
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.cantrowitz:rxbroadcast:2.0.0'
