@@ -15,7 +15,7 @@ buildscript {
         // in the individual module build.gradle files
 
         classpath 'com.squareup.sqldelight:gradle-plugin:1.5.5'
-        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:4.31.5'
+        classpath 'org.jfrog.buildinfo:build-info-extractor-gradle:5.1.1'
     }
 }
 
