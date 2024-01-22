@@ -2,6 +2,7 @@ plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.devtools.ksp'
 }
 
 def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
@@ -20,9 +21,12 @@ android {
         consumerProguardFiles 'proguard-rules.pro'
 
         vectorDrawables.useSupportLibrary true
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        "room.incremental": "true"
+                ]
             }
         }
     }
@@ -104,12 +108,12 @@ dependencies {
     api "androidx.room:room-runtime:${roomVersion}"
     api "androidx.room:room-ktx:${roomVersion}"
 
-    kapt "com.google.auto.value:auto-value:${autoValueVersion}"
-    kapt "androidx.room:room-compiler:${roomVersion}"
-    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    ksp "com.google.auto.value:auto-value:${autoValueVersion}"
+    ksp "androidx.room:room-compiler:${roomVersion}"
+    ksp "com.google.dagger:dagger-compiler:${daggerVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
-    kapt "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
+    ksp "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
 
     annotationProcessor "androidx.room:room-compiler:${roomVersion}"
     annotationProcessor "com.google.auto.value:auto-value:${autoValueVersion}"
