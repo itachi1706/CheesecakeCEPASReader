@@ -26,13 +26,13 @@ import android.content.Context
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import com.itachi1706.cepaslib.app.feature.main.MainActivity
-import com.jakewharton.rxrelay2.BehaviorRelay
-import com.uber.autodispose.OutsideScopeException
-import com.uber.autodispose.lifecycle.CorrespondingEventsFunction
-import com.uber.autodispose.lifecycle.LifecycleScopeProvider
+import autodispose2.OutsideScopeException
+import autodispose2.lifecycle.CorrespondingEventsFunction
+import autodispose2.lifecycle.LifecycleScopeProvider
+import com.jakewharton.rxrelay3.BehaviorRelay
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.ScreenView
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 @Suppress("FINITE_BOUNDS_VIOLATION_IN_JAVA")
 abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenLifecycleEvent>
@@ -87,7 +87,8 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
         lifecycleRelay.accept(ScreenLifecycleEvent.HIDE)
     }
 
-    final override fun lifecycle(): Observable<ScreenLifecycleEvent> = lifecycleRelay.hide()
+    final override fun lifecycle(): Observable<ScreenLifecycleEvent>? =
+        lifecycleRelay.hide()
 
     final override fun correspondingEvents(): CorrespondingEventsFunction<ScreenLifecycleEvent> =
             CORRESPONDING_EVENTS

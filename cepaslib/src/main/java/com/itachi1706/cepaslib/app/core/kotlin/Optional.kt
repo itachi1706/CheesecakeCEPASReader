@@ -22,15 +22,15 @@
 
 package com.itachi1706.cepaslib.app.core.kotlin
 
-import io.reactivex.Maybe
-import io.reactivex.Observable
-import io.reactivex.Single
+import io.reactivex.rxjava3.core.Maybe
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.Single
 
-fun <T> Observable<Optional<T>>.filterAndGetOptional(): Observable<T> = this
+fun <T : Any> Observable<Optional<T>>.filterAndGetOptional(): Observable<T> = this
         .filter { it.isPresent }
         .map { it.get }
 
-fun <T> Single<Optional<T>>.filterAndGetOptional(): Maybe<T> = this
+fun <T : Any> Single<Optional<T>>.filterAndGetOptional(): Maybe<T> = this
         .filter { it.isPresent }
         .map { it.get }
 

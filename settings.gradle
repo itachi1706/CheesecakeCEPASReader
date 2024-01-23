@@ -1,2 +1,18 @@
-include ':app', ':cepaslib'
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {url "https://plugins.gradle.org/m2/"}
+    }
+}
+
 rootProject.name='Cheesecake CEPAS Reader Sample'
+include ':app', ':cepaslib'

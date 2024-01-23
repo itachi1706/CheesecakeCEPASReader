@@ -37,7 +37,7 @@ import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.RefillViewHolder
 import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.SubscriptionViewHolder
 import com.itachi1706.cepaslib.app.feature.card.TransactionAdapter.TransactionViewHolder.TripViewHolder
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay3.PublishRelay
 import com.xwray.groupie.GroupieViewHolder
 import java.util.Calendar
 import java.util.Date

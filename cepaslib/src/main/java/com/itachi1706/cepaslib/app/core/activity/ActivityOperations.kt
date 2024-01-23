@@ -25,7 +25,7 @@ package com.itachi1706.cepaslib.app.core.activity
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
 import android.view.MenuItem
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 /**
  * interface for screens to interact with parent activity.

@@ -33,10 +33,10 @@ import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.transit.TransitInfo
 import com.itachi1706.cepaslib.CEPASLibBuilder
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay3.PublishRelay
 import com.wealthfront.magellan.BaseScreenView
 import com.xwray.groupie.GroupAdapter
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 class CardScreenView(context: Context) : BaseScreenView<CardScreen>(context) {
 

@@ -30,7 +30,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.app.core.kotlin.inflate
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay3.PublishRelay
 import java.text.DateFormat
 import java.text.SimpleDateFormat
 

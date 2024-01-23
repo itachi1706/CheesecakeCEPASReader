@@ -62,7 +62,7 @@ import com.itachi1706.cepaslib.app.feature.home.HomeScreen
 import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardKeysPersister
 import com.itachi1706.cepaslib.persist.CardPersister
-import com.jakewharton.rxrelay2.PublishRelay
+import com.jakewharton.rxrelay3.PublishRelay
 import com.wealthfront.magellan.*
 import dagger.BindsInstance
 import dagger.Component

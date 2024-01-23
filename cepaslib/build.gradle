@@ -1,26 +1,32 @@
-apply plugin: 'com.android.library'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+    id 'com.google.devtools.ksp'
+}
 
 def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
 
 android {
-    compileSdkVersion 33
-    buildToolsVersion "33.0.2"
+    compileSdk 34
     namespace 'com.itachi1706.cepaslib'
 
     defaultConfig {
-        minSdkVersion 19
-        targetSdkVersion 33
+        minSdk 19
+        targetSdk 34
         versionCode 475
         versionName "2.4.3"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables.useSupportLibrary true
         consumerProguardFiles 'proguard-rules.pro'
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas".toString())
+
+        vectorDrawables.useSupportLibrary true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += [
+                        "room.schemaLocation": "$projectDir/schemas".toString(),
+                        "room.incremental": "true"
+                ]
             }
         }
     }
@@ -35,20 +41,26 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_11
-        targetCompatibility JavaVersion.VERSION_11
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = "17"
     }
     lint {
         //abortOnError !isGHActions
         abortOnError false
     }
 
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
-def autoDisposeVersion   = '1.4.0'
+def autoDisposeVersion   = '2.2.1'
 def autoValueGsonVersion = '1.3.1'
 def autoValueVersion     = '1.10.4'
 def daggerVersion        = '2.50'
@@ -58,7 +70,7 @@ def roomVersion          = '2.5.1'
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation 'androidx.core:core-ktx:1.12.0'
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
@@ -67,24 +79,24 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     // Farebot
-    implementation "com.uber.autodispose:autodispose:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-error-prone:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-android:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-lifecycle:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-error-prone:${autoDisposeVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"
     implementation 'com.google.code.gson:gson:2.10.1'
     implementation 'com.google.guava:guava:33.0.0-android'
     implementation "com.wealthfront:magellan:${magellanVersion}"
-    implementation 'com.google.android.gms:play-services-maps:18.1.0'
-    implementation 'com.cantrowitz:rxbroadcast:2.0.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
-    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
-    implementation 'com.google.android.material:material:1.8.0'
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation "io.reactivex.rxjava3:rxjava:3.1.8"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+    implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.1'
+    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
-    implementation 'androidx.preference:preference-ktx:1.2.0'
+    implementation 'androidx.preference:preference-ktx:1.2.1'
     implementation "androidx.cardview:cardview:1.0.0"
     implementation "androidx.recyclerview:recyclerview:1.3.2"
 
@@ -97,8 +109,8 @@ dependencies {
     api "androidx.room:room-ktx:${roomVersion}"
 
     kapt "com.google.auto.value:auto-value:${autoValueVersion}"
-    kapt "androidx.room:room-compiler:${roomVersion}"
-    kapt "com.google.dagger:dagger-compiler:${daggerVersion}"
+    ksp "androidx.room:room-compiler:${roomVersion}"
+    ksp "com.google.dagger:dagger-compiler:${daggerVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
     kapt "com.google.auto.value:auto-value-annotations:${autoValueVersion}"

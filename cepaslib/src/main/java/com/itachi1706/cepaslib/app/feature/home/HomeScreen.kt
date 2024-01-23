@@ -42,10 +42,10 @@ import com.itachi1706.cepaslib.app.feature.card.CardScreen
 import com.itachi1706.cepaslib.app.feature.help.HelpScreen
 import com.itachi1706.cepaslib.app.feature.history.HistoryScreen
 import com.itachi1706.cepaslib.app.feature.main.MainActivity.MainActivityComponent
-import com.uber.autodispose.autoDispose
 import dagger.Component
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import autodispose2.autoDispose
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),

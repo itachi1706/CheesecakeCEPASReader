@@ -38,10 +38,10 @@ import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.card.Card
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.transit.TransitInfo
-import com.uber.autodispose.autoDispose
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import autodispose2.autoDispose
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Component, CardScreenView>() {

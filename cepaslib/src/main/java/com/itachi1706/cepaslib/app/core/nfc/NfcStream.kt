@@ -25,6 +25,8 @@ package com.itachi1706.cepaslib.app.core.nfc
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.nfc.NfcAdapter
@@ -36,9 +38,8 @@ import android.nfc.tech.NfcF
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
-import com.cantrowitz.rxbroadcast.RxBroadcast
 import com.itachi1706.cepaslib.app.core.rx.LastValueRelay
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 class NfcStream(private val activity: Activity) {
 
@@ -47,10 +48,11 @@ class NfcStream(private val activity: Activity) {
         private const val INTENT_EXTRA_TAG = "android.nfc.extra.TAG"
 
         private val TECH_LISTS = arrayOf(
-                arrayOf(IsoDep::class.java.name),
-                arrayOf(MifareClassic::class.java.name),
-                arrayOf(MifareUltralight::class.java.name),
-                arrayOf(NfcF::class.java.name))
+            arrayOf(IsoDep::class.java.name),
+            arrayOf(MifareClassic::class.java.name),
+            arrayOf(MifareUltralight::class.java.name),
+            arrayOf(NfcF::class.java.name)
+        )
     }
 
     private val relay = LastValueRelay.create<Tag>()
@@ -59,9 +61,13 @@ class NfcStream(private val activity: Activity) {
         if (savedInstanceState == null) {
             @Suppress("DEPRECATION")
             when {
-                SDK_INT >= Build.VERSION_CODES.TIRAMISU -> activity.intent.getParcelableExtra<Tag>(INTENT_EXTRA_TAG, Tag::class.java)?.let {
+                SDK_INT >= Build.VERSION_CODES.TIRAMISU -> activity.intent.getParcelableExtra<Tag>(
+                    INTENT_EXTRA_TAG,
+                    Tag::class.java
+                )?.let {
                     relay.accept(it)
                 }
+
                 else -> activity.intent.getParcelableExtra<Tag>(INTENT_EXTRA_TAG)?.let {
                     relay.accept(it)
                 }
@@ -89,15 +95,35 @@ class NfcStream(private val activity: Activity) {
     }
 
     fun observe(): Observable<Tag> {
-        val broadcastIntents = when {
-            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
-                    .map { it.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java) }
-            else -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
-                .map {
-                    @Suppress("DEPRECATION")
-                    it.getParcelableExtra(INTENT_EXTRA_TAG)
+        // Create observable for rxjava3 broadcast receiver
+
+        var broadcastIntents = when {
+            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> Observable.create<Tag> { emitter ->
+                val receiver = object : BroadcastReceiver() {
+                    override fun onReceive(context: Context?, intent: Intent?) {
+                        intent?.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java)?.let {
+                            emitter.onNext(it)
+                        }
+                    }
                 }
+                activity.registerReceiver(receiver, IntentFilter(ACTION), Context.RECEIVER_NOT_EXPORTED)
+                emitter.setCancellable { activity.unregisterReceiver(receiver) }
+            }
+
+            else -> Observable.create { emitter ->
+                val receiver = object : BroadcastReceiver() {
+                    override fun onReceive(context: Context?, intent: Intent?) {
+                        @Suppress("DEPRECATION")
+                        intent?.getParcelableExtra<Tag>(INTENT_EXTRA_TAG)?.let {
+                            emitter.onNext(it)
+                        }
+                    }
+                }
+                activity.registerReceiver(receiver, IntentFilter(ACTION))
+                emitter.setCancellable { activity.unregisterReceiver(receiver) }
+            }
         }
+
         return Observable.merge(relay, broadcastIntents)
     }
 }

@@ -22,9 +22,9 @@
 
 package com.itachi1706.cepaslib.app.core.rx
 
-import com.jakewharton.rxrelay2.PublishRelay
-import com.jakewharton.rxrelay2.Relay
-import io.reactivex.Observer
+import com.jakewharton.rxrelay3.PublishRelay
+import com.jakewharton.rxrelay3.Relay
+import io.reactivex.rxjava3.core.Observer
 import java.util.concurrent.atomic.AtomicReference
 
 class LastValueRelay<T : Any> private constructor() : Relay<T>() {
