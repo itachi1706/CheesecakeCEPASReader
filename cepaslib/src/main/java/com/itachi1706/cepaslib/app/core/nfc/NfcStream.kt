@@ -100,8 +100,8 @@ class NfcStream(private val activity: Activity) {
         var broadcastIntents = when {
             SDK_INT >= Build.VERSION_CODES.TIRAMISU -> Observable.create<Tag> { emitter ->
                 val receiver = object : BroadcastReceiver() {
-                    override fun onReceive(context: android.content.Context?, intent: Intent?) {
-                        intent?.getParcelableExtra<Tag>(INTENT_EXTRA_TAG, Tag::class.java)?.let {
+                    override fun onReceive(context: Context?, intent: Intent?) {
+                        intent?.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java)?.let {
                             emitter.onNext(it)
                         }
                     }
@@ -110,9 +110,9 @@ class NfcStream(private val activity: Activity) {
                 emitter.setCancellable { activity.unregisterReceiver(receiver) }
             }
 
-            else -> Observable.create<Tag> { emitter ->
+            else -> Observable.create { emitter ->
                 val receiver = object : BroadcastReceiver() {
-                    override fun onReceive(context: android.content.Context?, intent: Intent?) {
+                    override fun onReceive(context: Context?, intent: Intent?) {
                         @Suppress("DEPRECATION")
                         intent?.getParcelableExtra<Tag>(INTENT_EXTRA_TAG)?.let {
                             emitter.onNext(it)
@@ -124,16 +124,6 @@ class NfcStream(private val activity: Activity) {
             }
         }
 
-
-//        val broadcastIntents = when {
-//            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
-//                    .map { it.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java) }
-//            else -> RxBroadcast.fromBroadcast(activity, IntentFilter(ACTION))
-//                .map {
-//                    @Suppress("DEPRECATION")
-//                    it.getParcelableExtra(INTENT_EXTRA_TAG)
-//                }
-//        }
         return Observable.merge(relay, broadcastIntents)
     }
 }
