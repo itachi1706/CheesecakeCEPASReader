@@ -52,6 +52,14 @@ class FareBotPreferenceActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction().replace(android.R.id.content, FareBotPreferenceFragment()).commit()
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            finish()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     class FareBotPreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
 
         private lateinit var preferenceLaunchFromBackground: SwitchPreference
@@ -92,14 +100,6 @@ class FareBotPreferenceActivity : AppCompatActivity() {
         private fun changeDarkModeTheme(newTheme: Int, themeName: String) {
             Log.i("AppThemeChanger", "Switching over to $themeName mode")
             AppCompatDelegate.setDefaultNightMode(newTheme)
-        }
-
-        override fun onOptionsItemSelected(item: MenuItem): Boolean {
-            if (item.itemId == android.R.id.home) {
-                requireActivity().finish()
-                return true
-            }
-            return super.onOptionsItemSelected(item)
         }
 
         private var launchFromBgEnabled: Boolean
