@@ -8,12 +8,12 @@ plugins {
 def isGHActions = System.getenv("GITHUB_ACTIONS") ?: false
 
 android {
-    compileSdk 33
+    compileSdk 34
     namespace 'com.itachi1706.cepaslib'
 
     defaultConfig {
         minSdk 19
-        targetSdk 33
+        targetSdk 34
         versionCode 475
         versionName "2.4.3"
 
@@ -60,7 +60,8 @@ android {
     }
 }
 
-def autoDisposeVersion   = '1.4.0'
+//def autoDisposeVersion   = '1.4.0'
+def autoDisposeVersion   = '2.2.1'
 def autoValueGsonVersion = '1.3.1'
 def autoValueVersion     = '1.10.4'
 def daggerVersion        = '2.50'
@@ -79,10 +80,14 @@ dependencies {
     implementation 'androidx.multidex:multidex:2.0.1'
 
     // Farebot
-    implementation "com.uber.autodispose:autodispose:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
-    implementation "com.uber.autodispose:autodispose-error-prone:${autoDisposeVersion}"
+//    implementation "com.uber.autodispose:autodispose:${autoDisposeVersion}"
+//    implementation "com.uber.autodispose:autodispose-android:${autoDisposeVersion}"
+//    implementation "com.uber.autodispose:autodispose-lifecycle:${autoDisposeVersion}"
+//    implementation "com.uber.autodispose:autodispose-error-prone:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-android:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-lifecycle:${autoDisposeVersion}"
+    implementation "com.uber.autodispose2:autodispose-error-prone:${autoDisposeVersion}"
     implementation "com.google.dagger:dagger:${daggerVersion}"
     implementation "com.xwray:groupie:${groupieVersion}"
     implementation "com.xwray:groupie-databinding:${groupieVersion}"
@@ -91,8 +96,11 @@ dependencies {
     implementation "com.wealthfront:magellan:${magellanVersion}"
     implementation 'com.google.android.gms:play-services-maps:18.1.0'
     implementation 'com.cantrowitz:rxbroadcast:2.0.0'
-    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
-    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
+//    implementation 'io.reactivex.rxjava2:rxjava:2.2.21'
+    implementation "io.reactivex.rxjava3:rxjava:3.1.8"
+    implementation 'io.reactivex.rxjava3:rxandroid:3.0.2'
+//    implementation 'com.jakewharton.rxrelay2:rxrelay:2.1.1'
+    implementation 'com.jakewharton.rxrelay3:rxrelay:3.0.1'
     implementation 'com.google.android.material:material:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2'
     implementation "androidx.legacy:legacy-support-v4:1.0.0"
@@ -108,12 +116,12 @@ dependencies {
     api "androidx.room:room-runtime:${roomVersion}"
     api "androidx.room:room-ktx:${roomVersion}"
 
-    ksp "com.google.auto.value:auto-value:${autoValueVersion}"
+    kapt "com.google.auto.value:auto-value:${autoValueVersion}"
     ksp "androidx.room:room-compiler:${roomVersion}"
     ksp "com.google.dagger:dagger-compiler:${daggerVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson:${autoValueGsonVersion}"
     kapt "com.ryanharter.auto.value:auto-value-gson-runtime:${autoValueGsonVersion}"
-    ksp "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
+    kapt "com.google.auto.value:auto-value-annotations:${autoValueVersion}"
 
     annotationProcessor "androidx.room:room-compiler:${roomVersion}"
     annotationProcessor "com.google.auto.value:auto-value:${autoValueVersion}"

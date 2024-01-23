@@ -49,11 +49,11 @@ import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.itachi1706.cepaslib.persist.db.model.SavedCard
 import com.itachi1706.cepaslib.transit.TransitIdentity
-import com.uber.autodispose.autoDispose
+import autodispose2.autoDispose
 import dagger.Component
-import io.reactivex.Single
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -252,7 +252,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         Single.fromCallable {
             activity?.contentResolver?.openOutputStream(uri)
                 ?.bufferedWriter()
-                .use { it?.write(exportHelper.exportCards(activity?.applicationContext)) }
+                .use { it?.write(exportHelper.exportCards(activity?.applicationContext)) }!!
         }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -33,11 +33,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
-import com.jakewharton.rxrelay2.PublishRelay
-import com.uber.autodispose.android.scope
-import com.uber.autodispose.autoDispose
+import autodispose2.android.scope
+import autodispose2.autoDispose
+import com.jakewharton.rxrelay3.PublishRelay
 import com.wealthfront.magellan.BaseScreenView
-import io.reactivex.Observable
+import io.reactivex.rxjava3.core.Observable
 
 @SuppressLint("ViewConstructor")
 class HistoryScreenView(
