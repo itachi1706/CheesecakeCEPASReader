@@ -46,8 +46,8 @@ public class IOUtils {
      * (if the buffer size were variable, we would need to synch. to ensure some other thread
      * did not create a smaller one)
      */
-    private static char[] SKIP_CHAR_BUFFER;
-    private static byte[] SKIP_BYTE_BUFFER;
+    private static char[] skipCharBuffer;
+    private static byte[] skipByteBuffer;
 
     private IOUtils() { }
 
@@ -275,28 +275,6 @@ public class IOUtils {
 
     /**
      * Copies bytes from an <code>InputStream</code> to chars on a
-     * <code>Writer</code> using the default character encoding of the platform.
-     * <p>
-     * This method buffers the input internally, so there is no need to use a
-     * <code>BufferedInputStream</code>.
-     * <p>
-     * This method uses {@link InputStreamReader}.
-     *
-     * @param input the <code>InputStream</code> to read from
-     * @param output the <code>Writer</code> to write to
-     * @throws NullPointerException if the input or output is null
-     * @throws IOException          if an I/O error occurs
-     * @since 1.1
-     * @deprecated 2.5 use {@link #copy(InputStream, Writer, Charset)} instead
-     */
-    @Deprecated
-    public static void copy(final InputStream input, final Writer output)
-            throws IOException {
-        copy(input, output, Charset.defaultCharset());
-    }
-
-    /**
-     * Copies bytes from an <code>InputStream</code> to chars on a
      * <code>Writer</code> using the specified character encoding.
      * <p>
      * This method buffers the input internally, so there is no need to use a
@@ -488,32 +466,6 @@ public class IOUtils {
 
     /**
      * Copies chars from a <code>Reader</code> to bytes on an
-     * <code>OutputStream</code> using the default character encoding of the
-     * platform, and calling flush.
-     * <p>
-     * This method buffers the input internally, so there is no need to use a
-     * <code>BufferedReader</code>.
-     * <p>
-     * Due to the implementation of OutputStreamWriter, this method performs a
-     * flush.
-     * <p>
-     * This method uses {@link OutputStreamWriter}.
-     *
-     * @param input the <code>Reader</code> to read from
-     * @param output the <code>OutputStream</code> to write to
-     * @throws NullPointerException if the input or output is null
-     * @throws IOException          if an I/O error occurs
-     * @since 1.1
-     * @deprecated 2.5 use {@link #copy(Reader, OutputStream, Charset)} instead
-     */
-    @Deprecated
-    public static void copy(final Reader input, final OutputStream output)
-            throws IOException {
-        copy(input, output, Charset.defaultCharset());
-    }
-
-    /**
-     * Copies chars from a <code>Reader</code> to bytes on an
      * <code>OutputStream</code> using the specified character encoding, and
      * calling flush.
      * <p>
@@ -606,13 +558,13 @@ public class IOUtils {
          * is ignored) - we always use the same size buffer, so if it it is recreated it will still be OK (if the buffer
          * size were variable, we would need to synch. to ensure some other thread did not create a smaller one)
          */
-        if (SKIP_BYTE_BUFFER == null) {
-            SKIP_BYTE_BUFFER = new byte[SKIP_BUFFER_SIZE];
+        if (skipByteBuffer == null) {
+            skipByteBuffer = new byte[SKIP_BUFFER_SIZE];
         }
         long remain = toSkip;
         while (remain > 0) {
             // See https://issues.apache.org/jira/browse/IO-203 for why we use read() rather than delegating to skip()
-            final long n = input.read(SKIP_BYTE_BUFFER, 0, (int) Math.min(remain, SKIP_BUFFER_SIZE));
+            final long n = input.read(skipByteBuffer, 0, (int) Math.min(remain, SKIP_BUFFER_SIZE));
             if (n < 0) { // EOF
                 break;
             }
@@ -681,13 +633,13 @@ public class IOUtils {
          * is ignored) - we always use the same size buffer, so if it it is recreated it will still be OK (if the buffer
          * size were variable, we would need to synch. to ensure some other thread did not create a smaller one)
          */
-        if (SKIP_CHAR_BUFFER == null) {
-            SKIP_CHAR_BUFFER = new char[SKIP_BUFFER_SIZE];
+        if (skipCharBuffer == null) {
+            skipCharBuffer = new char[SKIP_BUFFER_SIZE];
         }
         long remain = toSkip;
         while (remain > 0) {
             // See https://issues.apache.org/jira/browse/IO-203 for why we use read() rather than delegating to skip()
-            final long n = input.read(SKIP_CHAR_BUFFER, 0, (int) Math.min(remain, SKIP_BUFFER_SIZE));
+            final long n = input.read(skipCharBuffer, 0, (int) Math.min(remain, SKIP_BUFFER_SIZE));
             if (n < 0) { // EOF
                 break;
             }

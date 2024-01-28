@@ -29,11 +29,11 @@ final class BusData {
             this.shortName = publicBus;
             this.isPremium = false;
             switch (publicBus.toLowerCase()) {
-                case "smrt": this.longName = "SMRT Buses"; break;
-                case "sbst": this.longName = "SBS Transit"; break;
-                case "tts": this.longName = "Tower Transit Singapore"; break;
-                case "gas": this.longName = "Go Ahead Singapore"; break;
-                default: this.longName = "SG Buses";
+                case "smrt" -> this.longName = "SMRT Buses";
+                case "sbst" -> this.longName = "SBS Transit";
+                case "tts" -> this.longName = "Tower Transit Singapore";
+                case "gas" -> this.longName = "Go Ahead Singapore";
+                default -> this.longName = "SG Buses";
             }
         }
 

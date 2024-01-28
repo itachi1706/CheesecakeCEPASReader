@@ -114,7 +114,10 @@ public abstract class DBUtil {
                 Log.d(TAG, String.format("Not updating %s database. Current: %s, app has: %s", getDBName(),
                         currentVersion, getDesiredVersion()));
             }
-        } catch (SQLiteException ignored) { }
+        } catch (SQLiteException e) {
+            // Database does not exist
+            Log.e(TAG, String.format("Database %s does not exist", getDBName()), e);
+        }
 
         if (tempDatabase != null) {
             tempDatabase.close();
@@ -124,21 +127,14 @@ public abstract class DBUtil {
     }
 
     private void copyDatabase() {
-        InputStream in = null;
-        OutputStream out = null;
-        try {
-            in = this.mContext.getAssets().open(getDBName());
-            out = new FileOutputStream(getDBFile());
+        try (OutputStream out = new FileOutputStream(getDBFile()); InputStream in = this.mContext.getAssets().open(getDBName())) {
             IOUtils.copy(in, out);
         } catch (IOException e) {
             throw new RuntimeException("Error copying database", e);
-        } finally {
-            IOUtils.closeQuietly(out);
-            IOUtils.closeQuietly(in);
         }
     }
 
     private File getDBFile() {
-        return new File(mContext.getCacheDir().getAbsolutePath() + "/" + getDBName());
+        return new File(mContext.getCacheDir().getAbsolutePath(), getDBName());
     }
 }

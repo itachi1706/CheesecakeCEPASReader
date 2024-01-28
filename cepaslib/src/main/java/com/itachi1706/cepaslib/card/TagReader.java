@@ -39,7 +39,7 @@ public abstract class TagReader<
     @NonNull private final Tag mTag;
     @Nullable private final K mCardKeys;
 
-    public TagReader(@NonNull byte[] tagId, @NonNull Tag tag, @Nullable K cardKeys) {
+    protected TagReader(@NonNull byte[] tagId, @NonNull Tag tag, @Nullable K cardKeys) {
         mTagId = tagId;
         mTag = tag;
         mCardKeys = cardKeys;

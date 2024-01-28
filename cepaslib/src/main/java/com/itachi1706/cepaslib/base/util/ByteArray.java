@@ -35,7 +35,7 @@ import java.util.Arrays;
 public class ByteArray implements Parcelable {
 
     @NonNull
-    public static final Creator<ByteArray> CREATOR = new Creator<ByteArray>() {
+    public static final Creator<ByteArray> CREATOR = new Creator<>() {
         @Override
         public ByteArray createFromParcel(Parcel in) {
             return new ByteArray(in);

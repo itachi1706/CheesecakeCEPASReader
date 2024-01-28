@@ -190,8 +190,8 @@ class TransactionAdapter(
         val cal1 = createCalendar(viewModels[position].date) ?: return false
         val cal2 = createCalendar(viewModels[position - 1].date) ?: return true
 
-        return cal1.get(Calendar.YEAR) != cal2.get(Calendar.YEAR) ||
-                cal1.get(Calendar.MONTH) != cal2.get(Calendar.MONTH) ||
-                cal1.get(Calendar.DAY_OF_MONTH) != cal2.get(Calendar.DAY_OF_MONTH)
+        return cal1[Calendar.YEAR] != cal2[Calendar.YEAR] ||
+                cal1[Calendar.MONTH] != cal2[Calendar.MONTH] ||
+                cal1[Calendar.DAY_OF_MONTH] != cal2[Calendar.DAY_OF_MONTH]
     }
 }

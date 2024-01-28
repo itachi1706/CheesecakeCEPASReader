@@ -23,6 +23,7 @@
 package com.itachi1706.cepaslib.transit.ezlink;
 
 import android.content.res.Resources;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -73,7 +74,7 @@ final class EZLinkData {
             }
             return byteArrayOutputStream.toString();
         } catch (IOException e) {
-            e.printStackTrace();
+            Log.e("EZLinkData", "Error reading from raw resource", e);
             return "";
         }
     }

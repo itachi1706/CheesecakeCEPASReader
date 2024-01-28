@@ -31,7 +31,6 @@ import com.itachi1706.cepaslib.card.cepas.CEPASCard;
 import com.itachi1706.cepaslib.card.cepas.CEPASTransaction;
 import com.itachi1706.cepaslib.transit.TransitFactory;
 import com.itachi1706.cepaslib.transit.TransitIdentity;
-import com.itachi1706.cepaslib.transit.Trip;
 import com.google.common.collect.ImmutableList;
 
 import java.util.List;

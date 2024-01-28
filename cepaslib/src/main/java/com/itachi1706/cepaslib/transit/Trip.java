@@ -110,7 +110,7 @@ public abstract class Trip {
         if (endStationName != null && !endStationName.equals(startStationName)) {
             stationText.add(endStationName);
         }
-        if (stationText.size() > 0) {
+        if (!stationText.isEmpty()) {
             return TextUtils.join(" → ", stationText);
         }
         return null;

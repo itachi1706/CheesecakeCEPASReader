@@ -93,7 +93,7 @@ public final class ByteUtils {
     }
 
     public static int convertBCDtoInteger(byte data) {
-        return (((data & (char) 0xF0) >> 4) * 10) + ((data & (char) 0x0F));
+        return (((data & (char) 0xF0) >> 4) * 10) + (data & (char) 0x0F);
     }
 
     public static int getBitsFromInteger(int buffer, int iStartBit, int iLength) {
@@ -154,7 +154,7 @@ public final class ByteUtils {
                 uRet |= (((char) buffer[i] & (char) 0xFF) << (((iEByte - i - 1) * 8) + (iEBit + 1)));
             }
 
-            uRet |= (((char) buffer[iEByte] & (char) 0xFF)) >> (7 - iEBit);
+            uRet |= ((char) buffer[iEByte] & (char) 0xFF) >> (7 - iEBit);
 
             return uRet;
         }

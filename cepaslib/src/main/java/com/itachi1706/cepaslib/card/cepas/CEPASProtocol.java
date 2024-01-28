@@ -125,7 +125,7 @@ class CEPASProtocol {
             }
 
             throw new CEPASException("Got generic invalid response: "
-                    + Integer.toHexString(((int) recvBuffer[recvBuffer.length - 2]) & 0xff));
+                    + Integer.toHexString((recvBuffer[recvBuffer.length - 2]) & 0xff));
         }
 
         output.write(recvBuffer, 0, recvBuffer.length - 2);

@@ -166,7 +166,7 @@ class MainActivity : AppCompatActivity(),
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
-            onBackPressed()
+            onBackPressedDispatcher.onBackPressed()
             return true
         }
         menuItemClickRelay.accept(item)
@@ -211,7 +211,9 @@ class MainActivity : AppCompatActivity(),
         permissionsResultRelay.accept(RequestPermissionsResult(requestCode, permissions, grantResults))
     }
 
-    override fun onHide(screen: Screen<*>?) { }
+    override fun onHide(screen: Screen<*>?) {
+        // No-Op
+    }
 
     @Module
     class MainActivityModule {

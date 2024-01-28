@@ -31,7 +31,6 @@ import com.itachi1706.cepaslib.card.cepas.CEPASCard;
 import com.itachi1706.cepaslib.card.cepas.CEPASHistory;
 import com.itachi1706.cepaslib.card.cepas.CEPASPurse;
 import com.google.auto.value.AutoValue;
-import com.google.common.base.Function;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 
