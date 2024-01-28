@@ -29,10 +29,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RawRes;
 
-import com.itachi1706.cepaslib.R;
-import com.itachi1706.cepaslib.transit.Station;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import com.itachi1706.cepaslib.R;
+import com.itachi1706.cepaslib.transit.Station;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -86,6 +86,7 @@ final class EZLinkData {
     // Coordinates taken from respective Wikipedia MRT pages
     private static final Map<String, Station> MRT_STATIONS = new TreeMap<String, Station>() {
         private static final long serialVersionUID = 1L;
+
         {
             // Transaction Codes
             put("GTM", Station.create("GTM Manual Top-up", "GTM", "GTM", null, null));

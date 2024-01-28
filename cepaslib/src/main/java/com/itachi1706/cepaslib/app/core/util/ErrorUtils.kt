@@ -23,19 +23,19 @@
 package com.itachi1706.cepaslib.app.core.util
 
 import android.app.Activity
-import androidx.appcompat.app.AlertDialog
 import android.text.TextUtils
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 
 object ErrorUtils {
 
     fun showErrorAlert(activity: Activity, ex: Throwable) {
         Log.e(activity.javaClass.name, ex.message, ex)
         AlertDialog.Builder(activity)
-                .setMessage(getErrorMessage(ex))
-                .setPositiveButton(android.R.string.ok, null)
-                .show()
+            .setMessage(getErrorMessage(ex))
+            .setPositiveButton(android.R.string.ok, null)
+            .show()
     }
 
     fun showErrorToast(activity: Activity, ex: Throwable) {

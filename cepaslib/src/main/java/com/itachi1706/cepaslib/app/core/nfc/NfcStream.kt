@@ -80,7 +80,7 @@ class NfcStream(private val activity: Activity) {
         val intent = Intent(ACTION)
         intent.`package` = activity.packageName
 
-        val pendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        val pendingIntent = if (SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getBroadcast(activity, 0, intent, PendingIntent.FLAG_MUTABLE)
         } else {
             PendingIntent.getBroadcast(activity, 0, intent, 0)
@@ -106,7 +106,11 @@ class NfcStream(private val activity: Activity) {
                         }
                     }
                 }
-                activity.registerReceiver(receiver, IntentFilter(ACTION), Context.RECEIVER_NOT_EXPORTED)
+                activity.registerReceiver(
+                    receiver,
+                    IntentFilter(ACTION),
+                    Context.RECEIVER_NOT_EXPORTED
+                )
                 emitter.setCancellable { activity.unregisterReceiver(receiver) }
             }
 

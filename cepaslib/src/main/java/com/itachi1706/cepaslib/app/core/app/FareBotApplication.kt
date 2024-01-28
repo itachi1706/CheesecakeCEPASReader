@@ -25,7 +25,7 @@ package com.itachi1706.cepaslib.app.core.app
 import android.app.Application
 import android.content.SharedPreferences
 import android.os.StrictMode
-import java.util.*
+import java.util.Date
 import javax.inject.Inject
 
 class FareBotApplication : Application() {
@@ -37,20 +37,23 @@ class FareBotApplication : Application() {
 
     lateinit var component: FareBotApplicationComponent
 
-    @Inject lateinit var sharedPreferences: SharedPreferences
+    @Inject
+    lateinit var sharedPreferences: SharedPreferences
 
     override fun onCreate() {
         super.onCreate()
 
-        StrictMode.setThreadPolicy(StrictMode.ThreadPolicy.Builder()
+        StrictMode.setThreadPolicy(
+            StrictMode.ThreadPolicy.Builder()
                 .detectAll()
                 .penaltyLog()
-                .build())
+                .build()
+        )
 
         component = DaggerFareBotApplicationComponent.builder()
-                .application(this)
-                .module(FareBotApplicationModule())
-                .build()
+            .application(this)
+            .module(FareBotApplicationModule())
+            .build()
 
         component.inject(this)
     }

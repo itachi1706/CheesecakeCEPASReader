@@ -52,17 +52,22 @@ class ExportHelper(
     }
 
     fun exportCards(ctx: Context?): String = gson.toJson(Export(
-            versionName = getPackageInfo(ctx)?.versionName ?: "Unknown",
-            versionCode = getVersionCode(getPackageInfo(ctx)) ?: 0,
-            cards = cardPersister.cards.map { cardSerializer.deserialize(it.data) }
+        versionName = getPackageInfo(ctx)?.versionName ?: "Unknown",
+        versionCode = getVersionCode(getPackageInfo(ctx)) ?: 0,
+        cards = cardPersister.cards.map { cardSerializer.deserialize(it.data) }
     ))
 
-    fun importCards(exportJsonString: String): List<Long> = gson.fromJson(exportJsonString, Export::class.java)
-            .cards.map { cardPersister.insertCard(SavedCard(
-            type = it.cardType(),
-            serial = it.tagId().hex(),
-            data = cardSerializer.serialize(it)))
-    }
+    fun importCards(exportJsonString: String): List<Long> =
+        gson.fromJson(exportJsonString, Export::class.java)
+            .cards.map {
+                cardPersister.insertCard(
+                    SavedCard(
+                        type = it.cardType(),
+                        serial = it.tagId().hex(),
+                        data = cardSerializer.serialize(it)
+                    )
+                )
+            }
 
     private data class Export(
         val versionName: String,

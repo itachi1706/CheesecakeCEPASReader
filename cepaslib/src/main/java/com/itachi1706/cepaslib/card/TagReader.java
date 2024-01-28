@@ -24,6 +24,7 @@ package com.itachi1706.cepaslib.card;
 
 import android.nfc.Tag;
 import android.nfc.tech.TagTechnology;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -35,9 +36,12 @@ public abstract class TagReader<
         C extends RawCard,
         K extends CardKeys> {
 
-    @NonNull private final byte[] mTagId;
-    @NonNull private final Tag mTag;
-    @Nullable private final K mCardKeys;
+    @NonNull
+    private final byte[] mTagId;
+    @NonNull
+    private final Tag mTag;
+    @Nullable
+    private final K mCardKeys;
 
     protected TagReader(@NonNull byte[] tagId, @NonNull Tag tag, @Nullable K cardKeys) {
         mTagId = tagId;
@@ -64,7 +68,7 @@ public abstract class TagReader<
             @NonNull Tag tag,
             @NonNull T tech,
             @Nullable K cardKeys)
-    throws Exception;
+            throws Exception;
 
     @NonNull
     protected abstract T getTech(@NonNull Tag tag);

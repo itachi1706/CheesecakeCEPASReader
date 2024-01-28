@@ -15,9 +15,16 @@ final class BusData {
     private JsonObject services;
     private JsonObject premiumServices;
 
-    BusData() {}
-    JsonObject getServices() { return services; }
-    JsonObject getPremiumServices() { return premiumServices; }
+    BusData() {
+    }
+
+    JsonObject getServices() {
+        return services;
+    }
+
+    JsonObject getPremiumServices() {
+        return premiumServices;
+    }
 
     static class OperatorName {
 
@@ -43,9 +50,16 @@ final class BusData {
             this.isPremium = isPremium;
         }
 
-        String getShortName() { return shortName; }
-        String getLongName() { return longName; }
+        String getShortName() {
+            return shortName;
+        }
 
-        boolean isPremium() { return isPremium; }
+        String getLongName() {
+            return longName;
+        }
+
+        boolean isPremium() {
+            return isPremium;
+        }
     }
 }

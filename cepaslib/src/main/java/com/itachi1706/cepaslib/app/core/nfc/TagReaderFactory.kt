@@ -30,8 +30,8 @@ import com.itachi1706.cepaslib.card.cepas.CEPASTagReader
 class TagReaderFactory {
 
     fun getTagReader(
-            tagId: ByteArray,
-            tag: Tag
+        tagId: ByteArray,
+        tag: Tag
     ): TagReader<*, *, *> = when {
         "android.nfc.tech.NfcB" in tag.techList -> CEPASTagReader(tagId, tag)
         else -> throw UnsupportedTagException(tag.techList, ByteUtils.getHexString(tag.id))

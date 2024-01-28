@@ -43,13 +43,15 @@ import com.itachi1706.cepaslib.app.feature.bg.BackgroundTagActivity
 
 class FareBotPreferenceActivity : AppCompatActivity() {
     companion object {
-        fun newIntent(context: Context): Intent = Intent(context, FareBotPreferenceActivity::class.java)
+        fun newIntent(context: Context): Intent =
+            Intent(context, FareBotPreferenceActivity::class.java)
     }
 
     override fun onPostCreate(savedInstanceState: Bundle?) {
         super.onPostCreate(savedInstanceState)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportFragmentManager.beginTransaction().replace(android.R.id.content, FareBotPreferenceFragment()).commit()
+        supportFragmentManager.beginTransaction()
+            .replace(android.R.id.content, FareBotPreferenceFragment()).commit()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -60,7 +62,8 @@ class FareBotPreferenceActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-    class FareBotPreferenceFragment : PreferenceFragmentCompat(), Preference.OnPreferenceChangeListener {
+    class FareBotPreferenceFragment : PreferenceFragmentCompat(),
+        Preference.OnPreferenceChangeListener {
 
         private lateinit var preferenceLaunchFromBackground: SwitchPreference
         private lateinit var preferenceDarkMode: ListPreference
@@ -68,7 +71,10 @@ class FareBotPreferenceActivity : AppCompatActivity() {
         override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
             setPreferencesFromResource(R.xml.prefs, rootKey)
 
-            setDarkMode(PreferenceManager.getDefaultSharedPreferences(requireContext()).getString("pref_dark_mode", "default"))
+            setDarkMode(
+                PreferenceManager.getDefaultSharedPreferences(requireContext())
+                    .getString("pref_dark_mode", "default")
+            )
 
             preferenceLaunchFromBackground = findPreference("pref_launch_from_background")!!
             preferenceLaunchFromBackground.isChecked = launchFromBgEnabled
@@ -93,7 +99,10 @@ class FareBotPreferenceActivity : AppCompatActivity() {
             when (newValue ?: "default") {
                 "light" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_NO, "Light")
                 "dark" -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_YES, "Dark")
-                else -> changeDarkModeTheme(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, "default system")
+                else -> changeDarkModeTheme(
+                    AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
+                    "default system"
+                )
             }
         }
 
@@ -104,14 +113,22 @@ class FareBotPreferenceActivity : AppCompatActivity() {
 
         private var launchFromBgEnabled: Boolean
             get() {
-                val componentName = ComponentName(requireContext(), BackgroundTagActivity::class.java)
-                val componentEnabledSetting = requireActivity().packageManager.getComponentEnabledSetting(componentName)
+                val componentName =
+                    ComponentName(requireContext(), BackgroundTagActivity::class.java)
+                val componentEnabledSetting =
+                    requireActivity().packageManager.getComponentEnabledSetting(componentName)
                 return componentEnabledSetting == COMPONENT_ENABLED_STATE_ENABLED
             }
             set(enabled) {
-                val componentName = ComponentName(requireContext(), BackgroundTagActivity::class.java)
-                val newState = if (enabled) COMPONENT_ENABLED_STATE_ENABLED else COMPONENT_ENABLED_STATE_DISABLED
-                requireActivity().packageManager.setComponentEnabledSetting(componentName, newState, PackageManager.DONT_KILL_APP)
+                val componentName =
+                    ComponentName(requireContext(), BackgroundTagActivity::class.java)
+                val newState =
+                    if (enabled) COMPONENT_ENABLED_STATE_ENABLED else COMPONENT_ENABLED_STATE_DISABLED
+                requireActivity().packageManager.setComponentEnabledSetting(
+                    componentName,
+                    newState,
+                    PackageManager.DONT_KILL_APP
+                )
             }
     }
 }

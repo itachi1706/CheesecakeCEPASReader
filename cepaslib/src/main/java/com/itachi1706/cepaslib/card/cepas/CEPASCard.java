@@ -24,14 +24,15 @@
 package com.itachi1706.cepaslib.card.cepas;
 
 import android.content.Context;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.itachi1706.cepaslib.card.Card;
-import com.itachi1706.cepaslib.card.CardType;
+import com.google.auto.value.AutoValue;
 import com.itachi1706.cepaslib.base.ui.FareBotUiTree;
 import com.itachi1706.cepaslib.base.util.ByteArray;
-import com.google.auto.value.AutoValue;
+import com.itachi1706.cepaslib.card.Card;
+import com.itachi1706.cepaslib.card.CardType;
 
 import java.text.DateFormat;
 import java.text.NumberFormat;

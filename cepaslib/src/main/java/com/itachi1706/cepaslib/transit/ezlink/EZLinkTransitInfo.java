@@ -25,15 +25,16 @@
 package com.itachi1706.cepaslib.transit.ezlink;
 
 import android.content.res.Resources;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.google.auto.value.AutoValue;
+import com.google.common.collect.ImmutableList;
 import com.itachi1706.cepaslib.transit.Refill;
 import com.itachi1706.cepaslib.transit.Subscription;
 import com.itachi1706.cepaslib.transit.TransitInfo;
 import com.itachi1706.cepaslib.transit.Trip;
-import com.google.auto.value.AutoValue;
-import com.google.common.collect.ImmutableList;
 
 import java.text.NumberFormat;
 import java.util.Currency;

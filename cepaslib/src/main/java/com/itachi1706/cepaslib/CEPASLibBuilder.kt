@@ -13,10 +13,14 @@ object CEPASLibBuilder {
     var prefClass: Class<*>? = null
     private var menuHandler: LibMenuItemHandler? = null
     var showAbout: Boolean = false
-    @ColorRes var titleBarColor: Int = R.color.accent
-    @ColorRes var accentColor: Int = R.color.accent
-    @ColorRes var errorColor: Int? = null
-    @ColorRes var textColor: Int = R.color.white
+    @ColorRes
+    var titleBarColor: Int = R.color.accent
+    @ColorRes
+    var accentColor: Int = R.color.accent
+    @ColorRes
+    var errorColor: Int? = null
+    @ColorRes
+    var textColor: Int = R.color.white
     var customTitle: String? = null
     var homeScreenWithBackButton: Boolean = false
 

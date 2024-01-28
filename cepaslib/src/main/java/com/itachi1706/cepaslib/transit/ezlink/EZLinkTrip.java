@@ -26,10 +26,10 @@ import android.content.res.Resources;
 
 import androidx.annotation.NonNull;
 
+import com.google.auto.value.AutoValue;
 import com.itachi1706.cepaslib.card.cepas.CEPASTransaction;
 import com.itachi1706.cepaslib.transit.Station;
 import com.itachi1706.cepaslib.transit.Trip;
-import com.google.auto.value.AutoValue;
 
 import java.text.NumberFormat;
 import java.util.Currency;
@@ -59,7 +59,8 @@ abstract class EZLinkTrip extends Trip {
                 || getTransaction().getType() == CEPASTransaction.TransactionType.BUS_REFUND) {
             String routeString = getTransaction().getUserData().substring(3, 7).replace(" ", "");
             if (!EZLinkData.initData) EZLinkData.initialize(resources);
-            if (EZLinkData.SG_BUSES.containsKey(routeString)) return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getLongName();
+            if (EZLinkData.SG_BUSES.containsKey(routeString))
+                return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getLongName();
             return "SG Buses";
         }
         if (getTransaction().getType() == CEPASTransaction.TransactionType.CREATION
@@ -79,7 +80,8 @@ abstract class EZLinkTrip extends Trip {
                 || getTransaction().getType() == CEPASTransaction.TransactionType.BUS_REFUND) {
             String routeString = getTransaction().getUserData().substring(3, 7).replace(" ", "");
             if (!EZLinkData.initData) EZLinkData.initialize(resources);
-            if (EZLinkData.SG_BUSES.containsKey(routeString)) return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getShortName();
+            if (EZLinkData.SG_BUSES.containsKey(routeString))
+                return Objects.requireNonNull(EZLinkData.SG_BUSES.get(routeString)).getShortName();
             return "SGB";
         }
         if (getTransaction().getType() == CEPASTransaction.TransactionType.CREATION

@@ -27,11 +27,11 @@ package com.itachi1706.cepaslib.transit.ezlink;
 
 import androidx.annotation.NonNull;
 
+import com.google.common.collect.ImmutableList;
 import com.itachi1706.cepaslib.card.cepas.CEPASCard;
 import com.itachi1706.cepaslib.card.cepas.CEPASTransaction;
 import com.itachi1706.cepaslib.transit.TransitFactory;
 import com.itachi1706.cepaslib.transit.TransitIdentity;
-import com.google.common.collect.ImmutableList;
 
 import java.util.List;
 
@@ -40,9 +40,9 @@ public class EZLinkTransitFactory implements TransitFactory<CEPASCard, EZLinkTra
     @Override
     public boolean check(@NonNull CEPASCard cepasCard) {
         return cepasCard.getHistory(3) != null
-                    && cepasCard.getHistory(3).isValid()
-                    && cepasCard.getPurse(3) != null
-                    && cepasCard.getPurse(3).isValid();
+                && cepasCard.getHistory(3).isValid()
+                && cepasCard.getPurse(3) != null
+                && cepasCard.getPurse(3).isValid();
     }
 
     @NonNull

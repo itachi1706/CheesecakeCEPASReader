@@ -26,9 +26,10 @@ package com.itachi1706.cepaslib.transit;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;

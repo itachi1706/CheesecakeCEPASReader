@@ -32,7 +32,8 @@ import com.wealthfront.magellan.transitions.Transition
 
 class FareBotCrossfadeTransition(context: Context) : Transition {
 
-    private val shortAnimationDuration = context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+    private val shortAnimationDuration =
+        context.resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
     override fun animate(
         viewFrom: View,
@@ -46,18 +47,18 @@ class FareBotCrossfadeTransition(context: Context) : Transition {
         viewTo.visibility = View.VISIBLE
 
         viewTo.animate()
-                .alpha(1f)
-                .setDuration(shortAnimationDuration)
-                .setListener(null)
+            .alpha(1f)
+            .setDuration(shortAnimationDuration)
+            .setListener(null)
 
         viewFrom.animate()
-                .alpha(0f)
-                .setDuration(shortAnimationDuration)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        viewFrom.visibility = View.GONE
-                        callback.onAnimationEnd()
-                    }
-                })
+            .alpha(0f)
+            .setDuration(shortAnimationDuration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    viewFrom.visibility = View.GONE
+                    callback.onAnimationEnd()
+                }
+            })
     }
 }

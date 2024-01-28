@@ -71,11 +71,13 @@ import dagger.Provides
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(),
-        ScreenLifecycleListener,
-        NavigationListener {
+    ScreenLifecycleListener,
+    NavigationListener {
 
-    @Inject internal lateinit var navigator: Navigator
-    @Inject internal lateinit var nfcStream: NfcStream
+    @Inject
+    internal lateinit var navigator: Navigator
+    @Inject
+    internal lateinit var nfcStream: NfcStream
 
     private val appBarLayout by bindView<AppBarLayout>(R.id.appBarLayout)
     private val toolbar by bindView<Toolbar>(R.id.toolbar)
@@ -97,15 +99,18 @@ class MainActivity : AppCompatActivity(),
 
     val component: MainActivityComponent by lazy {
         DaggerMainActivity_MainActivityComponent.builder()
-                .applicationComponent((application as FareBotApplication).component)
-                .activity(this)
-                .mainActivityModule(MainActivityModule())
-                .activityOperations(ActivityOperations(
-                        this,
-                        activityResultRelay.hide(),
-                        menuItemClickRelay.hide(),
-                        permissionsResultRelay.hide()))
-                .build()
+            .applicationComponent((application as FareBotApplication).component)
+            .activity(this)
+            .mainActivityModule(MainActivityModule())
+            .activityOperations(
+                ActivityOperations(
+                    this,
+                    activityResultRelay.hide(),
+                    menuItemClickRelay.hide(),
+                    permissionsResultRelay.hide()
+                )
+            )
+            .build()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -183,7 +188,11 @@ class MainActivity : AppCompatActivity(),
 
         supportActionBar?.setDisplayHomeAsUpEnabled(!navigator.atRoot())
 
-        if (CEPASLibBuilder.homeScreenWithBackButton && navigator.atRoot()) supportActionBar?.apply { setDisplayHomeAsUpEnabled(true) }
+        if (CEPASLibBuilder.homeScreenWithBackButton && navigator.atRoot()) supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(
+                true
+            )
+        }
 
         toolbar.setTitleTextColor(getColor(options.textColorRes, Color.BLACK))
         toolbar.title = screen.getTitle(this)
@@ -197,18 +206,30 @@ class MainActivity : AppCompatActivity(),
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             animToolbarBg?.cancel()
-            animToolbarBg = ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim).apply {
-                duration = shortAnimationDuration
-                start()
-            }
+            animToolbarBg =
+                ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim)
+                    .apply {
+                        duration = shortAnimationDuration
+                        start()
+                    }
         }
 
         ViewCompat.setElevation(appBarLayout, if (options.shadow) toolbarElevation else 0f)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionsResultRelay.accept(RequestPermissionsResult(requestCode, permissions, grantResults))
+        permissionsResultRelay.accept(
+            RequestPermissionsResult(
+                requestCode,
+                permissions,
+                grantResults
+            )
+        )
     }
 
     override fun onHide(screen: Screen<*>?) {
@@ -232,22 +253,26 @@ class MainActivity : AppCompatActivity(),
             tagReaderFactory: TagReaderFactory
         ): CardStream {
             return CardStream(
-                    application,
-                    cardPersister,
-                    cardSerializer,
-                    nfcStream,
-                    tagReaderFactory)
+                application,
+                cardPersister,
+                cardSerializer,
+                nfcStream,
+                tagReaderFactory
+            )
         }
 
         @Provides
         @ActivityScope
         fun provideNavigator(activity: MainActivity): Navigator = Navigator.withRoot(HomeScreen())
-                .transition(FareBotCrossfadeTransition(activity))
-                .build()
+            .transition(FareBotCrossfadeTransition(activity))
+            .build()
     }
 
     @ActivityScope
-    @Component(dependencies = [FareBotApplicationComponent::class], modules = [MainActivityModule::class])
+    @Component(
+        dependencies = [FareBotApplicationComponent::class],
+        modules = [MainActivityModule::class]
+    )
     interface MainActivityComponent {
 
         fun activityOperations(): ActivityOperations

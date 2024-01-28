@@ -51,37 +51,42 @@ class CardStream(
 
     fun observeCards(): Observable<RawCard<*>> {
         val realCards = nfcStream.observe()
-                .observeOn(Schedulers.io())
-                .doOnNext { loadingRelay.accept(true) }
-                .map { tag -> Optional(
-                        try {
-                            val rawCard = tagReaderFactory.getTagReader(tag.id, tag).readTag()
-                            if (rawCard.isUnauthorized) {
-                                throw CardUnauthorizedException()
-                            }
-                            rawCard
-                        } catch (error: Throwable) {
-                            errorRelay.accept(error)
-                            loadingRelay.accept(false)
-                            null
-                        })
-                }
-                .filterAndGetOptional()
+            .observeOn(Schedulers.io())
+            .doOnNext { loadingRelay.accept(true) }
+            .map { tag ->
+                Optional(
+                    try {
+                        val rawCard = tagReaderFactory.getTagReader(tag.id, tag).readTag()
+                        if (rawCard.isUnauthorized) {
+                            throw CardUnauthorizedException()
+                        }
+                        rawCard
+                    } catch (error: Throwable) {
+                        errorRelay.accept(error)
+                        loadingRelay.accept(false)
+                        null
+                    }
+                )
+            }
+            .filterAndGetOptional()
 
         val sampleCards = sampleRelay
-                .observeOn(Schedulers.io())
-                .doOnNext { loadingRelay.accept(true) }
-                .delay(3, TimeUnit.SECONDS)
+            .observeOn(Schedulers.io())
+            .doOnNext { loadingRelay.accept(true) }
+            .delay(3, TimeUnit.SECONDS)
 
         return Observable.merge(realCards, sampleCards)
-                .doOnNext { card ->
-                    application.updateTimestamp(card.tagId().hex())
-                    cardPersister.insertCard(SavedCard(
+            .doOnNext { card ->
+                application.updateTimestamp(card.tagId().hex())
+                cardPersister.insertCard(
+                    SavedCard(
                         type = card.cardType(),
                         serial = card.tagId().hex(),
-                        data = cardSerializer.serialize(card)))
-                }
-                .doOnNext { loadingRelay.accept(false) }
+                        data = cardSerializer.serialize(card)
+                    )
+                )
+            }
+            .doOnNext { loadingRelay.accept(false) }
     }
 
     fun observeLoading(): Observable<Boolean> = loadingRelay.hide()

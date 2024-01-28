@@ -22,9 +22,9 @@
 
 package com.itachi1706.cepaslib.app.core.serialize.gson
 
+import com.google.gson.Gson
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.card.serialize.CardSerializer
-import com.google.gson.Gson
 
 class GsonCardSerializer(private val gson: Gson) : CardSerializer {
 

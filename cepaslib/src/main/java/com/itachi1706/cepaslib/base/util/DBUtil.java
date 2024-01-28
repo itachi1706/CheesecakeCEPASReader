@@ -68,7 +68,7 @@ public abstract class DBUtil {
      *
      * @return true if exact match is required, false if it just must be at minimum this number.
      */
-    private boolean allowGreaterDatabaseVersions = false;
+    private final boolean allowGreaterDatabaseVersions = false;
 
     public SQLiteDatabase openDatabase() throws SQLException {
         if (mDatabase != null) {

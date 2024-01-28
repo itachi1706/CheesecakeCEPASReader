@@ -31,7 +31,8 @@ import com.itachi1706.cepaslib.transit.ezlink.EZLinkTransitFactory
 
 class TransitFactoryRegistry {
 
-    private val registry = mutableMapOf<Class<out Card>, MutableList<TransitFactory<Card, TransitInfo>>>()
+    private val registry =
+        mutableMapOf<Class<out Card>, MutableList<TransitFactory<Card, TransitInfo>>>()
 
     init {
         registerFactory(CEPASCard::class.java, EZLinkTransitFactory())
@@ -52,5 +53,5 @@ class TransitFactoryRegistry {
     }
 
     private fun findFactory(card: Card): TransitFactory<Card, out TransitInfo>? =
-            registry[card.parentClass]?.find { it.check(card) }
+        registry[card.parentClass]?.find { it.check(card) }
 }

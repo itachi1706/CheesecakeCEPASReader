@@ -26,8 +26,9 @@
 package com.itachi1706.cepaslib.card.cepas;
 
 import android.nfc.tech.IsoDep;
-import androidx.annotation.NonNull;
 import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.itachi1706.cepaslib.card.cepas.raw.RawCEPASHistory;
 import com.itachi1706.cepaslib.card.cepas.raw.RawCEPASPurse;
@@ -47,7 +48,8 @@ class CEPASProtocol {
     private static final byte OPERATION_OK = (byte) 0x00;
     private static final byte PERMISSION_DENIED = (byte) 0x9D;
 
-    @NonNull private final IsoDep mTagTech;
+    @NonNull
+    private final IsoDep mTagTech;
 
     CEPASProtocol(@NonNull IsoDep tagTech) {
         mTagTech = tagTech;

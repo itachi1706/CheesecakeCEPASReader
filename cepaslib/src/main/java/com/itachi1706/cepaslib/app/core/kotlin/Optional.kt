@@ -27,12 +27,12 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Single
 
 fun <T : Any> Observable<Optional<T>>.filterAndGetOptional(): Observable<T> = this
-        .filter { it.isPresent }
-        .map { it.get }
+    .filter { it.isPresent }
+    .map { it.get }
 
 fun <T : Any> Single<Optional<T>>.filterAndGetOptional(): Maybe<T> = this
-        .filter { it.isPresent }
-        .map { it.get }
+    .filter { it.isPresent }
+    .map { it.get }
 
 data class Optional<out T>(val value: T?) {
     val isPresent: Boolean

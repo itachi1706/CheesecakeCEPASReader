@@ -25,10 +25,10 @@ package com.itachi1706.cepaslib.app.core.ui
 import android.content.Context
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
-import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import autodispose2.OutsideScopeException
 import autodispose2.lifecycle.CorrespondingEventsFunction
 import autodispose2.lifecycle.LifecycleScopeProvider
+import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.jakewharton.rxrelay3.BehaviorRelay
 import com.wealthfront.magellan.Screen
 import com.wealthfront.magellan.ScreenView
@@ -47,16 +47,20 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
     }
 
     companion object {
-        private val CORRESPONDING_EVENTS = CorrespondingEventsFunction<ScreenLifecycleEvent> { lastEvent ->
-            when (lastEvent) {
-                ScreenLifecycleEvent.RESUME -> ScreenLifecycleEvent.PAUSE
-                ScreenLifecycleEvent.SHOW -> ScreenLifecycleEvent.HIDE
-                else -> throw OutsideScopeException("what! $lastEvent")
+        private val CORRESPONDING_EVENTS =
+            CorrespondingEventsFunction<ScreenLifecycleEvent> { lastEvent ->
+                when (lastEvent) {
+                    ScreenLifecycleEvent.RESUME -> ScreenLifecycleEvent.PAUSE
+                    ScreenLifecycleEvent.SHOW -> ScreenLifecycleEvent.HIDE
+                    else -> throw OutsideScopeException("what! $lastEvent")
+                }
             }
-        }
     }
 
-    @Deprecated("override getActionBarOptions instead", replaceWith = ReplaceWith("getActionBarOptions()"))
+    @Deprecated(
+        "override getActionBarOptions instead",
+        replaceWith = ReplaceWith("getActionBarOptions()")
+    )
     final override fun getActionBarColorRes(): Int {
         return super.getActionBarColorRes()
     }
@@ -87,11 +91,11 @@ abstract class FareBotScreen<C, V> : Screen<V>(), LifecycleScopeProvider<ScreenL
         lifecycleRelay.accept(ScreenLifecycleEvent.HIDE)
     }
 
-    final override fun lifecycle(): Observable<ScreenLifecycleEvent>? =
+    final override fun lifecycle(): Observable<ScreenLifecycleEvent> =
         lifecycleRelay.hide()
 
     final override fun correspondingEvents(): CorrespondingEventsFunction<ScreenLifecycleEvent> =
-            CORRESPONDING_EVENTS
+        CORRESPONDING_EVENTS
 
     final override fun peekLifecycle(): ScreenLifecycleEvent = lifecycleRelay.value!!
 

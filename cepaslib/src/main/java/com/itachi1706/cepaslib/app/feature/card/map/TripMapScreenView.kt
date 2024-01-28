@@ -116,13 +116,22 @@ class TripMapScreenView(
         }
     }
 
-    private fun addStationMarker(map: GoogleMap, station: Station, @DrawableRes iconId: Int): LatLng {
-        val pos = LatLng(station.latitude?.toDoubleOrNull() ?: 0.0, station.longitude?.toDoubleOrNull() ?: 0.0)
-        map.addMarker(MarkerOptions()
+    private fun addStationMarker(
+        map: GoogleMap,
+        station: Station,
+        @DrawableRes iconId: Int
+    ): LatLng {
+        val pos = LatLng(
+            station.latitude?.toDoubleOrNull() ?: 0.0,
+            station.longitude?.toDoubleOrNull() ?: 0.0
+        )
+        map.addMarker(
+            MarkerOptions()
                 .position(pos)
                 .title(station.stationName)
                 .snippet(station.companyName)
-                .icon(BitmapDescriptorFactory.fromResource(iconId)))
+                .icon(BitmapDescriptorFactory.fromResource(iconId))
+        )
         return pos
     }
 }

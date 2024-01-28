@@ -25,6 +25,7 @@ package com.itachi1706.cepaslib.app.feature.card
 import android.content.Context
 import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import autodispose2.autoDispose
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.inject.ScreenScope
@@ -38,13 +39,13 @@ import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.card.Card
 import com.itachi1706.cepaslib.card.RawCard
 import com.itachi1706.cepaslib.transit.TransitInfo
-import autodispose2.autoDispose
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
-class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Component, CardScreenView>() {
+class CardScreen(private val rawCard: RawCard<*>) :
+    FareBotScreen<CardScreen.Component, CardScreenView>() {
 
     data class Content(
         val card: Card,
@@ -54,10 +55,13 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
 
     private var content: Content? = null
 
-    @Inject lateinit var activityOperations: ActivityOperations
-    @Inject lateinit var transitFactoryRegistry: TransitFactoryRegistry
+    @Inject
+    lateinit var activityOperations: ActivityOperations
+    @Inject
+    lateinit var transitFactoryRegistry: TransitFactoryRegistry
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault(shadow = false)
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault(shadow = false)
 
     override fun onCreateView(context: Context): CardScreenView = CardScreenView(context)
 
@@ -130,13 +134,16 @@ class CardScreen(private val rawCard: RawCard<*>) : FareBotScreen<CardScreen.Com
         val subscriptions = transitInfo?.subscriptions?.map {
             TransactionViewModel.SubscriptionViewModel(activity, it)
         } ?: listOf()
-        val trips = transitInfo?.trips?.map { TransactionViewModel.TripViewModel(activity, it) } ?: listOf()
-        val refills = transitInfo?.refills?.map { TransactionViewModel.RefillViewModel(activity, it) } ?: listOf()
+        val trips =
+            transitInfo?.trips?.map { TransactionViewModel.TripViewModel(activity, it) } ?: listOf()
+        val refills =
+            transitInfo?.refills?.map { TransactionViewModel.RefillViewModel(activity, it) }
+                ?: listOf()
         return subscriptions + (trips + refills).sortedByDescending { it.date }
     }
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): Component =
-            DaggerCardScreen_Component.builder()
+        DaggerCardScreen_Component.builder()
             .mainActivityComponent(parentComponent)
             .build()
 
