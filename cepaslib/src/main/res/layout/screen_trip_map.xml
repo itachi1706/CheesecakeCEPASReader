@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   screen_trip_map.xml
 
   This file is part of FareBot.
@@ -21,9 +20,8 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<com.google.android.gms.maps.MapView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/map"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"/>
+    android:orientation="vertical" />

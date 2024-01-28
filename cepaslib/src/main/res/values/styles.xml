@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   styles.xml
 
   This file is part of FareBot.
@@ -22,6 +21,7 @@
   -->
 
 <resources>
+
     <style name="FareBot.Style.Button.Link" parent="@android:style/Widget.Holo.Button.Borderless.Small">
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>

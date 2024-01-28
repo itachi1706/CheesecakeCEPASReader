@@ -22,8 +22,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<androidx.cardview.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -32,10 +31,12 @@
     app:cardCornerRadius="4dp"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="false">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -43,25 +44,29 @@
             android:paddingRight="@dimen/grid_unit_2x"
             android:paddingLeft="@dimen/grid_unit_2x"
             android:orientation="horizontal">
+
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <TextView
                     android:id="@+id/card_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:textSize="@dimen/text_primary"
-                    tools:text="Card Name"/>
+                    tools:text="Card Name" />
+
                 <TextView
                     android:id="@+id/card_location"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/text_secondary"
-                    tools:text="Location"/>
+                    tools:text="Location" />
             </LinearLayout>
+
             <ImageView
                 android:id="@+id/card_secure"
                 android:layout_width="wrap_content"
@@ -70,11 +75,13 @@
                 android:layout_marginStart="@dimen/grid_unit_2x"
                 android:contentDescription="@string/keys_required"
                 app:srcCompat="@drawable/ic_lock_24dp"
-                android:alpha="0.54"/>
+                android:alpha="0.54" />
         </LinearLayout>
+
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <ImageView
                 android:id="@+id/card_image"
                 android:layout_width="wrap_content"
@@ -83,7 +90,8 @@
                 android:contentDescription="@string/card_photo"
                 android:src="@drawable/ezlink_card"
                 android:layout_marginTop="@dimen/grid_unit_5x"
-                android:layout_marginBottom="@dimen/grid_unit_5x"/>
+                android:layout_marginBottom="@dimen/grid_unit_5x" />
+
             <TextView
                 android:id="@+id/card_not_supported"
                 android:layout_width="match_parent"
@@ -95,8 +103,9 @@
                 android:textColor="@color/white"
                 android:background="@color/card_unsupported"
                 android:layout_gravity="center"
-                android:padding="4dp"/>
+                android:padding="4dp" />
         </FrameLayout>
+
         <TextView
             android:id="@+id/card_note"
             android:layout_width="match_parent"
@@ -109,6 +118,6 @@
             android:gravity="center"
             android:visibility="gone"
             tools:visibility="visible"
-            tools:text="The quick brown fox jumps over the lazy dog."/>
+            tools:text="The quick brown fox jumps over the lazy dog." />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

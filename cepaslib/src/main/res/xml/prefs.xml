@@ -29,7 +29,7 @@
         <SwitchPreference
             android:title="@string/launch_from_background"
             android:persistent="false"
-            android:key="pref_launch_from_background"/>
+            android:key="pref_launch_from_background" />
         <ListPreference
             android:title="@string/setting_dark_mode"
             android:summary="%s"
