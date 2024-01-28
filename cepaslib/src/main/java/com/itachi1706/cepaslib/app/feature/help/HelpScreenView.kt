@@ -38,30 +38,29 @@ import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.card.CardType
 import com.wealthfront.magellan.BaseScreenView
-import java.util.*
 
 class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
 
     companion object {
         private val SUPPORTED_CARDS = listOf(
-                SupportedCard(
-                        imageResId = R.drawable.ezlink_card,
-                        name = "EZ-Link",
-                        locationResId = R.string.location_singapore,
-                        cardType = CardType.CEPAS
-                ),
-                SupportedCard(
-                        imageResId = R.drawable.nets_card,
-                        name = "NETS FlashPay",
-                        locationResId = R.string.location_singapore,
-                        cardType = CardType.CEPAS
-                ),
-                SupportedCard(
-                        imageResId = R.drawable.sg_concession,
-                        name = "EZ-Link Concession Cards (Schools, Child, Senior, NSF)",
-                        locationResId = R.string.location_singapore,
-                        cardType = CardType.CEPAS
-                )
+            SupportedCard(
+                imageResId = R.drawable.ezlink_card,
+                name = "EZ-Link",
+                locationResId = R.string.location_singapore,
+                cardType = CardType.CEPAS
+            ),
+            SupportedCard(
+                imageResId = R.drawable.nets_card,
+                name = "NETS FlashPay",
+                locationResId = R.string.location_singapore,
+                cardType = CardType.CEPAS
+            ),
+            SupportedCard(
+                imageResId = R.drawable.sg_concession,
+                name = "EZ-Link Concession Cards (Schools, Child, Senior, NSF)",
+                locationResId = R.string.location_singapore,
+                cardType = CardType.CEPAS
+            )
 
         )
     }
@@ -82,7 +81,13 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SupportedCardViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
-            return SupportedCardViewHolder(layoutInflater.inflate(R.layout.item_supported_card, parent, false))
+            return SupportedCardViewHolder(
+                layoutInflater.inflate(
+                    R.layout.item_supported_card,
+                    parent,
+                    false
+                )
+            )
         }
 
         override fun onBindViewHolder(holder: SupportedCardViewHolder, position: Int) {
@@ -103,7 +108,8 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
 
         init {
             imageViewSecure.setOnClickListener {
-                Toast.makeText(imageViewSecure.context, R.string.keys_required, Toast.LENGTH_SHORT).show()
+                Toast.makeText(imageViewSecure.context, R.string.keys_required, Toast.LENGTH_SHORT)
+                    .show()
             }
         }
 
@@ -123,7 +129,8 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
                 textViewNote.visibility = View.GONE
             }
 
-            viewNotSupported.visibility = if (isCardSupported(context, supportedCard)) View.GONE else View.VISIBLE
+            viewNotSupported.visibility =
+                if (isCardSupported(context, supportedCard)) View.GONE else View.VISIBLE
         }
 
         private fun getNotes(context: Context, supportedCard: SupportedCard): String? {
@@ -149,10 +156,7 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
                 return false // No NFC
             }
             val supportsMifareClassic = context.packageManager.hasSystemFeature("com.nxp.mifare")
-            if (supportedCard.cardType == CardType.MifareClassic && !supportsMifareClassic) {
-                return false
-            }
-            return true
+            return !(supportedCard.cardType == CardType.MifareClassic && !supportsMifareClassic)
         }
     }
 

@@ -31,7 +31,7 @@ import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.base.ui.FareBotUiTree
 import com.itachi1706.cepaslib.base.util.ByteArray
-import java.util.*
+import java.util.Locale
 
 // This is not very efficient.️
 class CardAdvancedAdapter(fareBotUiTree: FareBotUiTree) :
@@ -48,21 +48,26 @@ class CardAdvancedAdapter(fareBotUiTree: FareBotUiTree) :
     override fun getItemCount(): Int = visibleViewModels.size
 
     override fun onCreateViewHolder(parent: ViewGroup, position: Int) =
-            ViewHolder(parent.inflate(R.layout.item_card_advanced))
+        ViewHolder(parent.inflate(R.layout.item_card_advanced))
 
     override fun onBindViewHolder(viewHolder: ViewHolder, position: Int) {
         viewHolder.bind(visibleViewModels[position])
     }
 
-    private fun flatten(items: List<FareBotUiTree.Item>, parent: ViewModel? = null, depth: Int = 0): List<ViewModel> {
+    private fun flatten(
+        items: List<FareBotUiTree.Item>,
+        parent: ViewModel? = null,
+        depth: Int = 0
+    ): List<ViewModel> {
         val viewModels = mutableListOf<ViewModel>()
         for (item in items) {
             val viewModel = ViewModel(
-                    title = item.title,
-                    value = item.value,
-                    parent = parent,
-                    canExpand = item.children().isNotEmpty(),
-                    depth = depth)
+                title = item.title,
+                value = item.value,
+                parent = parent,
+                canExpand = item.children().isNotEmpty(),
+                depth = depth
+            )
             viewModels.add(viewModel)
             viewModels.addAll(flatten(item.children(), viewModel, depth + 1))
         }

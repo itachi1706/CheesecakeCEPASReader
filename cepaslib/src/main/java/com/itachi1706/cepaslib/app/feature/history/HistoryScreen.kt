@@ -32,6 +32,7 @@ import android.net.Uri
 import android.provider.OpenableColumns
 import android.view.Menu
 import android.widget.Toast
+import autodispose2.autoDispose
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.inject.ScreenScope
@@ -49,7 +50,6 @@ import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.itachi1706.cepaslib.persist.db.model.SavedCard
 import com.itachi1706.cepaslib.transit.TransitIdentity
-import autodispose2.autoDispose
 import dagger.Component
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
@@ -60,7 +60,8 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScreenView>(), HistoryScreenView.Listener {
+class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScreenView>(),
+    HistoryScreenView.Listener {
 
     companion object {
         private const val REQUEST_SELECT_FILE = 1
@@ -68,18 +69,24 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         private const val FILENAME = "cepasreader-export.json"
     }
 
-    @Inject lateinit var activityOperations: ActivityOperations
-    @Inject lateinit var cardPersister: CardPersister
-    @Inject lateinit var cardSerializer: CardSerializer
-    @Inject lateinit var exportHelper: ExportHelper
-    @Inject lateinit var transitFactoryRegistry: TransitFactoryRegistry
+    @Inject
+    lateinit var activityOperations: ActivityOperations
+    @Inject
+    lateinit var cardPersister: CardPersister
+    @Inject
+    lateinit var cardSerializer: CardSerializer
+    @Inject
+    lateinit var exportHelper: ExportHelper
+    @Inject
+    lateinit var transitFactoryRegistry: TransitFactoryRegistry
 
     override fun getTitle(context: Context): String = context.getString(R.string.history)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
     override fun onCreateView(context: Context): HistoryScreenView =
-            HistoryScreenView(context, activityOperations, this)
+        HistoryScreenView(context, activityOperations, this)
 
     override fun onUpdateMenu(menu: Menu) {
         activity.menuInflater.inflate(R.menu.screen_history, menu)
@@ -104,6 +111,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             ), REQUEST_SELECT_FILE
                         )
                     }
+
                     R.id.import_clipboard -> {
                         val importClip = clipboardManager.primaryClip
                         if (importClip != null && importClip.itemCount > 0) {
@@ -115,6 +123,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                                 .subscribe { cards -> onCardsImported(cards) }
                         }
                     }
+
                     R.id.copy -> {
                         val exportClip =
                             ClipData.newPlainText(null, exportHelper.exportCards(context))
@@ -122,12 +131,14 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                         Toast.makeText(activity, R.string.copied_to_clipboard, Toast.LENGTH_SHORT)
                             .show()
                     }
+
                     R.id.share -> {
                         val intent = Intent(Intent.ACTION_SEND)
                         intent.type = "text/plain"
                         intent.putExtra(Intent.EXTRA_TEXT, exportHelper.exportCards(context))
                         activity.startActivity(intent)
                     }
+
                     R.id.save -> {
                         val storageIntent = Intent(Intent.ACTION_CREATE_DOCUMENT).apply {
                             addCategory(Intent.CATEGORY_OPENABLE)
@@ -150,6 +161,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             }
                         }
                     }
+
                     REQUEST_SELECT_EXPORT_FILE -> {
                         if (resultCode == Activity.RESULT_OK) {
                             data?.data?.let {
@@ -183,7 +195,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
     }
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): HistoryComponent =
-            DaggerHistoryScreen_HistoryComponent.builder()
+        DaggerHistoryScreen_HistoryComponent.builder()
             .mainActivityComponent(parentComponent)
             .build()
 
@@ -226,7 +238,11 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
     private fun onCardsImported(cardIds: List<Long>) {
         loadCards()
 
-        val text = activity.resources.getQuantityString(R.plurals.cards_imported, cardIds.size, cardIds.size)
+        val text = activity.resources.getQuantityString(
+            R.plurals.cards_imported,
+            cardIds.size,
+            cardIds.size
+        )
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
 
         if (cardIds.size == 1) {

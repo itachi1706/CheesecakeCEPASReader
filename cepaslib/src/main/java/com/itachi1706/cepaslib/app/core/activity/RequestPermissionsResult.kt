@@ -35,9 +35,7 @@ data class RequestPermissionsResult(
 
         if (requestCode != other.requestCode) return false
         if (!permissions.contentEquals(other.permissions)) return false
-        if (!grantResults.contentEquals(other.grantResults)) return false
-
-        return true
+        return grantResults.contentEquals(other.grantResults)
     }
 
     override fun hashCode(): Int {

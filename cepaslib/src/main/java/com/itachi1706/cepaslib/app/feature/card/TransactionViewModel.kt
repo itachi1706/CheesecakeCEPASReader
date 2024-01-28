@@ -29,14 +29,16 @@ import com.itachi1706.cepaslib.transit.Refill
 import com.itachi1706.cepaslib.transit.Subscription
 import com.itachi1706.cepaslib.transit.Trip
 import java.text.DateFormat
-import java.util.*
+import java.util.Date
+import java.util.Locale
 
 sealed class TransactionViewModel(val context: Context) {
 
     abstract val date: Date?
 
     val time: String?
-        get() = if (date != null) DateFormat.getTimeInstance(DateFormat.SHORT).format(date!!) else null
+        get() = if (date != null) DateFormat.getTimeInstance(DateFormat.SHORT)
+            .format(date!!) else null
 
     class TripViewModel(context: Context, val trip: Trip) : TransactionViewModel(context) {
 
@@ -52,17 +54,17 @@ sealed class TransactionViewModel(val context: Context) {
 
         @DrawableRes
         val imageResId: Int = when (trip.mode) {
-                Trip.Mode.BUS -> R.drawable.ic_transaction_bus_32dp
-                Trip.Mode.TRAIN -> R.drawable.ic_transaction_train_32dp
-                Trip.Mode.TRAM -> R.drawable.ic_transaction_tram_32dp
-                Trip.Mode.METRO -> R.drawable.ic_transaction_metro_32dp
-                Trip.Mode.FERRY -> R.drawable.ic_transaction_ferry_32dp
-                Trip.Mode.TICKET_MACHINE -> R.drawable.ic_transaction_tvm_32dp
-                Trip.Mode.VENDING_MACHINE -> R.drawable.ic_transaction_vend_32dp
-                Trip.Mode.POS -> R.drawable.ic_transaction_pos_32dp
-                Trip.Mode.BANNED -> R.drawable.ic_transaction_banned_32dp
-                Trip.Mode.OTHER -> R.drawable.ic_transaction_unknown_32dp
-                else -> R.drawable.ic_transaction_unknown_32dp
+            Trip.Mode.BUS -> R.drawable.ic_transaction_bus_32dp
+            Trip.Mode.TRAIN -> R.drawable.ic_transaction_train_32dp
+            Trip.Mode.TRAM -> R.drawable.ic_transaction_tram_32dp
+            Trip.Mode.METRO -> R.drawable.ic_transaction_metro_32dp
+            Trip.Mode.FERRY -> R.drawable.ic_transaction_ferry_32dp
+            Trip.Mode.TICKET_MACHINE -> R.drawable.ic_transaction_tvm_32dp
+            Trip.Mode.VENDING_MACHINE -> R.drawable.ic_transaction_vend_32dp
+            Trip.Mode.POS -> R.drawable.ic_transaction_pos_32dp
+            Trip.Mode.BANNED -> R.drawable.ic_transaction_banned_32dp
+            Trip.Mode.OTHER -> R.drawable.ic_transaction_unknown_32dp
+            else -> R.drawable.ic_transaction_unknown_32dp
         }
     }
 

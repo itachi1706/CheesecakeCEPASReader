@@ -35,9 +35,11 @@ import com.itachi1706.cepaslib.transit.TransitInfo
 class CardAdvancedScreen(private val card: Card, private val transitInfo: TransitInfo?) :
     FareBotScreen<CardAdvancedScreen.Component, CardAdvancedScreenView>() {
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
-    override fun onCreateView(context: Context): CardAdvancedScreenView = CardAdvancedScreenView(context)
+    override fun onCreateView(context: Context): CardAdvancedScreenView =
+        CardAdvancedScreenView(context)
 
     override fun getTitle(context: Context): String = activity.getString(R.string.advanced)
 
@@ -53,7 +55,7 @@ class CardAdvancedScreen(private val card: Card, private val transitInfo: Transi
     }
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): Component =
-            DaggerCardAdvancedScreen_Component.builder()
+        DaggerCardAdvancedScreen_Component.builder()
             .mainActivityComponent(parentComponent)
             .build()
 

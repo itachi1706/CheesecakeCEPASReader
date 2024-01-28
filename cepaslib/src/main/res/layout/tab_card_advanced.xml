@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   tab_card_advanced.xml
 
   This file is part of FareBot.
@@ -21,13 +20,12 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<com.itachi1706.cepaslib.app.feature.card.advanced.CardAdvancedTabView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.itachi1706.cepaslib.app.feature.card.advanced.CardAdvancedTabView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent" />
 </com.itachi1706.cepaslib.app.feature.card.advanced.CardAdvancedTabView>

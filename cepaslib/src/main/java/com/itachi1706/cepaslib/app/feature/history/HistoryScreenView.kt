@@ -30,11 +30,11 @@ import android.view.View
 import androidx.appcompat.view.ActionMode
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import autodispose2.android.scope
+import autodispose2.autoDispose
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.activity.ActivityOperations
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
-import autodispose2.android.scope
-import autodispose2.autoDispose
 import com.jakewharton.rxrelay3.PublishRelay
 import com.wealthfront.magellan.BaseScreenView
 import io.reactivex.rxjava3.core.Observable

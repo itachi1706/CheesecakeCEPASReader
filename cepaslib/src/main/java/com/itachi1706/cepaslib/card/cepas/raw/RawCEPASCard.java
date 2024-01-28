@@ -22,24 +22,23 @@
 
 package com.itachi1706.cepaslib.card.cepas.raw;
 
+import static com.google.common.collect.Iterables.transform;
+import static com.google.common.collect.Lists.newArrayList;
+
 import androidx.annotation.NonNull;
 
+import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
 import com.itachi1706.cepaslib.base.util.ByteArray;
 import com.itachi1706.cepaslib.card.CardType;
 import com.itachi1706.cepaslib.card.RawCard;
 import com.itachi1706.cepaslib.card.cepas.CEPASCard;
 import com.itachi1706.cepaslib.card.cepas.CEPASHistory;
 import com.itachi1706.cepaslib.card.cepas.CEPASPurse;
-import com.google.auto.value.AutoValue;
-import com.google.common.base.Function;
-import com.google.gson.Gson;
-import com.google.gson.TypeAdapter;
 
 import java.util.Date;
 import java.util.List;
-
-import static com.google.common.collect.Iterables.transform;
-import static com.google.common.collect.Lists.newArrayList;
 
 @AutoValue
 public abstract class RawCEPASCard implements RawCard<CEPASCard> {

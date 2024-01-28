@@ -30,8 +30,8 @@ import androidx.core.content.res.ResourcesCompat
 
 @ColorInt
 fun Context.getColor(@ColorRes colorRes: Int?, @ColorInt defaultColor: Int) =
-        if (colorRes == null) defaultColor else ResourcesCompat.getColor(resources, colorRes, theme)
+    if (colorRes == null) defaultColor else ResourcesCompat.getColor(resources, colorRes, theme)
 
 @ColorInt
 fun adjustAlpha(@ColorInt color: Int, alpha: Int = 0): Int =
-        Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color))
+    Color.argb(alpha, Color.red(color), Color.green(color), Color.blue(color))

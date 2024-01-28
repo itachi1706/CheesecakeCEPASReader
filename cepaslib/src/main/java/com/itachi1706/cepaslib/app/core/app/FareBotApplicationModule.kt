@@ -24,9 +24,16 @@ package com.itachi1706.cepaslib.app.core.app
 
 import android.content.SharedPreferences
 import androidx.preference.PreferenceManager
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.itachi1706.cepaslib.app.core.nfc.TagReaderFactory
 import com.itachi1706.cepaslib.app.core.serialize.CardKeysSerializer
-import com.itachi1706.cepaslib.app.core.serialize.gson.*
+import com.itachi1706.cepaslib.app.core.serialize.gson.ByteArrayGsonTypeAdapter
+import com.itachi1706.cepaslib.app.core.serialize.gson.CardTypeGsonTypeAdapter
+import com.itachi1706.cepaslib.app.core.serialize.gson.EpochDateTypeAdapter
+import com.itachi1706.cepaslib.app.core.serialize.gson.GsonCardKeysSerializer
+import com.itachi1706.cepaslib.app.core.serialize.gson.GsonCardSerializer
+import com.itachi1706.cepaslib.app.core.serialize.gson.RawCardGsonTypeAdapterFactory
 import com.itachi1706.cepaslib.app.core.transit.TransitFactoryRegistry
 import com.itachi1706.cepaslib.app.core.util.ExportHelper
 import com.itachi1706.cepaslib.base.util.ByteArray
@@ -38,27 +45,25 @@ import com.itachi1706.cepaslib.persist.CardPersister
 import com.itachi1706.cepaslib.persist.db.DbCardKeysPersister
 import com.itachi1706.cepaslib.persist.db.DbCardPersister
 import com.itachi1706.cepaslib.persist.db.FareBotDb
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import java.util.*
+import java.util.Date
 
 @Module
 class FareBotApplicationModule {
 
     @Provides
     fun provideSharedPreferences(application: FareBotApplication): SharedPreferences =
-            PreferenceManager.getDefaultSharedPreferences(application)
+        PreferenceManager.getDefaultSharedPreferences(application)
 
     @Provides
     fun provideGson(): Gson = GsonBuilder()
-            .registerTypeAdapter(Date::class.java, EpochDateTypeAdapter())
-            .registerTypeAdapterFactory(CEPASTypeAdapterFactory.create())
-            .registerTypeAdapterFactory(RawCardGsonTypeAdapterFactory())
-            .registerTypeAdapter(ByteArray::class.java, ByteArrayGsonTypeAdapter())
-            .registerTypeAdapter(CardType::class.java, CardTypeGsonTypeAdapter())
-            .create()
+        .registerTypeAdapter(Date::class.java, EpochDateTypeAdapter())
+        .registerTypeAdapterFactory(CEPASTypeAdapterFactory.create())
+        .registerTypeAdapterFactory(RawCardGsonTypeAdapterFactory())
+        .registerTypeAdapter(ByteArray::class.java, ByteArrayGsonTypeAdapter())
+        .registerTypeAdapter(CardType::class.java, CardTypeGsonTypeAdapter())
+        .create()
 
     @Provides
     fun provideCardSerializer(gson: Gson): CardSerializer = GsonCardSerializer(gson)
@@ -67,7 +72,8 @@ class FareBotApplicationModule {
     fun provideCardKeysSerializer(gson: Gson): CardKeysSerializer = GsonCardKeysSerializer(gson)
 
     @Provides
-    fun provideFareBotDb(application: FareBotApplication): FareBotDb = FareBotDb.getInstance(application)
+    fun provideFareBotDb(application: FareBotApplication): FareBotDb =
+        FareBotDb.getInstance(application)
 
     @Provides
     fun provideCardPersister(db: FareBotDb): CardPersister = DbCardPersister(db)
@@ -76,8 +82,12 @@ class FareBotApplicationModule {
     fun provideCardKeysPersister(db: FareBotDb): CardKeysPersister = DbCardKeysPersister(db)
 
     @Provides
-    fun provideExportHelper(cardPersister: CardPersister, cardSerializer: CardSerializer, gson: Gson): ExportHelper =
-            ExportHelper(cardPersister, cardSerializer, gson)
+    fun provideExportHelper(
+        cardPersister: CardPersister,
+        cardSerializer: CardSerializer,
+        gson: Gson
+    ): ExportHelper =
+        ExportHelper(cardPersister, cardSerializer, gson)
 
     @Provides
     fun provideTagReaderFactory(): TagReaderFactory {
@@ -86,5 +96,5 @@ class FareBotApplicationModule {
 
     @Provides
     fun provideTransitFactoryRegistry(): TransitFactoryRegistry =
-            TransitFactoryRegistry()
+        TransitFactoryRegistry()
 }

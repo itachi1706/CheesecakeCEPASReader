@@ -26,8 +26,8 @@ import android.content.Context
 import android.view.ViewGroup
 import android.widget.TabHost
 import com.itachi1706.cepaslib.R
-import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
+import com.itachi1706.cepaslib.app.core.kotlin.inflate
 import com.itachi1706.cepaslib.base.ui.FareBotUiTree
 import com.wealthfront.magellan.BaseScreenView
 
@@ -44,11 +44,12 @@ class CardAdvancedScreenView(context: Context) : BaseScreenView<CardAdvancedScre
     }
 
     fun addTab(title: String, fareBotUiTree: FareBotUiTree) {
-        val contentView = tabContent.inflate(R.layout.tab_card_advanced, false) as CardAdvancedTabView
+        val contentView =
+            tabContent.inflate(R.layout.tab_card_advanced, false) as CardAdvancedTabView
         contentView.setAdvancedUi(fareBotUiTree)
         tabHost.addTab(tabHost.newTabSpec("tab_$tabCount")
-                .setIndicator(title)
-                .setContent { contentView })
+            .setIndicator(title)
+            .setContent { contentView })
         tabCount++
     }
 }

@@ -22,8 +22,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
@@ -50,14 +49,16 @@
             android:layout_height="wrap_content"
             tools:text="Monthly Pass" />
     </LinearLayout>
+
     <TextView
         android:id="@+id/valid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:text="Valid 2017/02/01 to 2017/02/30" />
+
     <TextView
         android:id="@+id/used"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Activated and used"  />
+        tools:text="Activated and used" />
 </LinearLayout>

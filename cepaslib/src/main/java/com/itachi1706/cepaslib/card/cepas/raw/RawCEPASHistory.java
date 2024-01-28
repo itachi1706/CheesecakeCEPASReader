@@ -25,11 +25,11 @@ package com.itachi1706.cepaslib.card.cepas.raw;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.itachi1706.cepaslib.base.util.ByteArray;
-import com.itachi1706.cepaslib.card.cepas.CEPASHistory;
 import com.google.auto.value.AutoValue;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
+import com.itachi1706.cepaslib.base.util.ByteArray;
+import com.itachi1706.cepaslib.card.cepas.CEPASHistory;
 
 @AutoValue
 public abstract class RawCEPASHistory {

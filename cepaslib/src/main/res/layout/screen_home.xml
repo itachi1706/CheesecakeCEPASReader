@@ -46,7 +46,7 @@
         android:indeterminate="true"
         android:layout_gravity="center"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        tools:visibility="visible" />
 
     <LinearLayout
         android:id="@+id/nfc_error_viewgroup"
@@ -61,6 +61,7 @@
         android:gravity="center"
         android:visibility="gone"
         tools:visibility="visible">
+
         <TextView
             android:id="@+id/nfc_error_text"
             android:layout_width="0dp"
@@ -68,12 +69,13 @@
             android:layout_height="wrap_content"
             android:textStyle="bold"
             android:textSize="18sp"
-            android:text="@string/nfc_off_error"/>
+            android:text="@string/nfc_off_error" />
+
         <Button
             style="@style/FareBot.Style.Button.Link"
             android:id="@+id/nfc_error_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/wireless_settings"/>
+            android:text="@string/wireless_settings" />
     </LinearLayout>
 </FrameLayout>

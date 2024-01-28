@@ -22,9 +22,6 @@
 
 package com.itachi1706.cepaslib.app.core.serialize.gson
 
-import com.itachi1706.cepaslib.card.CardType
-import com.itachi1706.cepaslib.card.RawCard
-import com.itachi1706.cepaslib.card.cepas.raw.RawCEPASCard
 import com.google.gson.Gson
 import com.google.gson.JsonPrimitive
 import com.google.gson.TypeAdapter
@@ -33,7 +30,9 @@ import com.google.gson.internal.Streams
 import com.google.gson.reflect.TypeToken
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
-import java.util.*
+import com.itachi1706.cepaslib.card.CardType
+import com.itachi1706.cepaslib.card.RawCard
+import com.itachi1706.cepaslib.card.cepas.raw.RawCEPASCard
 
 class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
 
@@ -41,7 +40,8 @@ class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
         private const val KEY_CARD_TYPE = "cardType"
 
         private val CLASSES = mapOf(
-                CardType.CEPAS to RawCEPASCard::class.java)
+            CardType.CEPAS to RawCEPASCard::class.java
+        )
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -51,7 +51,8 @@ class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
         }
         val delegates = HashMap<CardType, TypeAdapter<RawCard<*>>>()
         for ((key, value) in CLASSES) {
-            delegates[key] = gson.getDelegateAdapter(this, TypeToken.get(value) as TypeToken<RawCard<*>>)
+            delegates[key] =
+                gson.getDelegateAdapter(this, TypeToken.get(value) as TypeToken<RawCard<*>>)
         }
         return RawCardTypeAdapter(delegates) as TypeAdapter<T>
     }
@@ -62,7 +63,7 @@ class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
 
         override fun write(out: JsonWriter, value: RawCard<*>) {
             val delegateAdapter = delegates[value.cardType()]
-                    ?: throw IllegalArgumentException("Unknown type: ${value.cardType()}")
+                ?: throw IllegalArgumentException("Unknown type: ${value.cardType()}")
             val jsonObject = delegateAdapter.toJsonTree(value).asJsonObject
             jsonObject.add(KEY_CARD_TYPE, JsonPrimitive(value.cardType().name))
             Streams.write(jsonObject, out)
@@ -73,7 +74,7 @@ class RawCardGsonTypeAdapterFactory : TypeAdapterFactory {
             val typeElement = rootElement.asJsonObject.remove(KEY_CARD_TYPE)
             val cardType = CardType.valueOf(typeElement.asString)
             val delegateAdapter = delegates[cardType]
-                    ?: throw IllegalArgumentException("Unknown type: $cardType")
+                ?: throw IllegalArgumentException("Unknown type: $cardType")
             return delegateAdapter.fromJsonTree(rootElement)
         }
     }

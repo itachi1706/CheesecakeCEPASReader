@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   item_transaction_trip.xml
 
   This file is part of FareBot.
@@ -21,8 +20,7 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/item"
     android:layout_width="match_parent"
@@ -56,7 +54,7 @@
             android:textSize="@dimen/text_primary"
             android:textColor="#424242"
             android:includeFontPadding="false"
-            tools:text="Yurikamome"/>
+            tools:text="Yurikamome" />
 
         <TextView
             android:id="@+id/agency"
@@ -92,13 +90,13 @@
             android:fontFamily="sans-serif-medium"
             android:alpha="0.87"
             android:includeFontPadding="false"
-            tools:text="¥300"/>
+            tools:text="¥300" />
 
         <TextView
             android:id="@+id/time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_secondary"
-            tools:text="8:00 AM"/>
+            tools:text="8:00 AM" />
     </LinearLayout>
 </LinearLayout>

@@ -56,18 +56,23 @@ class TransactionAdapter(
 
     override fun getItemCount(): Int = viewModels.size
 
-    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TransactionViewHolder = when (viewType) {
-        TYPE_TRIP -> TripViewHolder(viewGroup)
-        TYPE_REFILL -> RefillViewHolder(viewGroup)
-        TYPE_SUBSCRIPTION -> SubscriptionViewHolder(viewGroup)
-        else -> throw IllegalArgumentException()
-    }
+    override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): TransactionViewHolder =
+        when (viewType) {
+            TYPE_TRIP -> TripViewHolder(viewGroup)
+            TYPE_REFILL -> RefillViewHolder(viewGroup)
+            TYPE_SUBSCRIPTION -> SubscriptionViewHolder(viewGroup)
+            else -> throw IllegalArgumentException()
+        }
 
     override fun onBindViewHolder(viewHolder: TransactionViewHolder, position: Int) {
         val viewModel = viewModels[position]
         viewHolder.updateHeader(viewModel, isFirstInSection(position))
         when (viewHolder) {
-            is TripViewHolder -> viewHolder.update(viewModel as TransactionViewModel.TripViewModel, relayClicks)
+            is TripViewHolder -> viewHolder.update(
+                viewModel as TransactionViewModel.TripViewModel,
+                relayClicks
+            )
+
             is RefillViewHolder -> viewHolder.update(viewModel as TransactionViewModel.RefillViewModel)
             is SubscriptionViewHolder -> viewHolder.update(viewModel as TransactionViewModel.SubscriptionViewModel)
         }
@@ -83,11 +88,16 @@ class TransactionAdapter(
 
         companion object {
             fun wrapLayout(parent: ViewGroup, @LayoutRes layoutId: Int): View =
-                    parent.inflate(R.layout.item_transaction).apply {
-                if (CEPASLibBuilder.customAccentColor)
-                    findViewById<TextView>(R.id.header).setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.accentColor))
-                findViewById<ViewGroup>(R.id.container).inflate(layoutId, true)
-            }
+                parent.inflate(R.layout.item_transaction).apply {
+                    if (CEPASLibBuilder.customAccentColor)
+                        findViewById<TextView>(R.id.header).setTextColor(
+                            ContextCompat.getColor(
+                                context,
+                                CEPASLibBuilder.accentColor
+                            )
+                        )
+                    findViewById<ViewGroup>(R.id.container).inflate(layoutId, true)
+                }
         }
 
         private val header: TextView by bindView(R.id.header)
@@ -98,7 +108,9 @@ class TransactionAdapter(
                 if (item is TransactionViewModel.SubscriptionViewModel) {
                     header.text = header.context.getString(R.string.subscriptions)
                 } else {
-                    item.date?.let { header.text = DateFormat.getLongDateFormat(header.context).format(it) }
+                    item.date?.let {
+                        header.text = DateFormat.getLongDateFormat(header.context).format(it)
+                    }
                 }
             }
         }
@@ -114,7 +126,10 @@ class TransactionAdapter(
             private val fare: TextView by bindView(R.id.fare)
             private val time: TextView by bindView(R.id.time)
 
-            fun update(viewModel: TransactionViewModel.TripViewModel, relayClicks: PublishRelay<TransactionViewModel>) {
+            fun update(
+                viewModel: TransactionViewModel.TripViewModel,
+                relayClicks: PublishRelay<TransactionViewModel>
+            ) {
                 image.setImageResource(viewModel.imageResId)
                 image.contentDescription = viewModel.trip.mode.toString()
 
@@ -151,7 +166,12 @@ class TransactionAdapter(
                 time.text = viewModel.time
 
                 // Update based on accent color
-                amount.setTextColor(ContextCompat.getColor(viewModel.context, CEPASLibBuilder.accentColor))
+                amount.setTextColor(
+                    ContextCompat.getColor(
+                        viewModel.context,
+                        CEPASLibBuilder.accentColor
+                    )
+                )
             }
         }
 
@@ -190,8 +210,8 @@ class TransactionAdapter(
         val cal1 = createCalendar(viewModels[position].date) ?: return false
         val cal2 = createCalendar(viewModels[position - 1].date) ?: return true
 
-        return cal1.get(Calendar.YEAR) != cal2.get(Calendar.YEAR) ||
-                cal1.get(Calendar.MONTH) != cal2.get(Calendar.MONTH) ||
-                cal1.get(Calendar.DAY_OF_MONTH) != cal2.get(Calendar.DAY_OF_MONTH)
+        return cal1[Calendar.YEAR] != cal2[Calendar.YEAR] ||
+                cal1[Calendar.MONTH] != cal2[Calendar.MONTH] ||
+                cal1[Calendar.DAY_OF_MONTH] != cal2[Calendar.DAY_OF_MONTH]
     }
 }

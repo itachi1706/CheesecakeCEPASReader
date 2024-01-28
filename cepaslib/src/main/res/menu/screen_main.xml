@@ -22,30 +22,29 @@
   along with this program.  If not, see <http://www.gnu.org/licenses/>.
   -->
 
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
         android:id="@+id/history"
         android:title="@string/history"
         android:icon="@drawable/ic_history_grey_24dp"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/help"
         android:title="@string/supported_cards"
         android:icon="@drawable/ic_help_outline_grey_24dp"
-        app:showAsAction="ifRoom"/>
+        app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/prefs"
         android:title="@string/preferences"
         android:icon="@android:drawable/ic_menu_preferences"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
     <item
         android:id="@+id/about"
         android:title="@string/about"
         android:icon="@android:drawable/ic_menu_info_details"
-        app:showAsAction="never"/>
+        app:showAsAction="never" />
 </menu>

@@ -26,8 +26,8 @@ package com.itachi1706.cepaslib.card.cepas;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.itachi1706.cepaslib.base.util.ByteArray;
 import com.google.auto.value.AutoValue;
+import com.itachi1706.cepaslib.base.util.ByteArray;
 
 @AutoValue
 public abstract class CEPASPurse {

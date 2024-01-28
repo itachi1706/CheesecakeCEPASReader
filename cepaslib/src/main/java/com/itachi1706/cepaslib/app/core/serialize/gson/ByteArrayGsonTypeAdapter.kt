@@ -22,10 +22,10 @@
 
 package com.itachi1706.cepaslib.app.core.serialize.gson
 
-import com.itachi1706.cepaslib.base.util.ByteArray
 import com.google.gson.TypeAdapter
 import com.google.gson.stream.JsonReader
 import com.google.gson.stream.JsonWriter
+import com.itachi1706.cepaslib.base.util.ByteArray
 
 class ByteArrayGsonTypeAdapter : TypeAdapter<ByteArray>() {
 

@@ -4,7 +4,8 @@ import java.math.BigInteger;
 
 public final class ByteUtils {
 
-    private ByteUtils() { }
+    private ByteUtils() {
+    }
 
     public static String getHexString(byte[] b) {
         StringBuilder result = new StringBuilder();
@@ -37,11 +38,11 @@ public final class ByteUtils {
     }
 
     public static byte[] intToByteArray(int value) {
-        return new byte[] {
-                (byte)(value >>> 24),
-                (byte)(value >>> 16),
-                (byte)(value >>> 8),
-                (byte)value};
+        return new byte[]{
+                (byte) (value >>> 24),
+                (byte) (value >>> 16),
+                (byte) (value >>> 8),
+                (byte) value};
     }
 
     public static int byteArrayToInt(byte[] b) {
@@ -68,7 +69,7 @@ public final class ByteUtils {
         long value = 0;
         for (int i = 0; i < length; i++) {
             int shift = (length - 1 - i) * 8;
-            value += (b[i + offset] & 0x000000FF) << shift;
+            value += (long) (b[i + offset] & 0x000000FF) << shift;
         }
         return value;
     }
@@ -93,7 +94,7 @@ public final class ByteUtils {
     }
 
     public static int convertBCDtoInteger(byte data) {
-        return (((data & (char) 0xF0) >> 4) * 10) + ((data & (char) 0x0F));
+        return (((data & (char) 0xF0) >> 4) * 10) + (data & (char) 0x0F);
     }
 
     public static int getBitsFromInteger(int buffer, int iStartBit, int iLength) {
@@ -154,7 +155,7 @@ public final class ByteUtils {
                 uRet |= (((char) buffer[i] & (char) 0xFF) << (((iEByte - i - 1) * 8) + (iEBit + 1)));
             }
 
-            uRet |= (((char) buffer[iEByte] & (char) 0xFF)) >> (7 - iEBit);
+            uRet |= ((char) buffer[iEByte] & (char) 0xFF) >> (7 - iEBit);
 
             return uRet;
         }

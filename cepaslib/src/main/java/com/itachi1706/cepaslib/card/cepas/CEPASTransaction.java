@@ -79,25 +79,16 @@ public abstract class CEPASTransaction {
 
     @NonNull
     public TransactionType getType() {
-        switch (getRawType()) {
-            case 48:
-                return TransactionType.MRT;
-            case 117:
-            case 3:
-                return TransactionType.TOP_UP;
-            case 49:
-                return TransactionType.BUS;
-            case 118:
-                return TransactionType.BUS_REFUND;
-            case -16:
-            case 5:
-                return TransactionType.CREATION;
-            case 4:
-                return TransactionType.SERVICE;
-            case 1:
-                return TransactionType.RETAIL;
-        }
-        return TransactionType.UNKNOWN;
+        return switch (getRawType()) {
+            case 48 -> TransactionType.MRT;
+            case 117, 3 -> TransactionType.TOP_UP;
+            case 49 -> TransactionType.BUS;
+            case 118 -> TransactionType.BUS_REFUND;
+            case -16, 5 -> TransactionType.CREATION;
+            case 4 -> TransactionType.SERVICE;
+            case 1 -> TransactionType.RETAIL;
+            default -> TransactionType.UNKNOWN;
+        };
     }
 
     public abstract int getRawType();

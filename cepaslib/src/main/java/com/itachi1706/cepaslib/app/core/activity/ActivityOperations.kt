@@ -22,9 +22,9 @@
 
 package com.itachi1706.cepaslib.app.core.activity
 
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.view.ActionMode
-import android.view.MenuItem
 import io.reactivex.rxjava3.core.Observable
 
 /**

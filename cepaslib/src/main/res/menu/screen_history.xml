@@ -25,20 +25,25 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/import_">
         <menu>
-            <item android:id="@+id/import_file"
-                  android:title="@string/import_file" />
-            <item android:id="@+id/import_clipboard"
+            <item
+                android:id="@+id/import_file"
+                android:title="@string/import_file" />
+            <item
+                android:id="@+id/import_clipboard"
                 android:title="@string/import_clipboard" />
         </menu>
     </item>
     <item android:title="@string/export_all">
         <menu>
-            <item android:id="@+id/copy"
-                  android:title="@string/copy_str" />
-            <item android:id="@+id/share"
-                  android:title="@string/share" />
-            <item android:id="@+id/save"
-                  android:title="@string/save" />
+            <item
+                android:id="@+id/copy"
+                android:title="@string/copy_str" />
+            <item
+                android:id="@+id/share"
+                android:title="@string/share" />
+            <item
+                android:id="@+id/save"
+                android:title="@string/save" />
         </menu>
     </item>
 </menu>

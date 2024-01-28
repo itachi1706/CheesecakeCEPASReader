@@ -35,12 +35,13 @@ class HelpScreen : FareBotScreen<HelpScreen.HelpComponent, HelpScreenView>() {
 
     override fun getTitle(context: Context): String = context.getString(R.string.supported_cards)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
     override fun onCreateView(context: Context): HelpScreenView = HelpScreenView(context)
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): HelpComponent =
-            DaggerHelpScreen_HelpComponent.builder()
+        DaggerHelpScreen_HelpComponent.builder()
             .mainActivityComponent(parentComponent)
             .build()
 

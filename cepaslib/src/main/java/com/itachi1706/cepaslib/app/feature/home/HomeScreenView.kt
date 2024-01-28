@@ -49,7 +49,8 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
     private val errorTextView: TextView by bindView(R.id.nfc_error_text)
     private val errorButton: TextView by bindView(R.id.nfc_error_button)
 
-    private val shortAnimationDuration = resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
+    private val shortAnimationDuration =
+        resources.getInteger(android.R.integer.config_shortAnimTime).toLong()
 
     private var fadeInAnim: ViewPropertyAnimator? = null
     private var fadeOutAnim: ViewPropertyAnimator? = null
@@ -70,18 +71,18 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
         viewFadeIn.visibility = View.VISIBLE
 
         fadeInAnim = viewFadeIn.animate()
-                .alpha(1f)
-                .setDuration(shortAnimationDuration)
-                .setListener(null)
+            .alpha(1f)
+            .setDuration(shortAnimationDuration)
+            .setListener(null)
 
         fadeOutAnim = viewFadeOut.animate()
-                .alpha(0f)
-                .setDuration(shortAnimationDuration)
-                .setListener(object : AnimatorListenerAdapter() {
-                    override fun onAnimationEnd(animation: Animator) {
-                        viewFadeOut.visibility = View.GONE
-                    }
-                })
+            .alpha(0f)
+            .setDuration(shortAnimationDuration)
+            .setListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    viewFadeOut.visibility = View.GONE
+                }
+            })
     }
 
     internal fun showNfcError(error: NfcError) {
@@ -89,18 +90,28 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
             errorViewGroup.visibility = View.GONE
             return
         }
-        if (ActionBarOptionsDefaults.isNightModeEnabled(context)) errorTextView.setTextColor(ContextCompat.getColor(context, R.color.black))
-        if (CEPASLibBuilder.errorColor != null) errorButton.setTextColor(ContextCompat.getColor(context, CEPASLibBuilder.errorColor!!))
+        if (ActionBarOptionsDefaults.isNightModeEnabled(context)) errorTextView.setTextColor(
+            ContextCompat.getColor(context, R.color.black)
+        )
+        if (CEPASLibBuilder.errorColor != null) errorButton.setTextColor(
+            ContextCompat.getColor(
+                context,
+                CEPASLibBuilder.errorColor!!
+            )
+        )
         when (error) {
             NfcError.DISABLED -> {
                 errorTextView.setText(R.string.nfc_off_error)
                 errorButton.visibility = View.VISIBLE
             }
+
             NfcError.UNAVAILABLE -> {
                 errorTextView.setText(R.string.nfc_unavailable)
                 errorButton.visibility = View.GONE
             }
-            NfcError.NONE -> { /* Unreachable */ }
+
+            NfcError.NONE -> { /* Unreachable */
+            }
         }
         errorViewGroup.visibility = View.VISIBLE
     }

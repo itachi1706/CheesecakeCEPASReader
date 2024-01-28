@@ -24,8 +24,9 @@ package com.itachi1706.cepaslib.base.util;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.annotation.NonNull;
 import android.util.Base64;
+
+import androidx.annotation.NonNull;
 
 import java.util.Arrays;
 
@@ -35,7 +36,7 @@ import java.util.Arrays;
 public class ByteArray implements Parcelable {
 
     @NonNull
-    public static final Creator<ByteArray> CREATOR = new Creator<ByteArray>() {
+    public static final Creator<ByteArray> CREATOR = new Creator<>() {
         @Override
         public ByteArray createFromParcel(Parcel in) {
             return new ByteArray(in);
@@ -47,7 +48,8 @@ public class ByteArray implements Parcelable {
         }
     };
 
-    @NonNull private final byte[] mData;
+    @NonNull
+    private final byte[] mData;
 
     public ByteArray(@NonNull byte[] data) {
         mData = data;

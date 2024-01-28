@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   screen_card.xml
 
   This file is part of FareBot.
@@ -24,5 +23,5 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/card_advanced"
-        android:title="@string/advanced"/>
+        android:title="@string/advanced" />
 </menu>

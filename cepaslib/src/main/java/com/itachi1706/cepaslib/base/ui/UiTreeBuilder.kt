@@ -44,10 +44,14 @@ class TreeScope(private val context: Context, private val uiBuilder: FareBotUiTr
 class ItemScope(private val context: Context, private val item: FareBotUiTree.Item.Builder) {
 
     var title: Any? = null
-        set(value) { item.title(if (value is Int) context.getString(value) else value.toString()) }
+        set(value) {
+            item.title(if (value is Int) context.getString(value) else value.toString())
+        }
 
     var value: Any? = null
-        set(value) { item.value(value) }
+        set(value) {
+            item.value(value)
+        }
 
     fun item(init: ItemScope.() -> Unit) {
         ItemScope(context, item.item()).init()

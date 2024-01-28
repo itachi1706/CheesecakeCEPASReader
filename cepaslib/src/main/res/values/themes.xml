@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   themes.xml
 
   This file is part of FareBot.
@@ -22,9 +21,10 @@
   -->
 
 <resources>
-    <style name="FareBot"/>
 
-    <style name="FareBot.Theme" parent="Theme.AppCompat.DayNight"/>
+    <style name="FareBot" />
+
+    <style name="FareBot.Theme" parent="Theme.AppCompat.DayNight" />
 
     <style name="FareBot.Theme.Main">
         <item name="windowActionBar">false</item>
@@ -33,5 +33,5 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
-    <style name="FareBot.Theme.Prefs" parent="Theme.AppCompat.DayNight"/>
+    <style name="FareBot.Theme.Prefs" parent="Theme.AppCompat.DayNight" />
 </resources>

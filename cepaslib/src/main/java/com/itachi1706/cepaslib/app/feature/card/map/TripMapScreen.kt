@@ -34,13 +34,16 @@ import com.itachi1706.cepaslib.app.core.util.ActionBarOptionsDefaults
 import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.transit.Trip
 
-class TripMapScreen(private val trip: Trip) : FareBotScreen<TripMapScreen.Component, TripMapScreenView>() {
+class TripMapScreen(private val trip: Trip) :
+    FareBotScreen<TripMapScreen.Component, TripMapScreenView>() {
 
     override fun getTitle(context: Context): String = context.getString(R.string.map)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault()
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault()
 
-    override fun onCreateView(context: Context): TripMapScreenView = TripMapScreenView(context, trip)
+    override fun onCreateView(context: Context): TripMapScreenView =
+        TripMapScreenView(context, trip)
 
     override fun onShow(context: Context) {
         super.onShow(context)
@@ -49,12 +52,13 @@ class TripMapScreen(private val trip: Trip) : FareBotScreen<TripMapScreen.Compon
             (activity as AppCompatActivity).supportActionBar?.apply {
                 val resources = context.resources
                 setDisplayHomeAsUpEnabled(true)
-                title = arrayOf(trip.startStation?.shortStationName, trip.endStation?.shortStationName)
+                title =
+                    arrayOf(trip.startStation?.shortStationName, trip.endStation?.shortStationName)
                         .compact()
                         .joinToString(" → ")
                 subtitle = arrayOf(trip.getAgencyName(resources), trip.getRouteName(resources))
-                        .compact()
-                        .joinToString(" ")
+                    .compact()
+                    .joinToString(" ")
             }
         }
 
@@ -79,7 +83,7 @@ class TripMapScreen(private val trip: Trip) : FareBotScreen<TripMapScreen.Compon
     }
 
     override fun createComponent(parentComponent: MainActivity.MainActivityComponent): Component =
-            DaggerTripMapScreen_Component.builder()
+        DaggerTripMapScreen_Component.builder()
             .mainActivityComponent(parentComponent)
             .build()
 

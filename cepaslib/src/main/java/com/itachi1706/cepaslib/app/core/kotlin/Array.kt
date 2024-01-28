@@ -23,5 +23,5 @@
 package com.itachi1706.cepaslib.app.core.kotlin
 
 fun Array<String?>.compact(): List<String> = this
-        .filter { !it.isNullOrEmpty() }
-        .map { it!! }
+    .filter { !it.isNullOrEmpty() }
+    .map { it!! }

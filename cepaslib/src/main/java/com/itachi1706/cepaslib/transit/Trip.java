@@ -26,9 +26,10 @@ package com.itachi1706.cepaslib.transit;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.text.TextUtils;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -110,7 +111,7 @@ public abstract class Trip {
         if (endStationName != null && !endStationName.equals(startStationName)) {
             stationText.add(endStationName);
         }
-        if (stationText.size() > 0) {
+        if (!stationText.isEmpty()) {
             return TextUtils.join(" → ", stationText);
         }
         return null;

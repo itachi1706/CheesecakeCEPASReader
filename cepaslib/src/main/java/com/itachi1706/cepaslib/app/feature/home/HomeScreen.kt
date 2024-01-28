@@ -29,6 +29,7 @@ import android.nfc.TagLostException
 import android.provider.Settings
 import android.view.Menu
 import androidx.appcompat.app.AlertDialog
+import autodispose2.autoDispose
 import com.itachi1706.cepaslib.CEPASLibBuilder
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.SettingsHandler
@@ -43,24 +44,29 @@ import com.itachi1706.cepaslib.app.feature.help.HelpScreen
 import com.itachi1706.cepaslib.app.feature.history.HistoryScreen
 import com.itachi1706.cepaslib.app.feature.main.MainActivity.MainActivityComponent
 import dagger.Component
-import autodispose2.autoDispose
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
-        HomeScreenView.Listener {
+    HomeScreenView.Listener {
 
-    @Inject lateinit var activityOperations: ActivityOperations
-    @Inject lateinit var cardStream: CardStream
+    @Inject
+    lateinit var activityOperations: ActivityOperations
+    @Inject
+    lateinit var cardStream: CardStream
 
     override fun onCreateView(context: Context): HomeScreenView = HomeScreenView(context, this)
 
-    override fun getTitle(context: Context): String = CEPASLibBuilder.customTitle ?: context.getString(R.string.app_name)
+    override fun getTitle(context: Context): String =
+        CEPASLibBuilder.customTitle ?: context.getString(R.string.app_name)
 
-    override fun getActionBarOptions(): ActionBarOptions = ActionBarOptionsDefaults.getActionBarOptionsDefault(backgroundColor = android.R.color.transparent,
+    override fun getActionBarOptions(): ActionBarOptions =
+        ActionBarOptionsDefaults.getActionBarOptionsDefault(
+            backgroundColor = android.R.color.transparent,
             textColorRes = if (ActionBarOptionsDefaults.isNightModeEnabled(activity)) R.color.white else R.color.black,
-            shadow = false)
+            shadow = false
+        )
 
     override fun onShow(context: Context) {
         super.onShow(context)
@@ -108,11 +114,13 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
                         .setMessage(R.string.keys_required)
                         .setPositiveButton(android.R.string.ok, null)
                         .show()
+
                     is TagLostException -> AlertDialog.Builder(activity)
                         .setTitle(R.string.tag_lost)
                         .setMessage(R.string.tag_lost_message)
                         .setPositiveButton(android.R.string.ok, null)
                         .show()
+
                     else -> {
                         ErrorUtils.showErrorAlert(activity, ex)
                     }
@@ -130,7 +138,7 @@ class HomeScreen : FareBotScreen<HomeScreen.HomeComponent, HomeScreenView>(),
     }
 
     override fun createComponent(parentComponent: MainActivityComponent): HomeComponent =
-            DaggerHomeScreen_HomeComponent.builder()
+        DaggerHomeScreen_HomeComponent.builder()
             .mainActivityComponent(parentComponent)
             .build()
 
