@@ -4,6 +4,34 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.4] - 2024-07-01
+### :sparkles: New Features
+- [`f3576ba`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f3576bad66bba385c4ea0fda69d72754a82c258d) - Upgrade Gradle Scripts and Gradle to AGP 8 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`617146d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/617146d0ed4e699f9401a79c85f2d41eef5c1e0b) - Migrated to Non Transitive R Classes and Build Config *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`f3a1200`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f3a1200112dbe05a2f6099bae3d8f6a68d14cac8) - Remove Non Final Res IDs *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`d3fb568`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d3fb56881d070e7f548ff3bdcf02b5fde684ee32) - Rewrite and migrate to RxJava3 to support API 34 *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :bug: Bug Fixes
+- [`d9298e1`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d9298e116bcb7f7749e85d991caafd0c4e06bf86) - Home button not working for sample app preference menu *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :recycle: Refactors
+- [`5890ae9`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/5890ae9b2786f5c8f3c19dadc464631a31647129) - Ran formatter on library *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`ea7ebbd`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/ea7ebbd4cfac3b9895d44a33c855a1b35edb47ec) - Ran formatter on sample app *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`11e7e82`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/11e7e827ce2eba14d69e4b766d98a750ddd9583c) - Ran formatter on resource files *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`27da8f6`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/27da8f653589b42d13e53852ae7f0891c4006011) - Migrating certain code to KSP from KAPT *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`e181ef6`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/e181ef6d22872bc15bd0f5ade75fabce057f947b) - Cleaned up code *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`131a64b`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/131a64b25873fee5e5655f84dc163daaf4c3713f) - **deps**: Upgrade core-ktx from 1.9.0 to 1.12.0 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`a5f579f`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/a5f579f89ecd60378baa339e11e7d90bd39777b9) - Upgraded multiple dependencies *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`a7c65c7`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/a7c65c7041e2f4de32571a9baf8ebf4bd2a02746) - **deps**: Update Room dependencies from 2.5.1 to 2.6.1 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`d04cde5`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d04cde57d487799878d6f03d3a70b534747b2423) - Various Sonar fixes *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`1c93203`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/1c9320306479e1a151de21893e84f6c4e2844f7a) - Remove legacy support dependency *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`5f9f3e7`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/5f9f3e7c194eade9bdaf4a64f5a253896d703af8) - **deps**: Bump softprops/action-gh-release from 1 to 2 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`74498f6`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/74498f68146cff7fe96a5f0dd6ca41e28f35d210) - Updated to AGP 8.5 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`5adccfd`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/5adccfd1adbba71e17b7bb44fffc48d178a322d9) - **deps**: CCRANDLIB-32 Upgraded groupie to use new bintray distribution *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.4.0] - 2023-03-12
 ### :sparkles: New Features
 - [`018b881`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/018b881707b3995975831d1976dfdeb885f3ee1a) - Targeting Android 13 (SDK 33 TIRAMISU) *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -32,3 +60,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 [2.3.1]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.3.0...2.3.1
 [2.4.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.3.1...2.4.0
+[2.4.4]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.3...2.4.4
