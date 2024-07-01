@@ -64,6 +64,8 @@ import com.itachi1706.cepaslib.persist.CardKeysPersister
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.jakewharton.rxrelay3.PublishRelay
 import com.wealthfront.magellan.*
+import com.wealthfront.magellan.navigation.NavigationListener
+import com.wealthfront.magellan.navigation.Navigator
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
