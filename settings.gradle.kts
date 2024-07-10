@@ -10,10 +10,10 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-        maven {url "https://plugins.gradle.org/m2/"}
+        maven { url = uri("https://jitpack.io") }
+        maven { url = uri("https://plugins.gradle.org/m2/") }
     }
 }
 
-rootProject.name='Cheesecake CEPAS Reader Sample'
-include ':app', ':cepaslib'
+rootProject.name = "Cheesecake CEPAS Reader Sample"
+include(":app", ":cepaslib")
