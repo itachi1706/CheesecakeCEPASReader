@@ -7,8 +7,8 @@ plugins {
 
 val isGHActions: Boolean = System.getenv("GITHUB_ACTIONS")?.toBoolean() ?: false
 
-ext.set("version", "2.4.4")
-ext.set("versionCode", 526)
+ext.set("version", "2.4.5")
+ext.set("versionCode", 540)
 
 android {
     compileSdk = 34
