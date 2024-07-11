@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.5] - 2024-07-11
+### :recycle: Refactors
+- [`041a66d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/041a66db523188e57a527d9133a224d4eeeca8d1) - Migrated to KTS files and library catalog *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`68c9afe`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/68c9afe48fa4fbc3ab51b6cde16454df0fe0dde4) - Wrong project name *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.4.4] - 2024-07-01
 ### :sparkles: New Features
 - [`f3576ba`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f3576bad66bba385c4ea0fda69d72754a82c258d) - Upgrade Gradle Scripts and Gradle to AGP 8 *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -61,3 +69,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.3.1]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.3.0...2.3.1
 [2.4.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.3.1...2.4.0
 [2.4.4]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.3...2.4.4
+[2.4.5]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.4...2.4.5
