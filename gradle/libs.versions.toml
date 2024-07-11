@@ -29,7 +29,7 @@ roomVersion = "2.6.1"
 rxandroid = "3.0.2"
 rxjava = "3.1.8"
 rxrelay = "3.0.1"
-sonarqube = "5.0.0.4638"
+sonarqube = "5.1.0.4882"
 sqldelight = "2.0.2"
 
 [libraries]
