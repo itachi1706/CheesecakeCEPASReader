@@ -1,5 +1,5 @@
 [versions]
-android-library = "8.5.0"
+android-library = "8.5.1"
 android-application = "8.5.1"
 appcompat = "1.6.1"
 autoDisposeVersion = "2.2.1"
