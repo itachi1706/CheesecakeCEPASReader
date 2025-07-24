@@ -11,7 +11,7 @@ ext.set("version", "2.4.5")
 ext.set("versionCode", 540)
 
 android {
-    compileSdk = 34
+    compileSdk = 36
     namespace = "com.itachi1706.cepaslib"
 
     defaultConfig {
