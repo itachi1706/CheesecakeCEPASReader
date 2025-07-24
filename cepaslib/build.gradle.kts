@@ -5,8 +5,6 @@ plugins {
     alias(libs.plugins.google.ksp)
 }
 
-val isGHActions: Boolean = System.getenv("GITHUB_ACTIONS")?.toBoolean() ?: false
-
 ext.set("version", "2.4.5")
 ext.set("versionCode", 540)
 
@@ -67,14 +65,6 @@ android {
         }
     }
 }
-
-val autoDisposeVersion   = "2.2.1"
-val autoValueGsonVersion = "1.3.1"
-val autoValueVersion     = "1.11.0"
-val daggerVersion        = "2.51.1"
-val groupieVersion       = "2.10.1"
-val magellanVersion      = "1.1.0"
-val roomVersion          = "2.6.1"
 
 dependencies {
     testImplementation(libs.junit)
