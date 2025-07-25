@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2025-07-25
+### :boom: BREAKING CHANGES
+- due to [`becf97c`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/becf97cbe7bd2df78c0266376086d5e9b62a5d9b) - Bump to SDK 21 to update the other packages *(commit by [@itachi1706](https://github.com/itachi1706))*:
+
+  Bump to SDK 21 to update the other packages
+
+
+### :sparkles: New Features
+- [`dda81e4`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/dda81e4c1fb0a36835c6e83311cbab94a8720ccc) - Target SDK 36 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`becf97c`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/becf97cbe7bd2df78c0266376086d5e9b62a5d9b) - Bump to SDK 21 to update the other packages *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`cfd2c9a`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/cfd2c9a228e18e51ac8cc4cda7514f6d8409b16e) - **deps**: Upgrade Sonarqube version *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`6006cb9`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/6006cb936541a1793e3fd0d4ecdaedd9cd4b3db5) - **deps**: Upgrade AGP to 8.11 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`a887065`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/a8870651cbbd264691072252799fd2a0538fa9b7) - **deps**: Bump stefanzweifel/git-auto-commit-action from 5 to 6 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`f13cd4b`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f13cd4b054f61a703f90127c857b76c7db68c4ef) - **deps**: Bump google-ksp and kotlin-android to Kotlin 2.2.0 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`5a1c59f`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/5a1c59f2fd4e872345b83394d2728b18adbbf74e) - Migrate compiler options and kapt *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`73d604f`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/73d604ff71d33b6464c726301b802c324c896827) - Back to KSP *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.4.5] - 2024-07-11
 ### :recycle: Refactors
 - [`041a66d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/041a66db523188e57a527d9133a224d4eeeca8d1) - Migrated to KTS files and library catalog *(commit by [@itachi1706](https://github.com/itachi1706))*
@@ -70,3 +90,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.4.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.3.1...2.4.0
 [2.4.4]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.3...2.4.4
 [2.4.5]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.4...2.4.5
+[2.5.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.5...2.5.0
