@@ -112,7 +112,6 @@ dependencies {
     api(libs.androidx.room.ktx)
 
     kapt(libs.auto.value)
-    kapt(libs.androidx.room.compiler)
     ksp(libs.androidx.room.compiler)
     ksp(libs.dagger.compiler)
     kapt(libs.auto.value.gson)
