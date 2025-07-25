@@ -13,7 +13,7 @@ android {
     namespace = "com.itachi1706.cepaslib"
 
     defaultConfig {
-        minSdk = 19
+        minSdk = 21
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("proguard-rules.pro")
