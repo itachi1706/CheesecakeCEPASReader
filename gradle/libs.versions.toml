@@ -30,7 +30,7 @@ rxandroid = "3.0.2"
 rxjava = "3.1.11"
 rxrelay = "3.0.1"
 sonarqube = "6.2.0.5505"
-sqldelight = "2.0.2"
+sqldelight = "2.1.0"
 
 [libraries]
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "appcompat" }
