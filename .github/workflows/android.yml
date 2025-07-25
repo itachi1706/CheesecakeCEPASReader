@@ -86,4 +86,4 @@ jobs:
           commit_message: 'docs: update CHANGELOG.md for ${{ github.ref_name }} [skip ci]'
           file_pattern: CHANGELOG.md
       - name: Finish Up
-        run: echo Upload successful. Maintainers can proceed onto https://s01.oss.sonatype.org to release the artifacts when capable
+        run: echo Upload successful. Maintainers can proceed onto https://central.sonatype.com/publishing/namespaces to release the artifacts when capable
