@@ -27,10 +27,7 @@ import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -63,7 +60,11 @@ import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardKeysPersister
 import com.itachi1706.cepaslib.persist.CardPersister
 import com.jakewharton.rxrelay3.PublishRelay
-import com.wealthfront.magellan.*
+import com.wealthfront.magellan.ActionBarConfig
+import com.wealthfront.magellan.NavigationListener
+import com.wealthfront.magellan.Navigator
+import com.wealthfront.magellan.Screen
+import com.wealthfront.magellan.ScreenLifecycleListener
 import dagger.BindsInstance
 import dagger.Component
 import dagger.Module
@@ -83,7 +84,6 @@ class MainActivity : AppCompatActivity(),
     private val toolbar by bindView<Toolbar>(R.id.toolbar)
 
     private val activityResultRelay = PublishRelay.create<ActivityResult>()
-    private val handler = Handler(Looper.getMainLooper())
     private val menuItemClickRelay = PublishRelay.create<MenuItem>()
     private val permissionsResultRelay = PublishRelay.create<RequestPermissionsResult>()
 
@@ -204,15 +204,13 @@ class MainActivity : AppCompatActivity(),
         val curColorForAnim = if (curColor == Color.TRANSPARENT) adjustAlpha(newColor) else curColor
         val newColorForAnim = if (newColor == Color.TRANSPARENT) adjustAlpha(curColor) else newColor
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            animToolbarBg?.cancel()
-            animToolbarBg =
-                ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim)
-                    .apply {
-                        duration = shortAnimationDuration
-                        start()
-                    }
-        }
+        animToolbarBg?.cancel()
+        animToolbarBg =
+            ObjectAnimator.ofArgb(toolbar, "backgroundColor", curColorForAnim, newColorForAnim)
+                .apply {
+                    duration = shortAnimationDuration
+                    start()
+                }
 
         ViewCompat.setElevation(appBarLayout, if (options.shadow) toolbarElevation else 0f)
     }

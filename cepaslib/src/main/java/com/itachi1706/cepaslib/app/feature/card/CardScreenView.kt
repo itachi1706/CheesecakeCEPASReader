@@ -23,7 +23,6 @@
 package com.itachi1706.cepaslib.app.feature.card
 
 import android.content.Context
-import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.res.ResourcesCompat
@@ -77,7 +76,7 @@ class CardScreenView(context: Context) : BaseScreenView<CardScreen>(context) {
                 recycler.adapter = GroupAdapter<TransactionAdapter.TransactionViewHolder>()
                 recycler.adapter = TransactionAdapter(viewModels, clicksRelay)
             } else {
-                recycler.visibility = View.GONE
+                recycler.visibility = GONE
                 balanceLayout.layoutParams = LinearLayout.LayoutParams(
                     LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT
                 )
@@ -86,9 +85,9 @@ class CardScreenView(context: Context) : BaseScreenView<CardScreen>(context) {
     }
 
     fun setError(error: String) {
-        recycler.visibility = View.GONE
-        balanceLayout.visibility = View.GONE
-        errorTextView.visibility = View.VISIBLE
+        recycler.visibility = GONE
+        balanceLayout.visibility = GONE
+        errorTextView.visibility = VISIBLE
         errorTextView.text = error
     }
 }

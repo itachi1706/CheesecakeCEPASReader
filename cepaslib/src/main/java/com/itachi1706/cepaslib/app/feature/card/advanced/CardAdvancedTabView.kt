@@ -25,15 +25,14 @@ package com.itachi1706.cepaslib.app.feature.card.advanced
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.widget.FrameLayout
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.itachi1706.cepaslib.R
 import com.itachi1706.cepaslib.app.core.kotlin.bindView
 import com.itachi1706.cepaslib.base.ui.FareBotUiTree
+import androidx.core.content.withStyledAttributes
 
 class CardAdvancedTabView : FrameLayout {
 
@@ -48,7 +47,6 @@ class CardAdvancedTabView : FrameLayout {
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int) :
             super(context, attrs, defStyleAttr)
 
-    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     @Suppress("unused")
     constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int, defStyleRes: Int) :
             super(context, attrs, defStyleAttr, defStyleRes)
@@ -57,13 +55,13 @@ class CardAdvancedTabView : FrameLayout {
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = CardAdvancedAdapter(fareBotUiTree)
         recyclerView.addItemDecoration(object : RecyclerView.ItemDecoration() {
-            val divider: Drawable
+            lateinit var divider: Drawable
 
             init {
                 val attrs = intArrayOf(android.R.attr.listDivider)
-                val ta = context.applicationContext.obtainStyledAttributes(attrs)
-                divider = ta.getDrawable(0)!!
-                ta.recycle()
+                context.applicationContext.withStyledAttributes(null, attrs) {
+                    divider = getDrawable(0)!!
+                }
             }
 
             override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {

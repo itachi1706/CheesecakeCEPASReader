@@ -26,7 +26,6 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.annotation.SuppressLint
 import android.content.Context
-import android.view.View
 import android.view.ViewGroup
 import android.view.ViewPropertyAnimator
 import android.widget.ImageView
@@ -68,7 +67,7 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
         val viewFadeOut = if (show) splashImageView else progressBar
 
         viewFadeIn.alpha = 0f
-        viewFadeIn.visibility = View.VISIBLE
+        viewFadeIn.visibility = VISIBLE
 
         fadeInAnim = viewFadeIn.animate()
             .alpha(1f)
@@ -80,14 +79,14 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
             .setDuration(shortAnimationDuration)
             .setListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    viewFadeOut.visibility = View.GONE
+                    viewFadeOut.visibility = GONE
                 }
             })
     }
 
     internal fun showNfcError(error: NfcError) {
         if (error == NfcError.NONE) {
-            errorViewGroup.visibility = View.GONE
+            errorViewGroup.visibility = GONE
             return
         }
         if (ActionBarOptionsDefaults.isNightModeEnabled(context)) errorTextView.setTextColor(
@@ -102,18 +101,15 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
         when (error) {
             NfcError.DISABLED -> {
                 errorTextView.setText(R.string.nfc_off_error)
-                errorButton.visibility = View.VISIBLE
+                errorButton.visibility = VISIBLE
             }
 
             NfcError.UNAVAILABLE -> {
                 errorTextView.setText(R.string.nfc_unavailable)
-                errorButton.visibility = View.GONE
-            }
-
-            NfcError.NONE -> { /* Unreachable */
+                errorButton.visibility = GONE
             }
         }
-        errorViewGroup.visibility = View.VISIBLE
+        errorViewGroup.visibility = VISIBLE
     }
 
     internal enum class NfcError {
@@ -122,7 +118,7 @@ class HomeScreenView internal constructor(ctx: Context, private val listener: Li
         UNAVAILABLE
     }
 
-    internal interface Listener {
+    internal fun interface Listener {
         fun onNfcErrorButtonClicked()
     }
 }

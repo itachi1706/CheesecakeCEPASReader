@@ -15,7 +15,7 @@ android {
     namespace = "com.itachi1706.cepaslib"
 
     defaultConfig {
-        minSdk = 21
+        minSdk = 23
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("proguard-rules.pro")
@@ -118,7 +118,6 @@ dependencies {
     kapt(libs.auto.value.gson.runtime)
     kapt(libs.auto.value.annotations)
 
-    annotationProcessor(libs.androidx.room.compiler)
     annotationProcessor(libs.auto.value)
     annotationProcessor(libs.auto.value.annotations)
     annotationProcessor(libs.auto.value.gson)

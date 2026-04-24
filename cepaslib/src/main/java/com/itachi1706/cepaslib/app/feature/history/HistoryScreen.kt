@@ -214,7 +214,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
     }
 
     private fun observeCards(): Single<List<HistoryViewModel>> {
-        return Single.create<List<SavedCard>> { e ->
+        return Single.create { e ->
             try {
                 e.onSuccess(cardPersister.cards)
             } catch (error: Throwable) {
@@ -246,7 +246,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
         Toast.makeText(activity, text, Toast.LENGTH_SHORT).show()
 
         if (cardIds.size == 1) {
-            Single.create<Optional<SavedCard>> { e ->
+            Single.create { e ->
                 e.onSuccess(
                     Optional(
                         cardPersister.getCard(

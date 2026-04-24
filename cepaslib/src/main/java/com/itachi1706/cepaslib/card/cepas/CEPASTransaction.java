@@ -55,14 +55,14 @@ public abstract class CEPASTransaction {
 
         int type = rawData[0];
 
-        tmp = (0x00ff0000 & ((rawData[1])) << 16) | (0x0000ff00 & (rawData[2] << 8)) | (0x000000ff & (rawData[3]));
+        tmp = (0x00ff0000 & (rawData[1]) << 16) | (0x0000ff00 & (rawData[2] << 8)) | (0x000000ff & (rawData[3]));
         /* Sign-extend the value */
         if (0 != (rawData[1] & 0x80)) {
             tmp |= 0xff000000;
         }
         int amount = tmp;
 
-        /* Date is expressed "in seconds", but the epoch is January 1 1995, SGT */
+        /* Date is expressed "in seconds", but the epoch is January 1, 1995, SGT */
         int date = ((0xff000000 & (rawData[4] << 24))
                 | (0x00ff0000 & (rawData[5] << 16))
                 | (0x0000ff00 & (rawData[6] << 8))

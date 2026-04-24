@@ -118,19 +118,19 @@ class HelpScreenView(context: Context) : BaseScreenView<HelpScreen>(context) {
             textViewLocation.setText(supportedCard.locationResId)
             imageView.setImageResource(supportedCard.imageResId)
 
-            imageViewSecure.visibility = if (supportedCard.keysRequired) View.VISIBLE else View.GONE
+            imageViewSecure.visibility = if (supportedCard.keysRequired) VISIBLE else GONE
 
             val notes = getNotes(context, supportedCard)
             if (notes != null) {
                 textViewNote.text = notes
-                textViewNote.visibility = View.VISIBLE
+                textViewNote.visibility = VISIBLE
             } else {
                 textViewNote.text = null
-                textViewNote.visibility = View.GONE
+                textViewNote.visibility = GONE
             }
 
             viewNotSupported.visibility =
-                if (isCardSupported(context, supportedCard)) View.GONE else View.VISIBLE
+                if (isCardSupported(context, supportedCard)) GONE else VISIBLE
         }
 
         private fun getNotes(context: Context, supportedCard: SupportedCard): String? {

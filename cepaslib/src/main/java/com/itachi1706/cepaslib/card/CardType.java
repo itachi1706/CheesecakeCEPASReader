@@ -22,6 +22,8 @@
 
 package com.itachi1706.cepaslib.card;
 
+import androidx.annotation.NonNull;
+
 public enum CardType {
     MifareClassic,
     MifareUltralight,
@@ -30,22 +32,16 @@ public enum CardType {
     FeliCa,
     Sample;
 
+    @NonNull
+    @Override
     public String toString() {
-        switch (this) {
-            case MifareClassic:
-                return "MIFARE Classic";
-            case MifareUltralight:
-                return "MIFARE Ultralight";
-            case MifareDesfire:
-                return "MIFARE DESFire";
-            case CEPAS:
-                return "CEPAS";
-            case FeliCa:
-                return "FeliCa";
-            case Sample:
-                return "Sample Card";
-            default:
-                return "Unknown";
-        }
+        return switch (this) {
+            case MifareClassic -> "MIFARE Classic";
+            case MifareUltralight -> "MIFARE Ultralight";
+            case MifareDesfire -> "MIFARE DESFire";
+            case CEPAS -> "CEPAS";
+            case FeliCa -> "FeliCa";
+            case Sample -> "Sample Card";
+        };
     }
 }
