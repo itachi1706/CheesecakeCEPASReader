@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.0] - 2026-04-24
+### :boom: BREAKING CHANGES
+- due to [`d7e8af7`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d7e8af79a09b919d14c61e8c79760ca40457b003) - Bump minSDK to 23 *(commit by [@itachi1706](https://github.com/itachi1706))*:
+
+  Bump minSDK to 23
+
+
+### :wrench: Chores
+- [`f21a3ea`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f21a3eabca87d323e45349ea5c13d2118d22261d) - **deps**: Bump actions/setup-java from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`8d1e5f3`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/8d1e5f380a4f7a6de3a386d7a74088e254038505) - **deps**: Bump stefanzweifel/git-auto-commit-action from 6 to 7 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`1c1258b`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/1c1258b65f4f0069e856094cbb9bd0051cc6dfdf) - **deps**: Bump actions/checkout from 4 to 6 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`5b17035`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/5b17035e850bb9de10bdf50e047e2c016ecf8d0c) - **deps**: Bump actions/cache from 4 to 5 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`0aab27d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/0aab27d96e8a71829662052d53ba0becc38deda7) - **deps**: Bump softprops/action-gh-release from 2 to 3 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`d7e8af7`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d7e8af79a09b919d14c61e8c79760ca40457b003) - **deps**: Bump minSDK to 23 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`c59ca9c`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/c59ca9c274c119f5910e4ac30a7be1b3b54d54d8) - **deps**: Minor dependency updates *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`9a7573d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/9a7573dc866ac86c022ce06ae56451f588cc2c64) - **deps**: Update to the remaining dependencies *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`f0e4d4d`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/f0e4d4d28d8d8c75c6a2cc3a850d574b94f0f147) - Did some code cleanup *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.5.0] - 2025-07-25
 ### :boom: BREAKING CHANGES
 - due to [`becf97c`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/becf97cbe7bd2df78c0266376086d5e9b62a5d9b) - Bump to SDK 21 to update the other packages *(commit by [@itachi1706](https://github.com/itachi1706))*:
@@ -91,3 +110,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.4.4]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.3...2.4.4
 [2.4.5]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.4...2.4.5
 [2.5.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.5...2.5.0
+[2.6.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.5.0...2.6.0
