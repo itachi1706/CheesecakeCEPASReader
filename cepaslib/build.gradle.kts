@@ -7,8 +7,8 @@ plugins {
     alias(libs.plugins.google.ksp)
 }
 
-ext.set("version", "2.5.0")
-ext.set("versionCode", 589)
+ext.set("version", "2.6.0")
+ext.set("versionCode", 624)
 
 android {
     compileSdk = 36
