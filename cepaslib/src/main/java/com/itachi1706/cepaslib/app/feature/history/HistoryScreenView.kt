@@ -119,10 +119,10 @@ class HistoryScreenView(
 
     internal fun setViewModels(viewModels: List<HistoryViewModel>) {
         recyclerView.adapter = HistoryAdapter(viewModels, clicksRelay, selectionRelay)
-        emptyView.visibility = if (viewModels.isEmpty()) View.VISIBLE else View.GONE
+        emptyView.visibility = if (viewModels.isEmpty()) VISIBLE else GONE
     }
 
-    interface Listener {
+    fun interface Listener {
         fun onDeleteSelectedItems(items: List<HistoryViewModel>)
     }
 }

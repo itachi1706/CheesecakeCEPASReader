@@ -27,6 +27,7 @@ import android.content.SharedPreferences
 import android.os.StrictMode
 import java.util.Date
 import javax.inject.Inject
+import androidx.core.content.edit
 
 class FareBotApplication : Application() {
 
@@ -59,9 +60,9 @@ class FareBotApplication : Application() {
     }
 
     fun updateTimestamp(tagIdString: String?) {
-        val prefs = sharedPreferences.edit()
-        prefs.putString(PREF_LAST_READ_ID, tagIdString)
-        prefs.putLong(PREF_LAST_READ_AT, Date().time)
-        prefs.apply()
+        sharedPreferences.edit {
+            putString(PREF_LAST_READ_ID, tagIdString)
+            putLong(PREF_LAST_READ_AT, Date().time)
+        }
     }
 }

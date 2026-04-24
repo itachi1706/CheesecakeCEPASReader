@@ -38,6 +38,7 @@ import android.nfc.tech.NfcF
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.itachi1706.cepaslib.app.core.rx.LastValueRelay
 import io.reactivex.rxjava3.core.Observable
 
@@ -61,7 +62,7 @@ class NfcStream(private val activity: Activity) {
         if (savedInstanceState == null) {
             @Suppress("DEPRECATION")
             when {
-                SDK_INT >= Build.VERSION_CODES.TIRAMISU -> activity.intent.getParcelableExtra<Tag>(
+                SDK_INT >= Build.VERSION_CODES.TIRAMISU -> activity.intent.getParcelableExtra(
                     INTENT_EXTRA_TAG,
                     Tag::class.java
                 )?.let {
@@ -97,8 +98,8 @@ class NfcStream(private val activity: Activity) {
     fun observe(): Observable<Tag> {
         // Create observable for rxjava3 broadcast receiver
 
-        var broadcastIntents = when {
-            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> Observable.create<Tag> { emitter ->
+        val broadcastIntents = when {
+            SDK_INT >= Build.VERSION_CODES.TIRAMISU -> Observable.create { emitter ->
                 val receiver = object : BroadcastReceiver() {
                     override fun onReceive(context: Context?, intent: Intent?) {
                         intent?.getParcelableExtra(INTENT_EXTRA_TAG, Tag::class.java)?.let {
@@ -123,7 +124,12 @@ class NfcStream(private val activity: Activity) {
                         }
                     }
                 }
-                activity.registerReceiver(receiver, IntentFilter(ACTION))
+                ContextCompat.registerReceiver(
+                    activity,
+                    receiver,
+                    IntentFilter(ACTION),
+                    ContextCompat.RECEIVER_NOT_EXPORTED
+                )
                 emitter.setCancellable { activity.unregisterReceiver(receiver) }
             }
         }
