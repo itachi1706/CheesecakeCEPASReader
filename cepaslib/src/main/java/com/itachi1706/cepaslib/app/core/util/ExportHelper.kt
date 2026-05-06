@@ -57,7 +57,7 @@ class ExportHelper(
         cards = cardPersister.cards.map { cardSerializer.deserialize(it.data) }
     ))
 
-    fun importCards(exportJsonString: String): List<Long> =
+    fun importCards(exportJsonString: String): List<Long> = try {
         gson.fromJson(exportJsonString, Export::class.java)
             .cards.map {
                 cardPersister.insertCard(
@@ -68,6 +68,9 @@ class ExportHelper(
                     )
                 )
             }
+    } catch (_: Exception) {
+        emptyList()
+    }
 
     private data class Export(
         val versionName: String,
