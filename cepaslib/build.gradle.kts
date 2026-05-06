@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.google.ksp)
+    alias(libs.plugins.sonarqube)
 }
 
 ext.set("version", "2.6.0")
@@ -61,6 +62,13 @@ kotlin {
 ksp {
     arg("room.schemaLocation", "$projectDir/schemas")
     arg("room.incremental", "true")
+}
+
+sonarqube {
+    properties {
+        property("sonar.android.variant", "debug")
+        property("sonar.java.binaries", "build")
+    }
 }
 
 dependencies {

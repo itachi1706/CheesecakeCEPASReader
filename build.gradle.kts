@@ -17,6 +17,5 @@ sonarqube {
         property("sonar.host.url", "https://sonarcloud.io")
         property("sonar.androidLint.reportPaths", "app/build/reports/lint-results-debug.xml,cepaslib/build/reports/lint-results-debug.xml")
         property("sonar.projectVersion", project(":cepaslib").ext.get("version") ?: "1.0")
-        property("sonar.java.binaries", "**/build")
     }
 }
