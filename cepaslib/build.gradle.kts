@@ -2,8 +2,7 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
-    id("org.jetbrains.kotlin.kapt")
+//    id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.google.ksp)
 }
 
@@ -27,16 +26,12 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-            arg("room.incremental", "true")
-        }
-        kapt {
-            arguments {
-                arg("room.schemaLocation", "$projectDir/schemas")
-                arg("room.incremental", "true")
-            }
-        }
+//        kapt {
+//            arguments {
+//                arg("room.schemaLocation", "$projectDir/schemas")
+//                arg("room.incremental", "true")
+//            }
+//        }
     }
 
     buildTypes {
@@ -68,6 +63,11 @@ kotlin {
     compilerOptions {
         jvmTarget = JvmTarget.JVM_17
     }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
+    arg("room.incremental", "true")
 }
 
 dependencies {
@@ -111,12 +111,16 @@ dependencies {
     api(libs.androidx.room.runtime)
     api(libs.androidx.room.ktx)
 
-    kapt(libs.auto.value)
+//    kapt(libs.auto.value)
+    ksp(libs.auto.value)
     ksp(libs.androidx.room.compiler)
     ksp(libs.dagger.compiler)
-    kapt(libs.auto.value.gson)
-    kapt(libs.auto.value.gson.runtime)
-    kapt(libs.auto.value.annotations)
+//    kapt(libs.auto.value.gson)
+//    kapt(libs.auto.value.gson.runtime)
+//    kapt(libs.auto.value.annotations)
+    ksp(libs.auto.value.gson)
+    ksp(libs.auto.value.gson.runtime)
+    ksp(libs.auto.value.annotations)
 
     annotationProcessor(libs.auto.value)
     annotationProcessor(libs.auto.value.annotations)
