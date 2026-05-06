@@ -6,8 +6,8 @@ plugins {
     alias(libs.plugins.sonarqube)
 }
 
-ext.set("version", "2.6.0")
-ext.set("versionCode", 624)
+ext.set("version", "2.6.1")
+ext.set("versionCode", 649)
 
 android {
     compileSdk = 36
