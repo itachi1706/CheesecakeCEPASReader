@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.library)
-//    id("org.jetbrains.kotlin.kapt")
     alias(libs.plugins.google.ksp)
 }
 
@@ -26,12 +25,6 @@ android {
                 arguments["room.incremental"] = "true"
             }
         }
-//        kapt {
-//            arguments {
-//                arg("room.schemaLocation", "$projectDir/schemas")
-//                arg("room.incremental", "true")
-//            }
-//        }
     }
 
     buildTypes {
@@ -111,13 +104,9 @@ dependencies {
     api(libs.androidx.room.runtime)
     api(libs.androidx.room.ktx)
 
-//    kapt(libs.auto.value)
     ksp(libs.auto.value)
     ksp(libs.androidx.room.compiler)
     ksp(libs.dagger.compiler)
-//    kapt(libs.auto.value.gson)
-//    kapt(libs.auto.value.gson.runtime)
-//    kapt(libs.auto.value.annotations)
     ksp(libs.auto.value.gson)
     ksp(libs.auto.value.gson.runtime)
     ksp(libs.auto.value.annotations)
