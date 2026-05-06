@@ -30,4 +30,5 @@ interface CardPersister {
     fun getCard(id: Long): SavedCard?
     fun insertCard(card: SavedCard): Long
     fun deleteCard(card: SavedCard)
+    fun deleteAllCards()
 }

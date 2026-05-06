@@ -48,7 +48,6 @@ import com.itachi1706.cepaslib.app.feature.card.CardScreen
 import com.itachi1706.cepaslib.app.feature.main.MainActivity
 import com.itachi1706.cepaslib.card.serialize.CardSerializer
 import com.itachi1706.cepaslib.persist.CardPersister
-import com.itachi1706.cepaslib.persist.db.model.SavedCard
 import com.itachi1706.cepaslib.transit.TransitIdentity
 import dagger.Component
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -71,12 +70,16 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
 
     @Inject
     lateinit var activityOperations: ActivityOperations
+
     @Inject
     lateinit var cardPersister: CardPersister
+
     @Inject
     lateinit var cardSerializer: CardSerializer
+
     @Inject
     lateinit var exportHelper: ExportHelper
+
     @Inject
     lateinit var transitFactoryRegistry: TransitFactoryRegistry
 
@@ -102,13 +105,13 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                     activity.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 when (menuItem.itemId) {
                     R.id.import_file -> {
-                        val target = Intent(Intent.ACTION_OPEN_DOCUMENT)
-                        target.type = "*/*"
+                        val target = Intent(Intent.ACTION_OPEN_DOCUMENT).apply {
+                            addCategory(Intent.CATEGORY_OPENABLE)
+                            type = "*/*"
+                        }
                         activity.startActivityForResult(
-                            Intent.createChooser(
-                                target,
-                                activity.getString(R.string.select_file)
-                            ), REQUEST_SELECT_FILE
+                            target,
+                            REQUEST_SELECT_FILE
                         )
                     }
 
@@ -146,6 +149,11 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                             putExtra(Intent.EXTRA_TITLE, FILENAME)
                         }
                         activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
+                    }
+
+                    R.id.clear_history -> {
+                        cardPersister.deleteAllCards()
+                        loadCards()
                     }
                 }
             }

@@ -2,9 +2,9 @@
 -dontusemixedcaseclassnames
 -dontskipnonpubliclibraryclasses
 -verbose
--dontoptimize
+#-dontoptimize
 -dontpreverify
--dontobfuscate
+#-dontobfuscate
 
 # Android
 -keep class * implements android.os.Parcelable {
