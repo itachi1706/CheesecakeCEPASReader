@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.6.1] - 2026-05-06
+### :sparkles: New Features
+- [`0c5d5f2`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/0c5d5f23712d53fdae83ec789b0fea006479178a) - Added ability to clear all history *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`2fec684`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/2fec684d5f018e8a971b31137d7ada8af02fe467) - Implemented delete all function *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :bug: Bug Fixes
+- [`e3fdec6`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/e3fdec699b7eecc7edfc020567c338ec72164fcf) - Fixed file importing not working *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`d960655`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d960655d007c4f099ddcc849f5af253ef88d3c6c) - Fixed importing invalid JSON crashing app *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+### :wrench: Chores
+- [`0e184cf`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/0e184cff0cc3f651c438ec0af079c76b37fa29b0) - **deps**: Bump requarks/changelog-action from 1.10.2 to 1.10.3 *(commit by [@dependabot[bot]](https://github.com/apps/dependabot))*
+- [`1a405e3`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/1a405e33c1faf8cd6cf680c25379b786ff72afc0) - Migrate to AGP 9 *(commit by [@itachi1706](https://github.com/itachi1706))*
+- [`16a5ccb`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/16a5ccbc484bc3eacdc118d7879a8c827514d6f4) - Cleanup *(commit by [@itachi1706](https://github.com/itachi1706))*
+
+
 ## [2.6.0] - 2026-04-24
 ### :boom: BREAKING CHANGES
 - due to [`d7e8af7`](https://github.com/itachi1706/CheesecakeCEPASReader/commit/d7e8af79a09b919d14c61e8c79760ca40457b003) - Bump minSDK to 23 *(commit by [@itachi1706](https://github.com/itachi1706))*:
@@ -111,3 +126,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 [2.4.5]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.4...2.4.5
 [2.5.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.4.5...2.5.0
 [2.6.0]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.5.0...2.6.0
+[2.6.1]: https://github.com/itachi1706/CheesecakeCEPASReader/compare/2.6.0...2.6.1
