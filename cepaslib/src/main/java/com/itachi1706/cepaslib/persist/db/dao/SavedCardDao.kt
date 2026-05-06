@@ -19,4 +19,7 @@ interface SavedCardDao {
 
     @Delete
     fun delete(savedCard: SavedCard)
+
+    @Query("DELETE FROM cards")
+    fun deleteAll()
 }

@@ -152,9 +152,7 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                     }
 
                     R.id.clear_history -> {
-                        for (savedCard in cardPersister.cards) {
-                            cardPersister.deleteCard(savedCard)
-                        }
+                        cardPersister.deleteAllCards()
                         loadCards()
                     }
                 }
