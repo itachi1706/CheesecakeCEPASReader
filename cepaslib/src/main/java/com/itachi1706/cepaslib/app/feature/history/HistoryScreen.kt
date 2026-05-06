@@ -150,6 +150,13 @@ class HistoryScreen : FareBotScreen<HistoryScreen.HistoryComponent, HistoryScree
                         }
                         activity.startActivityForResult(storageIntent, REQUEST_SELECT_EXPORT_FILE)
                     }
+
+                    R.id.clear_history -> {
+                        for (savedCard in cardPersister.cards) {
+                            cardPersister.deleteCard(savedCard)
+                        }
+                        loadCards()
+                    }
                 }
             }
 
